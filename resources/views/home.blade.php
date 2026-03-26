@@ -451,14 +451,14 @@
                                                     <li><a href="{{ route('home') }}">Other Pages 2</a>
                                                         <ul>
                                                             <li><a href="{{ route('contact') }}">Contact</a></li>
-                                                            <li><a href="about-us.html">About Us</a></li>
+                                                            <li><a href="{{ route('about') }}">About Us</a></li>
                                                             <li><a href="faq.html">FAQ</a></li>
                                                             <li><a href="404.html">404 Error</a></li>
                                                         </ul>
                                                     </li>
                                                 </ul>
                                             </li>
-                                            <li><a href="about-us.html">About Us</a></li>
+                                            <li class="site-nav-link"><a href="{{ route('about') }}">About Us</a></li>
                                             <li class="site-nav-link"><a href="{{ route('contact') }}">Contact</a></li>
                                             <li><a href="shop-left-sidebar.html">Smartwatch</a></li>
                                             <li><a href="shop-left-sidebar.html">Accessories</a></li>
@@ -3119,7 +3119,7 @@
                                             @endif
                                         </span>
                                         <p class="info">
-                                            {!! nl2br(e($companyProfile->description)) !!}
+                                            {!! nl2br(e($companyProfile->short_description_text)) !!}
                                         </p>
                                     </div>
                                     <ul class="des">

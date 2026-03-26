@@ -12,6 +12,8 @@ use Illuminate\Support\Facades\Storage;
     'email',
     'address',
     'map_embed_url',
+    'short_description',
+    'long_description',
     'description',
     'logo_path',
     'facebook_url',
@@ -29,6 +31,8 @@ class CompanyProfile extends Model
             'email' => 'info@yourdomain.com',
             'address' => '6688 Princess Road, London, Greater London BAS 23JK, UK',
             'map_embed_url' => null,
+            'short_description' => 'We are a team of designers and developers that create high quality HTML Template & Woocommerce, Shopify Theme.',
+            'long_description' => 'We are a team of designers and developers that create high quality HTML Template & Woocommerce, Shopify Theme.',
             'description' => 'We are a team of designers and developers that create high quality HTML Template & Woocommerce, Shopify Theme.',
             'logo_path' => null,
             'facebook_url' => null,
@@ -41,6 +45,16 @@ class CompanyProfile extends Model
     public function getHasLogoAttribute(): bool
     {
         return filled($this->logo_path);
+    }
+
+    public function getShortDescriptionTextAttribute(): string
+    {
+        return $this->short_description ?: $this->description ?: '';
+    }
+
+    public function getLongDescriptionTextAttribute(): string
+    {
+        return $this->long_description ?: $this->short_description ?: $this->description ?: '';
     }
 
     public function getLogoUrlAttribute(): ?string

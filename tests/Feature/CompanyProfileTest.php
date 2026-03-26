@@ -2,6 +2,7 @@
 
 namespace Tests\Feature;
 
+use App\Models\AboutValue;
 use App\Models\CompanyProfile;
 use App\Models\PartnerRegistration;
 use App\Models\User;
@@ -31,7 +32,8 @@ class CompanyProfileTest extends TestCase
             'phone' => '+62 812 0000 1111',
             'email' => 'hello@andre-store.test',
             'address' => 'Jakarta, Indonesia',
-            'description' => 'Company profile description',
+            'short_description' => 'Company short description',
+            'long_description' => 'Company long description',
             'x_url' => 'https://x.com/andre',
         ]);
 
@@ -40,7 +42,7 @@ class CompanyProfileTest extends TestCase
             ->assertSeeText('+62 812 0000 1111')
             ->assertSeeText('hello@andre-store.test')
             ->assertSeeText('Jakarta, Indonesia')
-            ->assertSeeText('Company profile description')
+            ->assertSeeText('Company short description')
             ->assertSee('https://x.com/andre', false);
     }
 
@@ -65,7 +67,8 @@ class CompanyProfileTest extends TestCase
             'phone' => '+62 812 0000 1111',
             'email' => 'hello@andre-store.test',
             'address' => 'Jakarta, Indonesia',
-            'description' => 'Company profile description',
+            'short_description' => 'Company short description',
+            'long_description' => 'Company long description',
             'map_embed_url' => 'https://www.google.com/maps/embed?pb=test-map',
             'instagram_url' => 'https://instagram.com/andre',
         ]);
@@ -78,9 +81,49 @@ class CompanyProfileTest extends TestCase
             ->assertSeeText('+62 812 0000 1111')
             ->assertSeeText('hello@andre-store.test')
             ->assertSeeText('Jakarta, Indonesia')
-            ->assertSeeText('Company profile description')
+            ->assertSeeText('Company short description')
             ->assertSee('https://www.google.com/maps/embed?pb=test-map', false)
             ->assertSee('https://instagram.com/andre', false);
+    }
+
+    public function test_about_page_uses_company_profile_data(): void
+    {
+        CompanyProfile::query()->create([
+            ...CompanyProfile::defaultAttributes(),
+            'company_name' => 'Andre Store',
+            'phone' => '+62 812 0000 1111',
+            'email' => 'hello@andre-store.test',
+            'short_description' => 'Company short description',
+            'long_description' => 'Company long description',
+        ]);
+
+        $this->get('/about-us')
+            ->assertOk()
+            ->assertSeeText('About Us')
+            ->assertSeeText('Andre Store')
+            ->assertSeeText('+62 812 0000 1111')
+            ->assertSeeText('hello@andre-store.test')
+            ->assertSeeText('Company short description')
+            ->assertSeeText('Company long description');
+    }
+
+    public function test_about_page_uses_database_driven_values(): void
+    {
+        CompanyProfile::query()->create(CompanyProfile::defaultAttributes());
+
+        AboutValue::query()->create([
+            'title' => 'Custom Value',
+            'description' => 'Custom description from database.',
+            'icon' => 'rocket',
+            'sort_order' => 99,
+            'is_active' => true,
+        ]);
+
+        $this->get('/about-us')
+            ->assertOk()
+            ->assertSeeText('Custom Value')
+            ->assertSeeText('Custom description from database.')
+            ->assertSee('fa-rocket', false);
     }
 
     public function test_home_page_contact_link_points_to_contact_route(): void
@@ -90,6 +133,15 @@ class CompanyProfileTest extends TestCase
         $this->get('/')
             ->assertOk()
             ->assertSee(route('contact'), false);
+    }
+
+    public function test_home_page_about_link_points_to_about_route(): void
+    {
+        CompanyProfile::query()->create(CompanyProfile::defaultAttributes());
+
+        $this->get('/')
+            ->assertOk()
+            ->assertSee(route('about'), false);
     }
 
     public function test_partner_registration_submission_is_stored_as_pending(): void
@@ -155,6 +207,25 @@ class CompanyProfileTest extends TestCase
             ->assertOk()
             ->assertSeeText('Andre Mantab')
             ->assertSeeText('Belum ditanggapi');
+    }
+
+    public function test_admin_can_view_about_values_list(): void
+    {
+        $admin = User::factory()->admin()->create();
+
+        AboutValue::query()->create([
+            'title' => 'Custom Value',
+            'description' => 'Custom description from database.',
+            'icon' => 'rocket',
+            'sort_order' => 99,
+            'is_active' => true,
+        ]);
+
+        $this->actingAs($admin)
+            ->get('/management/about-values')
+            ->assertOk()
+            ->assertSeeText('Custom Value')
+            ->assertSeeText('rocket');
     }
 
     public function test_follow_us_is_hidden_when_no_social_media_is_filled(): void

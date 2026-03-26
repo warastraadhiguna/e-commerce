@@ -233,6 +233,7 @@
                                 <nav>
                                     <ul>
                                         <li class="site-nav-link"><a href="{{ route('home') }}">Home</a></li>
+                                        <li class="site-nav-link"><a href="{{ route('about') }}">About Us</a></li>
                                         <li class="site-nav-link active"><a href="{{ route('contact') }}">Contact</a></li>
                                     </ul>
                                 </nav>
@@ -280,7 +281,7 @@
                     <div class="col-lg-5 offset-lg-1 col-md-12 order-1 order-lg-2">
                         <div class="contact-page-side-content">
                             <h3 class="contact-page-title">Contact Us</h3>
-                            <p class="contact-page-message mb-25">{{ $companyProfile->description }}</p>
+                            <p class="contact-page-message mb-25">{{ $companyProfile->short_description_text }}</p>
 
                             <div class="single-contact-block">
                                 <h4><i class="fa fa-fax"></i> Address</h4>

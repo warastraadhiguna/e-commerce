@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Models\AboutValue;
 use App\Models\CompanyProfile;
 use Illuminate\Cache\RateLimiting\Limit;
 use Illuminate\Http\Request;
@@ -48,7 +49,19 @@ class AppServiceProvider extends ServiceProvider
                     ?? CompanyProfile::make(CompanyProfile::defaultAttributes());
             });
 
+            $aboutValues = once(function () {
+                if (! Schema::hasTable('about_values')) {
+                    return collect();
+                }
+
+                return AboutValue::query()
+                    ->where('is_active', true)
+                    ->orderBy('sort_order')
+                    ->get();
+            });
+
             $view->with('companyProfile', $companyProfile);
+            $view->with('aboutValues', $aboutValues);
         });
     }
 }

@@ -43,13 +43,20 @@ class CompanyProfileForm
                             ->imageResizeTargetWidth('440')
                             ->imageResizeTargetHeight('140')
                             ->imageResizeUpscale(false)
-                            ->helperText('Recommended: transparent PNG/SVG with horizontal ratio. Best result around 440 x 140 px. If empty, the UI will show the company name as text.')
+                            ->helperText('Recommended: transparent PNG/SVG with horizontal ratio. Best result around 440 x 140 px.')
                             ->disk('public')
                             ->directory('company')
                             ->visibility('public')
                             ->columnSpanFull(),
-                        Textarea::make('description')
-                            ->rows(10)
+                        Textarea::make('short_description')
+                            ->label('Short description')
+                            ->rows(2)
+                            ->helperText('Dipakai untuk ringkasan singkat di home, contact, dan area umum lainnya.')
+                            ->columnSpanFull(),
+                        Textarea::make('long_description')
+                            ->label('Long description')
+                            ->rows(4)
+                            ->helperText('Dipakai untuk halaman About Us dengan isi yang lebih lengkap.')
                             ->columnSpanFull(),
                     ]),
                 Grid::make(1)
