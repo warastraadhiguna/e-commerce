@@ -15,6 +15,7 @@ use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
+use UnitEnum;
 
 class AboutValueResource extends Resource
 {
@@ -27,6 +28,8 @@ class AboutValueResource extends Resource
     protected static ?string $pluralModelLabel = 'Our Values';
 
     protected static ?string $navigationLabel = 'Our Values';
+
+    protected static string|UnitEnum|null $navigationGroup = 'Company Setting';
 
     protected static ?int $navigationSort = 2;
 

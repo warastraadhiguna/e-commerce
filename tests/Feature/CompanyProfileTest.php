@@ -4,6 +4,8 @@ namespace Tests\Feature;
 
 use App\Models\AboutValue;
 use App\Models\CompanyProfile;
+use App\Models\HomeHighlight;
+use App\Models\HomeMedia;
 use App\Models\PartnerRegistration;
 use App\Models\User;
 use Database\Seeders\CompanyProfileSeeder;
@@ -144,6 +146,61 @@ class CompanyProfileTest extends TestCase
             ->assertSee(route('about'), false);
     }
 
+    public function test_home_page_uses_database_driven_highlights(): void
+    {
+        CompanyProfile::query()->create(CompanyProfile::defaultAttributes());
+
+        HomeHighlight::query()->create([
+            'title' => 'Custom Highlight',
+            'description' => 'Custom highlight description from database.',
+            'image_path' => null,
+            'fallback_asset' => null,
+            'sort_order' => 99,
+            'is_active' => true,
+        ]);
+
+        $this->get('/')
+            ->assertOk()
+            ->assertSeeText('Custom Highlight')
+            ->assertSeeText('Custom highlight description from database.');
+    }
+
+    public function test_home_page_uses_storage_backed_home_media_images(): void
+    {
+        CompanyProfile::query()->create(CompanyProfile::defaultAttributes());
+
+        HomeMedia::query()->create([
+            'key' => 'custom_home_media',
+            'label' => 'Custom Home Media',
+            'section' => 'side_banner',
+            'image_path' => 'home-media/custom-banner.jpg',
+            'link_url' => '#',
+            'sort_order' => 99,
+        ]);
+
+        $this->get('/')
+            ->assertOk()
+            ->assertSee('/storage/home-media/', false);
+    }
+
+    public function test_home_page_hides_highlight_image_when_image_is_empty(): void
+    {
+        CompanyProfile::query()->create(CompanyProfile::defaultAttributes());
+
+        HomeHighlight::query()->create([
+            'title' => 'No Image Highlight',
+            'description' => 'Highlight without image.',
+            'image_path' => null,
+            'fallback_asset' => 'desain/images/shipping-icon/1.png',
+            'sort_order' => 99,
+            'is_active' => true,
+        ]);
+
+        $this->get('/')
+            ->assertOk()
+            ->assertDontSee('alt="No Image Highlight"', false);
+    }
+
     public function test_partner_registration_submission_is_stored_as_pending(): void
     {
         CompanyProfile::query()->create(CompanyProfile::defaultAttributes());
@@ -226,6 +283,44 @@ class CompanyProfileTest extends TestCase
             ->assertOk()
             ->assertSeeText('Custom Value')
             ->assertSeeText('rocket');
+    }
+
+    public function test_admin_can_view_home_highlights_list(): void
+    {
+        $admin = User::factory()->admin()->create();
+
+        HomeHighlight::query()->create([
+            'title' => 'Custom Highlight',
+            'description' => 'Custom highlight description from database.',
+            'image_path' => null,
+            'fallback_asset' => null,
+            'sort_order' => 99,
+            'is_active' => true,
+        ]);
+
+        $this->actingAs($admin)
+            ->get('/management/home-highlights')
+            ->assertOk()
+            ->assertSeeText('Custom Highlight');
+    }
+
+    public function test_admin_can_view_home_media_list(): void
+    {
+        $admin = User::factory()->admin()->create();
+
+        HomeMedia::query()->create([
+            'key' => 'custom_home_media',
+            'label' => 'Custom Home Media',
+            'section' => 'side_banner',
+            'image_path' => 'home-media/custom-banner.jpg',
+            'link_url' => '#',
+            'sort_order' => 99,
+        ]);
+
+        $this->actingAs($admin)
+            ->get('/management/home-media')
+            ->assertOk()
+            ->assertSeeText('Custom Home Media');
     }
 
     public function test_follow_us_is_hidden_when_no_social_media_is_filled(): void

@@ -12,6 +12,7 @@ use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
+use UnitEnum;
 
 class CompanyProfileResource extends Resource
 {
@@ -24,6 +25,8 @@ class CompanyProfileResource extends Resource
     protected static ?string $pluralModelLabel = 'Company Profile';
 
     protected static ?string $navigationLabel = 'Company Profile';
+
+    protected static string|UnitEnum|null $navigationGroup = 'Company Setting';
 
     protected static ?int $navigationSort = 1;
 

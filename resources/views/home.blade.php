@@ -108,6 +108,32 @@
                 padding-right: 0;
             }
 
+            .home-hero-slide {
+                background-size: cover !important;
+                background-position: center right !important;
+                background-repeat: no-repeat !important;
+            }
+
+            .home-side-banner img {
+                display: block;
+                width: 100%;
+                aspect-ratio: 37 / 23;
+                object-fit: cover;
+            }
+
+            .home-promo-banner img {
+                display: block;
+                width: 100%;
+                aspect-ratio: 188 / 115;
+                object-fit: cover;
+            }
+
+            .li-static-home-image {
+                background-size: cover !important;
+                background-position: center center !important;
+                background-repeat: no-repeat !important;
+            }
+
             @media (max-width: 767px) {
                 .site-brand {
                     justify-content: center;
@@ -135,6 +161,12 @@
 	<![endif]-->
         <!-- Begin Body Wrapper -->
         <div class="body-wrapper">
+            @php
+                $heroSlides = $homeMedia->where('section', 'hero_slider')->sortBy('sort_order')->values();
+                $sideBanners = $homeMedia->where('section', 'side_banner')->sortBy('sort_order')->values();
+                $promoBanners = $homeMedia->where('section', 'promo_banner')->sortBy('sort_order')->values();
+                $featuredBanner = $homeMedia->firstWhere('section', 'featured_banner');
+            @endphp
             <!-- Begin Header Area -->
             <header>
                 <!-- Begin Header Top Area -->
@@ -492,7 +524,7 @@
                             <div class="slider-area">
                                 <div class="slider-active owl-carousel">
                                     <!-- Begin Single Slide Area -->
-                                    <div class="single-slide align-center-left  animation-style-01 bg-1">
+                                    <div class="single-slide home-hero-slide align-center-left  animation-style-01 bg-1" @if ($heroSlides->get(0)?->image_url) style="background-image: url('{{ $heroSlides->get(0)->image_url }}');" @endif>
                                         <div class="slider-progress"></div>
                                         <div class="slider-content">
                                             <h5>Sale Offer <span>-20% Off</span> This Week</h5>
@@ -505,7 +537,7 @@
                                     </div>
                                     <!-- Single Slide Area End Here -->
                                     <!-- Begin Single Slide Area -->
-                                    <div class="single-slide align-center-left animation-style-02 bg-2">
+                                    <div class="single-slide home-hero-slide align-center-left animation-style-02 bg-2" @if ($heroSlides->get(1)?->image_url) style="background-image: url('{{ $heroSlides->get(1)->image_url }}');" @endif>
                                         <div class="slider-progress"></div>
                                         <div class="slider-content">
                                             <h5>Sale Offer <span>Black Friday</span> This Week</h5>
@@ -518,7 +550,7 @@
                                     </div>
                                     <!-- Single Slide Area End Here -->
                                     <!-- Begin Single Slide Area -->
-                                    <div class="single-slide align-center-left animation-style-01 bg-3">
+                                    <div class="single-slide home-hero-slide align-center-left animation-style-01 bg-3" @if ($heroSlides->get(2)?->image_url) style="background-image: url('{{ $heroSlides->get(2)->image_url }}');" @endif>
                                         <div class="slider-progress"></div>
                                         <div class="slider-content">
                                             <h5>Sale Offer <span>-10% Off</span> This Week</h5>
@@ -536,14 +568,14 @@
                         <!-- Slider Area End Here -->
                         <!-- Begin Li Banner Area -->
                         <div class="col-lg-4 col-md-4 text-center pt-xs-30">
-                            <div class="li-banner">
-                                <a href="#">
-                                    <img src="images/banner/1_1.jpg" alt="">
+                            <div class="li-banner home-side-banner">
+                                <a href="{{ $sideBanners->get(0)?->link_url ?: '#' }}">
+                                    <img src="{{ $sideBanners->get(0)?->image_url ?: asset('desain/images/banner/1_1.jpg') }}" alt="{{ $sideBanners->get(0)?->label ?: 'Side Banner 1' }}">
                                 </a>
                             </div>
-                            <div class="li-banner mt-15 mt-sm-30 mt-xs-30">
-                                <a href="#">
-                                    <img src="images/banner/1_2.jpg" alt="">
+                            <div class="li-banner home-side-banner mt-15 mt-sm-30 mt-xs-30">
+                                <a href="{{ $sideBanners->get(1)?->link_url ?: '#' }}">
+                                    <img src="{{ $sideBanners->get(1)?->image_url ?: asset('desain/images/banner/1_2.jpg') }}" alt="{{ $sideBanners->get(1)?->label ?: 'Side Banner 2' }}">
                                 </a>
                             </div>
                         </div>
@@ -1352,27 +1384,27 @@
                     <div class="row">
                         <!-- Begin Single Banner Area -->
                         <div class="col-lg-4 col-md-4 text-center">
-                            <div class="single-banner">
-                                <a href="#">
-                                    <img src="images/banner/1_3.jpg" alt="Li's Static Banner">
+                            <div class="single-banner home-promo-banner">
+                                <a href="{{ $promoBanners->get(0)?->link_url ?: '#' }}">
+                                    <img src="{{ $promoBanners->get(0)?->image_url ?: asset('desain/images/banner/1_3.jpg') }}" alt="{{ $promoBanners->get(0)?->label ?: 'Promo Banner 1' }}">
                                 </a>
                             </div>
                         </div>
                         <!-- Single Banner Area End Here -->
                         <!-- Begin Single Banner Area -->
                         <div class="col-lg-4 col-md-4 text-center pt-xs-30">
-                            <div class="single-banner">
-                                <a href="#">
-                                    <img src="images/banner/1_4.jpg" alt="Li's Static Banner">
+                            <div class="single-banner home-promo-banner">
+                                <a href="{{ $promoBanners->get(1)?->link_url ?: '#' }}">
+                                    <img src="{{ $promoBanners->get(1)?->image_url ?: asset('desain/images/banner/1_4.jpg') }}" alt="{{ $promoBanners->get(1)?->label ?: 'Promo Banner 2' }}">
                                 </a>
                             </div>
                         </div>
                         <!-- Single Banner Area End Here -->
                         <!-- Begin Single Banner Area -->
                         <div class="col-lg-4 col-md-4 text-center pt-xs-30">
-                            <div class="single-banner">
-                                <a href="#">
-                                    <img src="images/banner/1_5.jpg" alt="Li's Static Banner">
+                            <div class="single-banner home-promo-banner">
+                                <a href="{{ $promoBanners->get(2)?->link_url ?: '#' }}">
+                                    <img src="{{ $promoBanners->get(2)?->image_url ?: asset('desain/images/banner/1_5.jpg') }}" alt="{{ $promoBanners->get(2)?->label ?: 'Promo Banner 3' }}">
                                 </a>
                             </div>
                         </div>
@@ -1943,7 +1975,7 @@
                     <div class="row">
                         <div class="col-lg-12">
                             <!-- Begin Li's Static Home Image Area -->
-                            <div class="li-static-home-image"></div>
+                            <div class="li-static-home-image" @if ($featuredBanner?->image_url) style="background-image: url('{{ $featuredBanner->image_url }}');" @endif></div>
                             <!-- Li's Static Home Image Area End Here -->
                             <!-- Begin Li's Static Home Content Area -->
                             <div class="li-static-home-content">
@@ -3043,62 +3075,35 @@
                 <div class="footer-static-top">
                     <div class="container">
                         <!-- Begin Footer Shipping Area -->
-                        <div class="footer-shipping pt-60 pb-55 pb-xs-25">
-                            <div class="row">
-                                <!-- Begin Li's Shipping Inner Box Area -->
-                                <div class="col-lg-3 col-md-6 col-sm-6 pb-sm-55 pb-xs-55">
-                                    <div class="li-shipping-inner-box">
-                                        <div class="shipping-icon">
-                                            <img src="images/shipping-icon/1.png" alt="Shipping Icon">
+                        @if ($homeHighlights->isNotEmpty())
+                            @php
+                                $homeHighlightColumnClass = match ($homeHighlights->count()) {
+                                    1 => 'col-lg-12 col-md-12 col-sm-12',
+                                    2 => 'col-lg-6 col-md-6 col-sm-6',
+                                    3 => 'col-lg-4 col-md-6 col-sm-6',
+                                    default => 'col-lg-3 col-md-6 col-sm-6',
+                                };
+                            @endphp
+                            <div class="footer-shipping pt-60 pb-55 pb-xs-25">
+                                <div class="row">
+                                    @foreach ($homeHighlights as $homeHighlight)
+                                        <div class="{{ $homeHighlightColumnClass }} pb-sm-55 pb-xs-30">
+                                            <div class="li-shipping-inner-box">
+                                                @if ($homeHighlight->image_url)
+                                                    <div class="shipping-icon">
+                                                        <img src="{{ $homeHighlight->image_url }}" alt="{{ $homeHighlight->title }}">
+                                                    </div>
+                                                @endif
+                                                <div class="shipping-text">
+                                                    <h2>{{ $homeHighlight->title }}</h2>
+                                                    <p>{{ $homeHighlight->description }}</p>
+                                                </div>
+                                            </div>
                                         </div>
-                                        <div class="shipping-text">
-                                            <h2>Free Delivery</h2>
-                                            <p>And free returns. See checkout for delivery dates.</p>
-                                        </div>
-                                    </div>
+                                    @endforeach
                                 </div>
-                                <!-- Li's Shipping Inner Box Area End Here -->
-                                <!-- Begin Li's Shipping Inner Box Area -->
-                                <div class="col-lg-3 col-md-6 col-sm-6 pb-sm-55 pb-xs-55">
-                                    <div class="li-shipping-inner-box">
-                                        <div class="shipping-icon">
-                                            <img src="images/shipping-icon/2.png" alt="Shipping Icon">
-                                        </div>
-                                        <div class="shipping-text">
-                                            <h2>Safe Payment</h2>
-                                            <p>Pay with the world's most popular and secure payment methods.</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- Li's Shipping Inner Box Area End Here -->
-                                <!-- Begin Li's Shipping Inner Box Area -->
-                                <div class="col-lg-3 col-md-6 col-sm-6 pb-xs-30">
-                                    <div class="li-shipping-inner-box">
-                                        <div class="shipping-icon">
-                                            <img src="images/shipping-icon/3.png" alt="Shipping Icon">
-                                        </div>
-                                        <div class="shipping-text">
-                                            <h2>Shop with Confidence</h2>
-                                            <p>Our Buyer Protection covers your purchasefrom click to delivery.</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- Li's Shipping Inner Box Area End Here -->
-                                <!-- Begin Li's Shipping Inner Box Area -->
-                                <div class="col-lg-3 col-md-6 col-sm-6 pb-xs-30">
-                                    <div class="li-shipping-inner-box">
-                                        <div class="shipping-icon">
-                                            <img src="images/shipping-icon/4.png" alt="Shipping Icon">
-                                        </div>
-                                        <div class="shipping-text">
-                                            <h2>24/7 Help Center</h2>
-                                            <p>Have a question? Call a Specialist or chat online.</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- Li's Shipping Inner Box Area End Here -->
                             </div>
-                        </div>
+                        @endif
                         <!-- Footer Shipping Area End Here -->
                     </div>
                 </div>
