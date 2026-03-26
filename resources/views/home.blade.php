@@ -100,6 +100,14 @@
                 background: #111;
             }
 
+            .hb-menu nav > ul > li.site-nav-link > a::after {
+                display: none !important;
+            }
+
+            .hb-menu nav > ul > li.site-nav-link > a {
+                padding-right: 0;
+            }
+
             @media (max-width: 767px) {
                 .site-brand {
                     justify-content: center;
@@ -342,14 +350,7 @@
                                 <div class="hb-menu">
                                     <nav>
                                         <ul>
-                                            <li class="dropdown-holder"><a href="{{ route('home') }}">Home</a>
-                                                <ul class="hb-dropdown">
-                                                    <li class="active"><a href="{{ route('home') }}">Home One</a></li>
-                                                    <li><a href="index-2.html">Home Two</a></li>
-                                                    <li><a href="index-3.html">Home Three</a></li>
-                                                    <li><a href="index-4.html">Home Four</a></li>
-                                                </ul>
-                                            </li>
+                                            <li class="site-nav-link active"><a href="{{ route('home') }}">Home</a></li>
                                             <li class="megamenu-holder"><a href="shop-left-sidebar.html">Shop</a>
                                                 <ul class="megamenu hb-megamenu">
                                                     <li><a href="shop-left-sidebar.html">Shop Page Layout</a>
@@ -449,7 +450,7 @@
                                                     </li>
                                                     <li><a href="{{ route('home') }}">Other Pages 2</a>
                                                         <ul>
-                                                            <li><a href="contact.html">Contact</a></li>
+                                                            <li><a href="{{ route('contact') }}">Contact</a></li>
                                                             <li><a href="about-us.html">About Us</a></li>
                                                             <li><a href="faq.html">FAQ</a></li>
                                                             <li><a href="404.html">404 Error</a></li>
@@ -458,7 +459,7 @@
                                                 </ul>
                                             </li>
                                             <li><a href="about-us.html">About Us</a></li>
-                                            <li><a href="contact.html">Contact</a></li>
+                                            <li class="site-nav-link"><a href="{{ route('contact') }}">Contact</a></li>
                                             <li><a href="shop-left-sidebar.html">Smartwatch</a></li>
                                             <li><a href="shop-left-sidebar.html">Accessories</a></li>
                                         </ul>
@@ -3145,7 +3146,7 @@
                                             <li><a href="#">Prices drop</a></li>
                                             <li><a href="#">New products</a></li>
                                             <li><a href="#">Best sales</a></li>
-                                            <li><a href="#">Contact us</a></li>
+                                            <li><a href="{{ route('contact') }}">Contact us</a></li>
                                         </ul>
                                     </div>
                                 </div>
@@ -3158,7 +3159,7 @@
                                             <li><a href="#">Delivery</a></li>
                                             <li><a href="#">Legal Notice</a></li>
                                             <li><a href="#">About us</a></li>
-                                            <li><a href="#">Contact us</a></li>
+                                            <li><a href="{{ route('contact') }}">Contact us</a></li>
                                         </ul>
                                     </div>
                                 </div>

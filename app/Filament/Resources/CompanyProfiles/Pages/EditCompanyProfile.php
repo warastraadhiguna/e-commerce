@@ -10,7 +10,7 @@ class EditCompanyProfile extends EditRecord
 {
     protected static string $resource = CompanyProfileResource::class;
 
-    protected Width | string | null $maxContentWidth = Width::Full;
+    protected Width|string|null $maxContentWidth = Width::Full;
 
     protected function getHeaderActions(): array
     {

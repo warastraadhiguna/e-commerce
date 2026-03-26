@@ -61,6 +61,26 @@ class CompanyProfileForm
                         'xl' => 7,
                     ])
                     ->schema([
+                        Section::make('Contact')
+                            ->columns(2)
+                            ->schema([
+                                TextInput::make('phone')
+                                    ->required()
+                                    ->maxLength(50),
+                                TextInput::make('email')
+                                    ->email()
+                                    ->required()
+                                    ->maxLength(255),
+                                Textarea::make('address')
+                                    ->required()
+                                    ->rows(1)
+                                    ->columnSpanFull(),
+                                Textarea::make('map_embed_url')
+                                    ->label('Location iframe URL')
+                                    ->rows(1)
+                                    ->helperText('Paste the Google Maps embed URL for the contact page iframe.')
+                                    ->columnSpanFull(),
+                            ]),
                         Section::make('Social Media')
                             ->columns(2)
                             ->schema([
@@ -80,21 +100,6 @@ class CompanyProfileForm
                                     ->label('Instagram URL')
                                     ->url()
                                     ->maxLength(255),
-                            ]),
-                        Section::make('Contact')
-                            ->columns(2)
-                            ->schema([
-                                TextInput::make('phone')
-                                    ->required()
-                                    ->maxLength(50),
-                                TextInput::make('email')
-                                    ->email()
-                                    ->required()
-                                    ->maxLength(255),
-                                Textarea::make('address')
-                                    ->required()
-                                    ->rows(4)
-                                    ->columnSpanFull(),
                             ]),
                     ]),
             ]);
