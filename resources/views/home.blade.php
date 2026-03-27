@@ -108,6 +108,8 @@
                 padding-right: 0;
             }
 
+            @include('partials.site-navigation-styles')
+
             .home-hero-slide {
                 background-size: cover !important;
                 background-position: center right !important;
@@ -134,6 +136,305 @@
                 background-repeat: no-repeat !important;
             }
 
+            .single-product-wrap .product-image a {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                min-height: 270px;
+            }
+
+            .single-product-wrap .product-image img {
+                width: 100%;
+                max-width: 100%;
+                max-height: 240px;
+                object-fit: contain;
+            }
+
+            .single-product-wrap .product-image__empty {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                width: 100%;
+                min-height: 240px;
+                border: 1px dashed #d5d5d5;
+                color: #999;
+                font-size: 14px;
+                text-transform: uppercase;
+                letter-spacing: .08em;
+            }
+
+            .quick-view-image__frame {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                min-height: 380px;
+                border: 1px solid #ededed;
+                background: #fff;
+            }
+
+            .quick-view-image__frame img {
+                width: 100%;
+                max-width: 100%;
+                max-height: 340px;
+                object-fit: contain;
+            }
+
+            .quick-view-modal .modal-dialog {
+                max-width: 1080px;
+            }
+
+            .quick-view-modal .modal-content {
+                border: 0;
+                border-radius: 0;
+            }
+
+            .quick-view-modal .modal-body {
+                padding: 34px 34px 30px;
+            }
+
+            .quick-view-modal .close {
+                position: absolute;
+                right: 18px;
+                top: 12px;
+                z-index: 3;
+                opacity: 1;
+                font-size: 34px;
+            }
+
+            .quick-view-gallery {
+                padding-right: 20px;
+            }
+
+            .quick-view-image__link {
+                display: block;
+            }
+
+            .quick-view-image__thumbs {
+                display: flex;
+                align-items: center;
+                gap: 16px;
+                margin-top: 18px;
+            }
+
+            .quick-view-image__thumb {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                width: 82px;
+                height: 82px;
+                border: 1px solid #ededed;
+                background: #fff;
+                cursor: pointer;
+                transition: border-color .2s ease, box-shadow .2s ease;
+            }
+
+            .quick-view-image__thumb.is-active {
+                border-color: #fed700;
+                box-shadow: 0 0 0 2px rgba(254, 215, 0, .15);
+            }
+
+            .quick-view-image__thumb img {
+                width: 100%;
+                max-width: 68px;
+                max-height: 68px;
+                object-fit: contain;
+            }
+
+            .quick-view-content {
+                padding-left: 12px;
+            }
+
+            .quick-view-content .product-info h2 {
+                margin-bottom: 10px;
+                line-height: 1.3;
+            }
+
+            .quick-view-review-links {
+                display: flex;
+                flex-wrap: wrap;
+                align-items: center;
+                gap: 14px;
+                margin: 14px 0 12px;
+                color: #8a8a8a;
+                font-size: 14px;
+            }
+
+            .quick-view-review-links a {
+                color: #8a8a8a;
+            }
+
+            .quick-view-divider {
+                margin: 22px 0;
+                border-top: 1px solid #ececec;
+            }
+
+            .quick-view-meta-list {
+                margin: 0;
+                padding: 0;
+                list-style: none;
+            }
+
+            .quick-view-meta-list li {
+                color: #666;
+                line-height: 1.85;
+                margin-bottom: 6px;
+            }
+
+            .quick-view-meta-list strong {
+                color: #222;
+            }
+
+            .quick-view-actions {
+                margin-top: 24px;
+            }
+
+            .quick-view-quantity-label {
+                display: block;
+                color: #222;
+                font-size: 16px;
+                font-weight: 600;
+                margin-bottom: 12px;
+            }
+
+            .quick-view-quantity-row {
+                display: flex;
+                flex-wrap: wrap;
+                align-items: center;
+                gap: 14px;
+            }
+
+            .quick-view-quantity-box {
+                display: inline-flex;
+                align-items: stretch;
+                border: 1px solid #ddd;
+                background: #fff;
+            }
+
+            .quick-view-quantity-box input {
+                width: 78px;
+                height: 52px;
+                border: 0;
+                text-align: center;
+                color: #222;
+            }
+
+            .quick-view-quantity-controls {
+                display: flex;
+                flex-direction: column;
+                border-left: 1px solid #ddd;
+            }
+
+            .quick-view-quantity-controls button {
+                width: 38px;
+                height: 26px;
+                border: 0;
+                background: #fff;
+                color: #444;
+                line-height: 1;
+            }
+
+            .quick-view-quantity-controls button + button {
+                border-top: 1px solid #ddd;
+            }
+
+            .quick-view-buy-button {
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                min-width: 220px;
+                min-height: 52px;
+                padding: 0 26px;
+                border: 0;
+                background: #fed700;
+                color: #242424;
+                cursor: pointer;
+                font-weight: 700;
+                text-transform: uppercase;
+                letter-spacing: .03em;
+            }
+
+            .quick-view-secondary-link {
+                display: inline-flex;
+                align-items: center;
+                gap: 8px;
+                margin-top: 18px;
+                color: #8a8a8a;
+                font-size: 15px;
+            }
+
+            .quick-view-secondary-link:hover,
+            .quick-view-buy-button:hover {
+                color: inherit;
+            }
+
+            .quick-view-image__empty {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                width: 100%;
+                min-height: 340px;
+                border: 1px dashed #d5d5d5;
+                color: #999;
+                font-size: 14px;
+                text-transform: uppercase;
+                letter-spacing: .08em;
+            }
+
+            .quick-view-meta {
+                display: block;
+                margin-top: 16px;
+                color: #666;
+                font-size: 14px;
+                line-height: 1.7;
+            }
+
+            .public-setting-button {
+                background: transparent;
+                border: 0;
+                color: #444;
+                cursor: pointer;
+                padding: 0;
+            }
+
+            .add-actions-link form {
+                display: block;
+                margin: 0;
+                width: 100%;
+                height: 100%;
+            }
+
+            .add-actions-link button.links-details {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                width: 100%;
+                height: 100%;
+                padding: 0;
+                background: transparent;
+                border: 0;
+                color: #a4a4a4;
+                cursor: pointer;
+                transition: all .3s ease-in-out;
+            }
+
+            .add-actions-link button.links-details.is-active {
+                background: transparent;
+                color: #a4a4a4;
+            }
+
+            .add-actions-link .add-cart form button {
+                display: block;
+                width: 100%;
+                height: 100%;
+                padding: 0;
+                background: transparent;
+                border: 0;
+                color: inherit;
+                cursor: pointer;
+                font: inherit;
+                text-transform: inherit;
+            }
+
             @media (max-width: 767px) {
                 .site-brand {
                     justify-content: center;
@@ -149,6 +450,28 @@
                 .site-brand__text {
                     font-size: 28px;
                     text-align: center;
+                }
+
+                .quick-view-gallery,
+                .quick-view-content {
+                    padding-right: 0;
+                    padding-left: 0;
+                }
+
+                .quick-view-modal .modal-body {
+                    padding: 22px 18px 20px;
+                }
+
+                .quick-view-image__frame {
+                    min-height: 260px;
+                }
+
+                .quick-view-image__thumbs {
+                    gap: 10px;
+                }
+
+                .quick-view-buy-button {
+                    width: 100%;
                 }
             }
         </style>
@@ -166,6 +489,24 @@
                 $sideBanners = $homeMedia->where('section', 'side_banner')->sortBy('sort_order')->values();
                 $promoBanners = $homeMedia->where('section', 'promo_banner')->sortBy('sort_order')->values();
                 $featuredBanner = $homeMedia->firstWhere('section', 'featured_banner');
+                $newArrivalProducts = $homeCatalog['new_arrivals'] ?? collect();
+                $bestsellerProducts = $homeCatalog['bestsellers'] ?? collect();
+                $featuredProducts = $homeCatalog['featured_products'] ?? collect();
+                $searchQuery = $homeCatalog['search_query'] ?? '';
+                $searchFilter = $homeCatalog['search_filter'] ?? 'all';
+                $searchFilterLabel = $homeCatalog['search_filter_label'] ?? 'All';
+                $searchIsActive = $homeCatalog['search_is_active'] ?? false;
+                $searchOptions = $homeCatalog['search_options'] ?? collect();
+                $searchResults = $homeCatalog['search_results'] ?? collect();
+                $primaryProductType = $homeCatalog['primary_type'] ?? null;
+                $primaryProductTypeFilters = $homeCatalog['primary_type_filters'] ?? collect();
+                $primaryProductTypeProducts = $homeCatalog['primary_type_products'] ?? collect();
+                $secondaryProductType = $homeCatalog['secondary_type'] ?? null;
+                $secondaryProductTypeFilters = $homeCatalog['secondary_type_filters'] ?? collect();
+                $secondaryProductTypeProducts = $homeCatalog['secondary_type_products'] ?? collect();
+                $trendingBrands = $homeCatalog['trending_brands'] ?? collect();
+                $trendingBrandProducts = $homeCatalog['trending_brand_products'] ?? [];
+                $bestsellerShowcase = $homeCatalog['bestseller_showcase'] ?? collect();
             @endphp
             <!-- Begin Header Area -->
             <header>
@@ -187,16 +528,7 @@
                                 <div class="header-top-right">
                                     <ul class="ht-menu">
                                         <!-- Begin Setting Area -->
-                                        <li>
-                                            <div class="ht-setting-trigger"><span>Setting</span></div>
-                                            <div class="setting ht-setting">
-                                                <ul class="ht-setting-list">
-                                                    <li><a href="login-register.html">My Account</a></li>
-                                                    <li><a href="checkout.html">Checkout</a></li>
-                                                    <li><a href="login-register.html">Sign In</a></li>
-                                                </ul>
-                                            </div>
-                                        </li>
+                                        @include('partials.public-setting-menu')
                                         <!-- Setting Area End Here -->
                                     </ul>
                                 </div>
@@ -228,80 +560,15 @@
                             <!-- Begin Header Middle Right Area -->
                             <div class="col-lg-9 pl-0 ml-sm-15 ml-xs-15">
                                 <!-- Begin Header Middle Searchbox Area -->
-                                <form action="#" class="hm-searchbox">
-                                    <select class="nice-select select-search-category">
-                                        <option value="0">All</option>                         
-                                        <option value="10">Laptops</option>                     
-                                        <option value="17">- -  Prime Video</option>                    
-                                        <option value="20">- - - -  All Videos</option>                     
-                                        <option value="21">- - - -  Blouses</option>                        
-                                        <option value="22">- - - -  Evening Dresses</option>                
-                                        <option value="23">- - - -  Summer Dresses</option>                     
-                                        <option value="24">- - - -  T-shirts</option>                       
-                                        <option value="25">- - - -  Rent or Buy</option>                        
-                                        <option value="26">- - - -  Your Watchlist</option>                     
-                                        <option value="27">- - - -  Watch Anywhere</option>                     
-                                        <option value="28">- - - -  Getting Started</option>         
-                                        <option value="18">- - - -  Computers</option>                      
-                                        <option value="29">- - - -  More to Explore</option>         
-                                        <option value="30">- - - -  TV &amp; Video</option>                     
-                                        <option value="31">- - - -  Audio &amp; Theater</option>               
-                                        <option value="32">- - - -  Camera, Photo </option>
-                                        <option value="33">- - - -  Cell Phones</option>                        
-                                        <option value="34">- - - -  Headphones</option>                     
-                                        <option value="35">- - - -  Video Games</option>                        
-                                        <option value="36">- - - -  Wireless Speakers</option>            
-                                        <option value="19">- - - -  Electronics</option>                        
-                                        <option value="37">- - - -  Amazon Home</option>                        
-                                        <option value="38">- - - -  Kitchen &amp; Dining</option>           
-                                        <option value="39">- - - -  Furniture</option>                      
-                                        <option value="40">- - - -  Bed &amp; Bath</option>                     
-                                        <option value="41">- - - -  Appliances</option>                 
-                                        <option value="11">TV &amp; Audio</option>                  
-                                        <option value="42">- -  Chamcham</option>                        
-                                        <option value="45">- - - -  Office</option>                     
-                                        <option value="47">- - - -  Gaming</option>                 
-                                        <option value="48">- - - -  Chromebook</option>                     
-                                        <option value="49">- - - -  Refurbished</option>                    
-                                        <option value="50">- - - -  Touchscreen</option>                        
-                                        <option value="51">- - - -  Ultrabooks</option>                     
-                                        <option value="52">- - - -  Blouses</option>                        
-                                        <option value="43">- -  Sanai</option>                        
-                                        <option value="53">- - - -  Hard Drives</option>                        
-                                        <option value="54">- - - -  Graphic Cards</option>                      
-                                        <option value="55">- - - -  Processors (CPU)</option>  
-                                        <option value="56">- - - -  Memory</option>                     
-                                        <option value="57">- - - -  Motherboards</option>                       
-                                        <option value="58">- - - -  Fans &amp; Cooling</option> 
-                                        <option value="59">- - - -  CD/DVD Drives</option>                      
-                                        <option value="44">- -  Meito</option>                        
-                                        <option value="60">- - - -  Sound Cards</option>                        
-                                        <option value="61">- - - -  Cases &amp; Towers</option>   
-                                        <option value="62">- - - -  Casual Dresses</option>                     
-                                        <option value="63">- - - -  Evening Dresses</option>       
-                                        <option value="64">- - - -  T-shirts</option>                       
-                                        <option value="65">- - - -  Tops</option>                                 
-                                        <option value="12">Smartphone</option>                  
-                                        <option value="66">- -  Camera Accessories</option>                     
-                                        <option value="68">- - - -  Octa Core</option>                      
-                                        <option value="69">- - - -  Quad Core</option>                  
-                                        <option value="70">- - - -  Dual Core</option>                      
-                                        <option value="71">- - - -  7.0 Screen</option>                     
-                                        <option value="72">- - - -  9.0 Screen</option>                     
-                                        <option value="73">- - - -  Bags &amp; Cases</option>                   
-                                        <option value="67">- -  XailStation</option>                     
-                                        <option value="74">- - - -  Batteries</option>                      
-                                        <option value="75">- - - -  Microphones</option>                        
-                                        <option value="76">- - - -  Stabilizers</option>                        
-                                        <option value="77">- - - -  Video Tapes</option>                        
-                                        <option value="78">- - - -  Memory Card Readers</option> 
-                                        <option value="79">- - - -  Tripods</option>           
-                                        <option value="13">Cameras</option>                          
-                                        <option value="14">headphone</option>                                
-                                        <option value="15">Smartwatch</option>                           
-                                        <option value="16">Accessories</option>
+                                <form action="{{ route('home') }}" method="GET" class="hm-searchbox">
+                                    <select name="catalog" class="nice-select select-search-category">
+                                        @foreach ($searchOptions as $option)
+                                            <option value="{{ $option['value'] }}" @selected($searchFilter === $option['value'])>
+                                                {{ $option['label'] }}
+                                            </option>
+                                        @endforeach
                                     </select>
-                                    <input type="text" placeholder="Enter your search key ...">
+                                    <input type="text" name="q" value="{{ $searchQuery }}" placeholder="Enter your search key ...">
                                     <button class="li-btn" type="submit"><i class="fa fa-search"></i></button>
                                 </form>
                                 <!-- Header Middle Searchbox Area End Here -->
@@ -310,13 +577,15 @@
                                     <ul class="hm-menu">
                                         <!-- Begin Header Middle Wishlist Area -->
                                         <li class="hm-wishlist">
-                                            <a href="wishlist.html">
-                                                <span class="cart-item-count wishlist-item-count">0</span>
+                                            <a href="{{ route('wishlist.index') }}">
+                                                <span class="cart-item-count wishlist-item-count">{{ $wishlistCount }}</span>
                                                 <i class="fa fa-heart-o"></i>
                                             </a>
                                         </li>
                                         <!-- Header Middle Wishlist Area End Here -->
                                         <!-- Begin Header Mini Cart Area -->
+                                        @include('partials.public-minicart')
+                                        {{--
                                         <li class="hm-minicart">
                                             <div class="hm-minicart-trigger">
                                                 <span class="item-icon"></span>
@@ -363,6 +632,7 @@
                                                 </div>
                                             </div>
                                         </li>
+                                        --}}
                                         <!-- Header Mini Cart Area End Here -->
                                     </ul>
                                 </div>
@@ -381,120 +651,7 @@
                                 <!-- Begin Header Bottom Menu Area -->
                                 <div class="hb-menu">
                                     <nav>
-                                        <ul>
-                                            <li class="site-nav-link active"><a href="{{ route('home') }}">Home</a></li>
-                                            <li class="megamenu-holder"><a href="shop-left-sidebar.html">Shop</a>
-                                                <ul class="megamenu hb-megamenu">
-                                                    <li><a href="shop-left-sidebar.html">Shop Page Layout</a>
-                                                        <ul>
-                                                            <li><a href="shop-3-column.html">Shop 3 Column</a></li>
-                                                            <li><a href="shop-4-column.html">Shop 4 Column</a></li>
-                                                            <li><a href="shop-left-sidebar.html">Shop Left Sidebar</a></li>
-                                                            <li><a href="shop-right-sidebar.html">Shop Right Sidebar</a></li>
-                                                            <li><a href="shop-list.html">Shop List</a></li>
-                                                            <li><a href="shop-list-left-sidebar.html">Shop List Left Sidebar</a></li>
-                                                            <li><a href="shop-list-right-sidebar.html">Shop List Right Sidebar</a></li>
-                                                        </ul>
-                                                    </li>
-                                                    <li><a href="single-product-gallery-left.html">Single Product Style</a>
-                                                        <ul>
-                                                            <li><a href="single-product-carousel.html">Single Product Carousel</a></li>
-                                                            <li><a href="single-product-gallery-left.html">Single Product Gallery Left</a></li>
-                                                            <li><a href="single-product-gallery-right.html">Single Product Gallery Right</a></li>
-                                                            <li><a href="single-product-tab-style-top.html">Single Product Tab Style Top</a></li>
-                                                            <li><a href="single-product-tab-style-left.html">Single Product Tab Style Left</a></li>
-                                                            <li><a href="single-product-tab-style-right.html">Single Product Tab Style Right</a></li>
-                                                        </ul>
-                                                    </li>
-                                                    <li><a href="single-product.html">Single Products</a>
-                                                        <ul>
-                                                            <li><a href="single-product.html">Single Product</a></li>
-                                                            <li><a href="single-product-sale.html">Single Product Sale</a></li>
-                                                            <li><a href="single-product-group.html">Single Product Group</a></li>
-                                                            <li><a href="single-product-normal.html">Single Product Normal</a></li>
-                                                            <li><a href="single-product-affiliate.html">Single Product Affiliate</a></li>
-                                                        </ul>
-                                                    </li>
-                                                </ul>
-                                            </li>
-                                            <li class="dropdown-holder"><a href="blog-left-sidebar.html">Blog</a>
-                                                <ul class="hb-dropdown">
-                                                    <li class="sub-dropdown-holder"><a href="blog-left-sidebar.html">Blog Grid View</a>
-                                                        <ul class="hb-dropdown hb-sub-dropdown">
-                                                            <li><a href="blog-2-column.html">Blog 2 Column</a></li>
-                                                            <li><a href="blog-3-column.html">Blog 3 Column</a></li>
-                                                            <li><a href="blog-left-sidebar.html">Grid Left Sidebar</a></li>
-                                                            <li><a href="blog-right-sidebar.html">Grid Right Sidebar</a></li>
-                                                        </ul>
-                                                    </li>
-                                                    <li class="sub-dropdown-holder"><a href="blog-list-left-sidebar.html">Blog List View</a>
-                                                        <ul class="hb-dropdown hb-sub-dropdown">
-                                                            <li><a href="blog-list.html">Blog List</a></li>
-                                                            <li><a href="blog-list-left-sidebar.html">List Left Sidebar</a></li>
-                                                            <li><a href="blog-list-right-sidebar.html">List Right Sidebar</a></li>
-                                                        </ul>
-                                                    </li>
-                                                    <li class="sub-dropdown-holder"><a href="blog-details-left-sidebar.html">Blog Details</a>
-                                                        <ul class="hb-dropdown hb-sub-dropdown">
-                                                            <li><a href="blog-details-left-sidebar.html">Left Sidebar</a></li>
-                                                            <li><a href="blog-details-right-sidebar.html">Right Sidebar</a></li>
-                                                        </ul>
-                                                    </li>
-                                                    <li class="sub-dropdown-holder"><a href="blog-gallery-format.html">Blog Format</a>
-                                                        <ul class="hb-dropdown hb-sub-dropdown">
-                                                            <li><a href="blog-audio-format.html">Blog Audio Format</a></li>
-                                                            <li><a href="blog-video-format.html">Blog Video Format</a></li>
-                                                            <li><a href="blog-gallery-format.html">Blog Gallery Format</a></li>
-                                                        </ul>
-                                                    </li>
-                                                </ul>
-                                            </li>
-                                            <li class="megamenu-static-holder"><a href="{{ route('home') }}">Pages</a>
-                                                <ul class="megamenu hb-megamenu">
-                                                    <li><a href="blog-left-sidebar.html">Blog Layouts</a>
-                                                        <ul>
-                                                            <li><a href="blog-2-column.html">Blog 2 Column</a></li>
-                                                            <li><a href="blog-3-column.html">Blog 3 Column</a></li>
-                                                            <li><a href="blog-left-sidebar.html">Grid Left Sidebar</a></li>
-                                                            <li><a href="blog-right-sidebar.html">Grid Right Sidebar</a></li>
-                                                            <li><a href="blog-list.html">Blog List</a></li>
-                                                            <li><a href="blog-list-left-sidebar.html">List Left Sidebar</a></li>
-                                                            <li><a href="blog-list-right-sidebar.html">List Right Sidebar</a></li>
-                                                        </ul>
-                                                    </li>
-                                                    <li><a href="blog-details-left-sidebar.html">Blog Details Pages</a>
-                                                        <ul>
-                                                            <li><a href="blog-details-left-sidebar.html">Left Sidebar</a></li>
-                                                            <li><a href="blog-details-right-sidebar.html">Right Sidebar</a></li>
-                                                            <li><a href="blog-audio-format.html">Blog Audio Format</a></li>
-                                                            <li><a href="blog-video-format.html">Blog Video Format</a></li>
-                                                            <li><a href="blog-gallery-format.html">Blog Gallery Format</a></li>
-                                                        </ul>
-                                                    </li>
-                                                    <li><a href="{{ route('home') }}">Other Pages</a>
-                                                        <ul>
-                                                            <li><a href="login-register.html">My Account</a></li>
-                                                            <li><a href="checkout.html">Checkout</a></li>
-                                                            <li><a href="compare.html">Compare</a></li>
-                                                            <li><a href="wishlist.html">Wishlist</a></li>
-                                                            <li><a href="shopping-cart.html">Shopping Cart</a></li>
-                                                        </ul>
-                                                    </li>
-                                                    <li><a href="{{ route('home') }}">Other Pages 2</a>
-                                                        <ul>
-                                                            <li><a href="{{ route('contact') }}">Contact</a></li>
-                                                            <li><a href="{{ route('about') }}">About Us</a></li>
-                                                            <li><a href="faq.html">FAQ</a></li>
-                                                            <li><a href="404.html">404 Error</a></li>
-                                                        </ul>
-                                                    </li>
-                                                </ul>
-                                            </li>
-                                            <li class="site-nav-link"><a href="{{ route('about') }}">About Us</a></li>
-                                            <li class="site-nav-link"><a href="{{ route('contact') }}">Contact</a></li>
-                                            <li><a href="shop-left-sidebar.html">Smartwatch</a></li>
-                                            <li><a href="shop-left-sidebar.html">Accessories</a></li>
-                                        </ul>
+                                        @include('partials.site-navigation')
                                     </nav>
                                 </div>
                                 <!-- Header Bottom Menu Area End Here -->
@@ -584,6 +741,60 @@
                 </div>
             </div>
             <!-- Slider With Banner Area End Here -->
+            @if ($searchIsActive)
+                <section id="search-results" class="product-area pt-60 pb-40">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="li-section-title">
+                                    <h2>
+                                        <span>Hasil Pencarian</span>
+                                    </h2>
+                                    <ul class="li-sub-category-list">
+                                        <li class="active"><a href="#">Filter: {{ $searchFilterLabel }}</a></li>
+                                        @if (filled($searchQuery))
+                                            <li><a href="#">Keyword: {{ $searchQuery }}</a></li>
+                                        @endif
+                                        <li><a href="{{ route('home') }}">Reset</a></li>
+                                    </ul>
+                                </div>
+                                @include('partials.home.product-carousel', [
+                                    'products' => $searchResults,
+                                    'useCarousel' => false,
+                                ])
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            @else
+            <!-- Begin Product Area -->
+            <div class="product-area pt-60 pb-50">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="li-product-tab">
+                                <ul class="nav li-product-menu">
+                                    <li><a class="active" data-toggle="tab" href="#li-new-product"><span>New Arrival</span></a></li>
+                                    <li><a data-toggle="tab" href="#li-bestseller-product"><span>Bestseller</span></a></li>
+                                    <li><a data-toggle="tab" href="#li-featured-product"><span>Featured Products</span></a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-content">
+                        <div id="li-new-product" class="tab-pane active show" role="tabpanel">
+                            @include('partials.home.product-carousel', ['products' => $newArrivalProducts])
+                        </div>
+                        <div id="li-bestseller-product" class="tab-pane" role="tabpanel">
+                            @include('partials.home.product-carousel', ['products' => $bestsellerProducts])
+                        </div>
+                        <div id="li-featured-product" class="tab-pane" role="tabpanel">
+                            @include('partials.home.product-carousel', ['products' => $featuredProducts])
+                        </div>
+                    </div>
+                </div>
+            </div>
+            @if (false)
             <!-- Begin Product Area -->
             <div class="product-area pt-60 pb-50">
                 <div class="container">
@@ -1378,6 +1589,7 @@
                 </div>
             </div>
             <!-- Product Area End Here -->
+            @endif
             <!-- Begin Li's Static Banner Area -->
             <div class="li-static-banner">
                 <div class="container">
@@ -1413,6 +1625,13 @@
                 </div>
             </div>
             <!-- Li's Static Banner Area End Here -->
+            @include('partials.home.product-type-section', [
+                'title' => $primaryProductType?->name ?? 'Produk Pilihan',
+                'filters' => $primaryProductTypeFilters,
+                'products' => $primaryProductTypeProducts,
+                'sectionClasses' => 'li-laptop-product pt-60 pb-45',
+            ])
+            @if (false)
             <!-- Begin Li's Laptop Product Area -->
             <section class="product-area li-laptop-product pt-60 pb-45">
                 <div class="container">
@@ -1691,6 +1910,14 @@
                 </div>
             </section>
             <!-- Li's Laptop Product Area End Here -->
+            @endif
+            @include('partials.home.product-type-section', [
+                'title' => $secondaryProductType?->name ?? 'Produk Lainnya',
+                'filters' => $secondaryProductTypeFilters,
+                'products' => $secondaryProductTypeProducts,
+                'sectionClasses' => 'li-laptop-product li-tv-audio-product pb-45',
+            ])
+            @if (false)
             <!-- Begin Li's TV & Audio Product Area -->
             <section class="product-area li-laptop-product li-tv-audio-product pb-45">
                 <div class="container">
@@ -1969,6 +2196,7 @@
                 </div>
             </section>
             <!-- Li's TV & Audio Product Area End Here -->
+            @endif
             <!-- Begin Li's Static Home Area -->
             <div class="li-static-home">
                 <div class="container">
@@ -1996,6 +2224,11 @@
                 </div>
             </div>
             <!-- Li's Static Home Area End Here -->
+            @include('partials.home.trending-section', [
+                'brands' => $trendingBrands,
+                'productMap' => $trendingBrandProducts,
+            ])
+            @if (false)
             <!-- Begin Li's Trending Product Area -->
             <section class="product-area li-trending-product pt-60 pb-45">
                 <div class="container">
@@ -2796,6 +3029,15 @@
                 </div>
             </section>
             <!-- Li's Trending Product Area End Here -->
+            @endif
+            @include('partials.home.product-type-section', [
+                'title' => 'Bestsellers',
+                'filters' => collect(),
+                'products' => $bestsellerShowcase,
+                'sectionClasses' => 'li-laptop-product li-trendding-products best-sellers pb-45',
+            ])
+            @endif
+            @if (false)
             <!-- Begin Li's Trendding Products Area -->
             <section class="product-area li-laptop-product li-trendding-products best-sellers pb-45">
                 <div class="container">
@@ -3069,6 +3311,7 @@
                 </div>
             </section>
             <!-- Li's Trendding Products Area End Here -->
+            @endif
             <!-- Begin Footer Area -->
             <div class="footer">
                 <!-- Begin Footer Static Top Area -->
@@ -3212,106 +3455,82 @@
             </div>
             <!-- Footer Area End Here -->
             <!-- Begin Quick View | Modal Area -->
-            <div class="modal fade modal-wrapper" id="exampleModalCenter" >
-                <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal fade modal-wrapper quick-view-modal" id="exampleModalCenter" >
+                <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
                     <div class="modal-content">
                         <div class="modal-body">
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
                             <div class="modal-inner-area row">
-                                <div class="col-lg-5 col-md-6 col-sm-6">
-                                   <!-- Product Details Left -->
-                                    <div class="product-details-left">
-                                        <div class="product-details-images slider-navigation-1">
-                                            <div class="lg-image">
-                                                <img src="images/product/large-size/1.jpg" alt="product image">
+                                <div class="col-lg-5 col-md-6 col-sm-12">
+                                    <div class="quick-view-gallery">
+                                        <a id="quickViewProductImageLink" class="quick-view-image__link" href="{{ route('home') }}">
+                                            <div class="quick-view-image__frame">
+                                                <img
+                                                    id="quickViewProductImage"
+                                                    src="{{ asset('desain/images/product/large-size/1.jpg') }}"
+                                                    alt="Quick view product image"
+                                                >
+                                                <div id="quickViewProductImageEmpty" class="quick-view-image__empty" style="display: none;">
+                                                    No Image
+                                                </div>
                                             </div>
-                                            <div class="lg-image">
-                                                <img src="images/product/large-size/2.jpg" alt="product image">
-                                            </div>
-                                            <div class="lg-image">
-                                                <img src="images/product/large-size/3.jpg" alt="product image">
-                                            </div>
-                                            <div class="lg-image">
-                                                <img src="images/product/large-size/4.jpg" alt="product image">
-                                            </div>
-                                            <div class="lg-image">
-                                                <img src="images/product/large-size/5.jpg" alt="product image">
-                                            </div>
-                                            <div class="lg-image">
-                                                <img src="images/product/large-size/6.jpg" alt="product image">
-                                            </div>
-                                        </div>
-                                        <div class="product-details-thumbs slider-thumbs-1">                                        
-                                            <div class="sm-image"><img src="images/product/small-size/1.jpg" alt="product image thumb"></div>
-                                            <div class="sm-image"><img src="images/product/small-size/2.jpg" alt="product image thumb"></div>
-                                            <div class="sm-image"><img src="images/product/small-size/3.jpg" alt="product image thumb"></div>
-                                            <div class="sm-image"><img src="images/product/small-size/4.jpg" alt="product image thumb"></div>
-                                            <div class="sm-image"><img src="images/product/small-size/5.jpg" alt="product image thumb"></div>
-                                            <div class="sm-image"><img src="images/product/small-size/6.jpg" alt="product image thumb"></div>
+                                        </a>
+                                        <div class="quick-view-image__thumbs">
+                                            <button type="button" id="quickViewProductThumb" class="quick-view-image__thumb is-active">
+                                                <img id="quickViewProductThumbImage" src="{{ asset('desain/images/product/large-size/1.jpg') }}" alt="Quick view thumbnail">
+                                            </button>
                                         </div>
                                     </div>
-                                    <!--// Product Details Left -->
                                 </div>
 
-                                <div class="col-lg-7 col-md-6 col-sm-6">
-                                    <div class="product-details-view-content pt-60">
+                                <div class="col-lg-7 col-md-6 col-sm-12">
+                                    <div class="product-details-view-content quick-view-content pt-15 pt-sm-30">
                                         <div class="product-info">
-                                            <h2>Today is a good day Framed poster</h2>
-                                            <span class="product-details-ref">Reference: demo_15</span>
-                                            <div class="rating-box pt-20">
-                                                <ul class="rating rating-with-review-item">
-                                                    <li><i class="fa fa-star-o"></i></li>
-                                                    <li><i class="fa fa-star-o"></i></li>
-                                                    <li><i class="fa fa-star-o"></i></li>
-                                                    <li class="no-star"><i class="fa fa-star-o"></i></li>
-                                                    <li class="no-star"><i class="fa fa-star-o"></i></li>
-                                                    <li class="review-item"><a href="#">Read Review</a></li>
-                                                    <li class="review-item"><a href="#">Write Review</a></li>
-                                                </ul>
+                                            <h2><a id="quickViewProductNameLink" href="{{ route('home') }}"><span id="quickViewProductName">Product Name</span></a></h2>
+                                            <span id="quickViewProductSku" class="product-details-ref">Reference: -</span>
+                                            <div class="quick-view-review-links">
+                                                <span><i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i></span>
+                                                <a href="#" id="quickViewReadReview">Read Review</a>
+                                                <a href="#" id="quickViewWriteReview">Write Review</a>
                                             </div>
                                             <div class="price-box pt-20">
-                                                <span class="new-price new-price-2">$57.98</span>
+                                                <span id="quickViewProductPrice" class="new-price new-price-2">Rp0,00</span>
+                                                <span id="quickViewProductOldPrice" class="old-price" style="display: none;"></span>
+                                                <span id="quickViewProductDiscount" class="discount-percentage" style="display: none;"></span>
                                             </div>
                                             <div class="product-desc">
                                                 <p>
-                                                    <span>100% cotton double printed dress. Black and white striped top and orange high waisted skater skirt bottom. Lorem ipsum dolor sit amet, consectetur adipisicing elit. quibusdam corporis, earum facilis et nostrum dolorum accusamus similique eveniet quia pariatur.
-                                                    </span>
+                                                    <span id="quickViewProductDescription">Deskripsi produk belum tersedia.</span>
                                                 </p>
                                             </div>
-                                            <div class="product-variants">
-                                                <div class="produt-variants-size">
-                                                    <label>Dimension</label>
-                                                    <select class="nice-select">
-                                                        <option value="1" title="S" selected="selected">40x60cm</option>
-                                                        <option value="2" title="M">60x90cm</option>
-                                                        <option value="3" title="L">80x120cm</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                            <div class="single-add-to-cart">
-                                                <form action="#" class="cart-quantity">
-                                                    <div class="quantity">
-                                                        <label>Quantity</label>
-                                                        <div class="cart-plus-minus">
-                                                            <input class="cart-plus-minus-box" value="1" type="text">
-                                                            <div class="dec qtybutton"><i class="fa fa-angle-down"></i></div>
-                                                            <div class="inc qtybutton"><i class="fa fa-angle-up"></i></div>
+                                            <div class="quick-view-divider"></div>
+                                            <ul class="quick-view-meta-list">
+                                                <li><strong>Informasi:</strong> <span id="quickViewProductMeta">-</span></li>
+                                            </ul>
+                                            <div class="quick-view-actions">
+                                                <label class="quick-view-quantity-label" for="quickViewProductQty">Quantity</label>
+                                                <div class="quick-view-quantity-row">
+                                                    <div class="quick-view-quantity-box">
+                                                        <input id="quickViewProductQty" type="text" value="1" readonly>
+                                                        <div class="quick-view-quantity-controls">
+                                                            <button type="button" class="js-quick-view-qty" data-direction="up"><i class="fa fa-angle-up"></i></button>
+                                                            <button type="button" class="js-quick-view-qty" data-direction="down"><i class="fa fa-angle-down"></i></button>
                                                         </div>
                                                     </div>
-                                                    <button class="add-to-cart" type="submit">Add to cart</button>
-                                                </form>
-                                            </div>
-                                            <div class="product-additional-info pt-25">
-                                                <a class="wishlist-btn" href="wishlist.html"><i class="fa fa-heart-o"></i>Add to wishlist</a>
-                                                <div class="product-social-sharing pt-25">
-                                                    <ul>
-                                                        <li class="facebook"><a href="#"><i class="fa fa-facebook"></i>Facebook</a></li>
-                                                        <li class="x-social"><a href="#"><span class="site-social__text">X</span></a></li>
-                                                        <li class="instagram"><a href="#"><i class="fa fa-instagram"></i>Instagram</a></li>
-                                                    </ul>
+                                                    <form id="quickViewAddToCartForm" action="" method="POST" data-preserve-scroll="true" style="display: none;">
+                                                        @csrf
+                                                        <input type="hidden" name="quantity" id="quickViewProductQtyHidden" value="1">
+                                                        <input type="hidden" name="redirect_to" value="{{ request()->getRequestUri() }}">
+                                                        <button id="quickViewProductBuyButton" class="quick-view-buy-button" type="submit">Beli</button>
+                                                    </form>
+                                                    <a id="quickViewProductLoginButton" class="quick-view-buy-button" href="{{ route('login') }}">Login untuk beli</a>
                                                 </div>
+                                                <a id="quickViewProductDetailLink" class="quick-view-secondary-link" href="{{ route('home') }}">
+                                                    <i class="fa fa-search-plus"></i>
+                                                    <span>Lihat detail produk</span>
+                                                </a>
                                             </div>
                                         </div>
                                     </div>
@@ -3364,6 +3583,91 @@
         <script src="js/jquery.nice-select.min.js"></script>
         <!-- ScrollUp js -->
         <script src="js/scrollUp.min.js"></script>
+        @include('partials.public-flash-alerts')
+        @include('partials.public-scroll-restore')
+        <script>
+            $(function () {
+                $('a[href="wishlist.html"]').attr('href', '{{ route('wishlist.index') }}');
+
+                $(document).on('click', '.js-quick-view-trigger', function (event) {
+                    event.preventDefault();
+
+                    var button = $(this);
+                    var image = button.data('product-image');
+                    var oldPrice = button.data('product-old-price');
+                    var discount = button.data('product-discount');
+                    var meta = button.data('product-meta');
+                    var productUrl = button.data('product-url');
+                    var cartUrl = button.data('product-cart-url');
+                    var loginUrl = button.data('product-login-url');
+                    var buyLabel = button.data('product-buy-label');
+                    var canPurchase = String(button.data('product-can-purchase')) === '1';
+                    var minimumQty = button.data('product-min-qty') || '1';
+
+                    $('#quickViewProductName').text(button.data('product-name') || 'Produk');
+                    $('#quickViewProductSku').text('Reference: ' + (button.data('product-sku') || '-'));
+                    $('#quickViewProductPrice').text(button.data('product-price') || 'Rp0,00');
+                    $('#quickViewProductDescription').text(button.data('product-description') || 'Deskripsi produk belum tersedia.');
+                    $('#quickViewProductMeta').text(meta || '');
+                    $('#quickViewProductBuyButton').text(buyLabel || 'Beli');
+                    $('#quickViewProductNameLink, #quickViewProductImageLink, #quickViewProductDetailLink').attr('href', productUrl || '#');
+                    $('#quickViewReadReview, #quickViewWriteReview').attr('href', productUrl ? (productUrl + '#reviews') : '#');
+                    $('#quickViewProductQty').val(minimumQty);
+                    $('#quickViewProductQtyHidden').val(minimumQty);
+
+                    if (oldPrice) {
+                        $('#quickViewProductOldPrice').text(oldPrice).show();
+                    } else {
+                        $('#quickViewProductOldPrice').hide().text('');
+                    }
+
+                    if (discount) {
+                        $('#quickViewProductDiscount').text(discount).show();
+                    } else {
+                        $('#quickViewProductDiscount').hide().text('');
+                    }
+
+                    if (image) {
+                        $('#quickViewProductImage').attr('src', image).show();
+                        $('#quickViewProductThumbImage').attr('src', image).show();
+                        $('#quickViewProductThumb').show();
+                        $('#quickViewProductImageEmpty').hide();
+                    } else {
+                        $('#quickViewProductImage').hide();
+                        $('#quickViewProductThumb').hide();
+                        $('#quickViewProductImageEmpty').show();
+                    }
+
+                    if (canPurchase && cartUrl) {
+                        $('#quickViewAddToCartForm').attr('action', cartUrl).show();
+                        $('#quickViewProductLoginButton').hide();
+                    } else {
+                        $('#quickViewAddToCartForm').hide();
+                        $('#quickViewProductLoginButton')
+                            .attr('href', loginUrl || '{{ route('login') }}')
+                            .text(buyLabel || 'Login untuk beli')
+                            .show();
+                    }
+
+                    $('#exampleModalCenter').modal('show');
+                });
+
+                $(document).on('click', '.js-quick-view-qty', function () {
+                    var input = $('#quickViewProductQty');
+                    var current = parseFloat(input.val()) || 1;
+                    var direction = $(this).data('direction');
+
+                    if (direction === 'up') {
+                        current += 1;
+                    } else if (current > 1) {
+                        current -= 1;
+                    }
+
+                    input.val(current);
+                    $('#quickViewProductQtyHidden').val(current);
+                });
+            });
+        </script>
         <!-- Main/Activator js -->
         <script src="js/main.js"></script>
     </body>

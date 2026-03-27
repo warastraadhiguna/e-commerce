@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\Users\Tables;
 
+use App\Enums\PartnerDiscountStatus;
 use App\Enums\UserRole;
 use App\Models\User;
 use Filament\Actions\DeleteAction;
@@ -10,7 +11,6 @@ use Filament\Actions\ViewAction;
 use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\SelectFilter;
-use Filament\Tables\Filters\TernaryFilter;
 use Filament\Tables\Table;
 
 class UsersTable
@@ -26,16 +26,35 @@ class UsersTable
                     ->searchable()
                     ->sortable()
                     ->copyable(),
+                TextColumn::make('phone')
+                    ->label('Nomor HP')
+                    ->searchable()
+                    ->copyable()
+                    ->placeholder('-'),
+                TextColumn::make('business_name')
+                    ->label('Usaha / instansi')
+                    ->searchable()
+                    ->placeholder('-')
+                    ->toggleable(isToggledHiddenByDefault: true),
+                TextColumn::make('contact_person')
+                    ->label('PIC')
+                    ->searchable()
+                    ->placeholder('-')
+                    ->toggleable(isToggledHiddenByDefault: true),
+                IconColumn::make('is_active')
+                    ->label('Aktif')
+                    ->boolean(),
                 TextColumn::make('role')
                     ->badge()
                     ->sortable()
                     ->formatStateUsing(fn (UserRole|string $state): string => $state instanceof UserRole ? $state->label() : UserRole::from($state)->label())
                     ->color(fn (UserRole|string $state): string => $state instanceof UserRole ? $state->color() : UserRole::from($state)->color()),
-                IconColumn::make('email_verified_at')
-                    ->label('Verified')
-                    ->boolean()
-                    ->state(fn (User $record): bool => filled($record->email_verified_at))
-                    ->tooltip(fn (User $record): string => $record->email_verified_at?->toDateTimeString() ?? 'Not verified'),
+                TextColumn::make('partner_discount_status')
+                    ->label('Approval mitra')
+                    ->badge()
+                    ->formatStateUsing(fn (PartnerDiscountStatus|string|null $state): string => blank($state) ? '-' : ($state instanceof PartnerDiscountStatus ? $state->label() : PartnerDiscountStatus::from($state)->label()))
+                    ->color(fn (PartnerDiscountStatus|string|null $state): string => blank($state) ? 'gray' : ($state instanceof PartnerDiscountStatus ? $state->color() : PartnerDiscountStatus::from($state)->color()))
+                    ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()
@@ -44,11 +63,9 @@ class UsersTable
             ->filters([
                 SelectFilter::make('role')
                     ->options(UserRole::options()),
-                TernaryFilter::make('email_verified_at')
-                    ->label('Email verified')
-                    ->nullable()
-                    ->trueLabel('Verified')
-                    ->falseLabel('Unverified'),
+                SelectFilter::make('partner_discount_status')
+                    ->label('Approval mitra')
+                    ->options(PartnerDiscountStatus::options()),
             ])
             ->recordActions([
                 ViewAction::make(),

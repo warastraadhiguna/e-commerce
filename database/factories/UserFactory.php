@@ -28,9 +28,11 @@ class UserFactory extends Factory
         return [
             'name' => fake()->name(),
             'email' => fake()->unique()->safeEmail(),
+            'phone' => '+62'.fake()->unique()->numerify('8###########'),
             'email_verified_at' => now(),
             'password' => static::$password ??= Hash::make('password'),
-            'role' => UserRole::Customer,
+            'role' => UserRole::Buyer,
+            'is_active' => true,
             'remember_token' => Str::random(10),
         ];
     }
@@ -49,6 +51,27 @@ class UserFactory extends Factory
     {
         return $this->state(fn (array $attributes) => [
             'role' => UserRole::Admin,
+        ]);
+    }
+
+    public function superAdmin(): static
+    {
+        return $this->state(fn (array $attributes) => [
+            'role' => UserRole::SuperAdmin,
+        ]);
+    }
+
+    public function buyer(): static
+    {
+        return $this->state(fn (array $attributes) => [
+            'role' => UserRole::Buyer,
+        ]);
+    }
+
+    public function mitra(): static
+    {
+        return $this->state(fn (array $attributes) => [
+            'role' => UserRole::Mitra,
         ]);
     }
 }

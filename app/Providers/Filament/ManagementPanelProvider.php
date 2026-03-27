@@ -29,6 +29,7 @@ class ManagementPanelProvider extends PanelProvider
             ->login()
             ->spa()
             ->topNavigation()
+            ->globalSearch(false)
             ->brandName(config('app.name', 'E-Commerce'))
             ->colors([
                 'primary' => Color::Amber,

@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\AboutValues;
 
+use App\Filament\Resources\Concerns\RestrictsDeleteToSuperAdmin;
 use App\Filament\Resources\AboutValues\Pages\CreateAboutValue;
 use App\Filament\Resources\AboutValues\Pages\EditAboutValue;
 use App\Filament\Resources\AboutValues\Pages\ListAboutValues;
@@ -19,6 +20,8 @@ use UnitEnum;
 
 class AboutValueResource extends Resource
 {
+    use RestrictsDeleteToSuperAdmin;
+
     protected static ?string $model = AboutValue::class;
 
     protected static ?string $recordTitleAttribute = 'title';

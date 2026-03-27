@@ -4,22 +4,28 @@ namespace App\Enums;
 
 enum UserRole: string
 {
+    case SuperAdmin = 'superadmin';
     case Admin = 'admin';
-    case Customer = 'customer';
+    case Buyer = 'buyer';
+    case Mitra = 'mitra';
 
     public function label(): string
     {
         return match ($this) {
+            self::SuperAdmin => 'Superadmin',
             self::Admin => 'Admin',
-            self::Customer => 'Customer',
+            self::Buyer => 'Buyer',
+            self::Mitra => 'Mitra',
         };
     }
 
     public function color(): string
     {
         return match ($this) {
+            self::SuperAdmin => 'success',
             self::Admin => 'danger',
-            self::Customer => 'gray',
+            self::Buyer => 'gray',
+            self::Mitra => 'warning',
         };
     }
 

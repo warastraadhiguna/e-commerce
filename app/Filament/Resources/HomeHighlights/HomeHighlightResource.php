@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\HomeHighlights;
 
+use App\Filament\Resources\Concerns\RestrictsDeleteToSuperAdmin;
 use App\Filament\Resources\HomeHighlights\Pages\CreateHomeHighlight;
 use App\Filament\Resources\HomeHighlights\Pages\EditHomeHighlight;
 use App\Filament\Resources\HomeHighlights\Pages\ListHomeHighlights;
@@ -17,6 +18,8 @@ use UnitEnum;
 
 class HomeHighlightResource extends Resource
 {
+    use RestrictsDeleteToSuperAdmin;
+
     protected static ?string $model = HomeHighlight::class;
 
     protected static ?string $recordTitleAttribute = 'title';

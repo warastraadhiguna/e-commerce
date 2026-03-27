@@ -120,6 +120,8 @@
             padding-right: 0;
         }
 
+        @include('partials.site-navigation-styles')
+
         .contact-form-feedback {
             margin-bottom: 24px;
         }
@@ -231,11 +233,7 @@
                         <div class="col-lg-12">
                             <div class="hb-menu">
                                 <nav>
-                                    <ul>
-                                        <li class="site-nav-link"><a href="{{ route('home') }}">Home</a></li>
-                                        <li class="site-nav-link"><a href="{{ route('about') }}">About Us</a></li>
-                                        <li class="site-nav-link active"><a href="{{ route('contact') }}">Contact</a></li>
-                                    </ul>
+                                    @include('partials.site-navigation')
                                 </nav>
                             </div>
                         </div>
