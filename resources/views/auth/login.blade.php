@@ -1,5 +1,5 @@
 <!doctype html>
-<html class="no-js" lang="zxx">
+<html class="no-js" lang="id">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -189,7 +189,7 @@
         }
 
         .auth-login-card input[type="tel"],
-        .auth-login-card input[type="password"] {
+        .auth-login-card input[name="password"] {
             height: 54px;
             border: 1px solid #e4e1d5;
             border-radius: 12px;
@@ -199,11 +199,44 @@
         }
 
         .auth-login-card input[type="tel"]:focus,
-        .auth-login-card input[type="password"]:focus {
+        .auth-login-card input[name="password"]:focus {
             border-color: #fed700;
             box-shadow: 0 0 0 4px rgba(254, 215, 0, .18);
             background: #fff;
             outline: none;
+        }
+
+        .auth-password-field {
+            position: relative;
+        }
+
+        .auth-password-field input[name="password"] {
+            padding-right: 56px;
+        }
+
+        .auth-password-toggle {
+            position: absolute;
+            right: 6px;
+            top: 5px;
+            width: 44px;
+            height: 44px;
+            padding: 0;
+            border: 0;
+            border-radius: 8px;
+            background: transparent;
+            color: #666;
+            font-size: 19px;
+            cursor: pointer;
+        }
+
+        .auth-password-toggle:hover {
+            color: #242424;
+            background: rgba(254, 215, 0, .15);
+        }
+
+        .auth-password-toggle:focus-visible {
+            outline: 2px solid #b58900;
+            outline-offset: 1px;
         }
 
         .auth-alert {
@@ -375,7 +408,7 @@
                         <div class="col-lg-3 col-md-4">
                             <div class="header-top-left">
                                 <ul class="phone-wrap">
-                                    <li><span>Telephone Enquiry:</span><a href="tel:{{ preg_replace('/[^0-9+]/', '', $companyProfile->phone) }}">{{ $companyProfile->phone }}</a></li>
+                                    <li><span>Hubungi Kami:</span><a href="tel:{{ preg_replace('/[^0-9+]/', '', $companyProfile->phone) }}">{{ $companyProfile->phone }}</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -445,8 +478,13 @@
                                             <input class="mb-0" type="tel" name="phone" value="{{ old('phone') }}" required autocomplete="tel" autofocus inputmode="tel" placeholder="Contoh: 08123456789">
                                         </div>
                                         <div class="col-12 mb-20">
-                                            <label>Password</label>
-                                            <input class="mb-0" type="password" name="password" required autocomplete="current-password">
+                                            <label for="login-password">Password</label>
+                                            <div class="auth-password-field">
+                                                <input id="login-password" class="mb-0" type="password" name="password" required autocomplete="current-password">
+                                                <button id="toggle-login-password" class="auth-password-toggle" type="button" aria-controls="login-password" aria-label="Tampilkan password" aria-pressed="false" title="Tampilkan password">
+                                                    <i class="fa fa-eye" aria-hidden="true"></i>
+                                                </button>
+                                            </div>
                                         </div>
                                         <div class="col-md-8 mb-20">
                                             <div class="check-box d-inline-block ml-0 ml-md-2 mt-10">
@@ -504,6 +542,21 @@
     <script src="js/vendor/jquery-1.12.4.min.js"></script>
     <script src="js/vendor/popper.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
-    <script src="js/main.js"></script>
+    <script>
+        jQuery('.ht-setting-trigger').on('click', function () {
+            jQuery(this).toggleClass('is-active').siblings('.ht-setting').slideToggle();
+        });
+
+        document.getElementById('toggle-login-password').addEventListener('click', function () {
+            const password = document.getElementById('login-password');
+            const showPassword = password.type === 'password';
+            password.type = showPassword ? 'text' : 'password';
+            this.setAttribute('aria-pressed', String(showPassword));
+            const label = showPassword ? 'Sembunyikan password' : 'Tampilkan password';
+            this.setAttribute('aria-label', label);
+            this.title = label;
+            this.querySelector('i').className = showPassword ? 'fa fa-eye-slash' : 'fa fa-eye';
+        });
+    </script>
 </body>
 </html>

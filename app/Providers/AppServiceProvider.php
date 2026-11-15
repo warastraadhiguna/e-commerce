@@ -216,7 +216,7 @@ class AppServiceProvider extends ServiceProvider
 
                 $searchQuery = trim((string) request()->query('q', ''));
                 $searchFilter = (string) request()->query('catalog', 'all');
-                $searchIsActive = filled($searchQuery) || ($searchFilter !== 'all' && filled($searchFilter));
+                $searchIsActive = request()->boolean('browse') || filled($searchQuery) || ($searchFilter !== 'all' && filled($searchFilter));
 
                 $typeQuery = ProductType::query()
                     ->where('is_active', true)
@@ -340,7 +340,7 @@ class AppServiceProvider extends ServiceProvider
                 $trendingBrands = Brand::query()
                     ->where('is_active', true)
                     ->whereHas('products', fn ($query) => $query->activePublished())
-                    ->orderBy("
+                    ->orderByRaw("
                         CASE
                             WHEN slug = 'sanai' THEN 0
                             WHEN slug = 'chamcham' THEN 1
@@ -365,7 +365,7 @@ class AppServiceProvider extends ServiceProvider
                     $searchResultsQuery = $productQuery();
                     $applySearchFilter($searchResultsQuery, $searchFilter);
                     $applySearchTerm($searchResultsQuery, $searchQuery);
-                    $searchResults = $searchResultsQuery->limit(18)->get();
+                    $searchResults = $searchResultsQuery->paginate(12)->withQueryString()->fragment('search-results');
                 }
 
                 return [

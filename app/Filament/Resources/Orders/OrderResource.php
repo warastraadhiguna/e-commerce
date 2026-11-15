@@ -20,11 +20,11 @@ class OrderResource extends Resource
 
     protected static ?string $recordTitleAttribute = 'order_number';
 
-    protected static ?string $modelLabel = 'History Transaksi';
+    protected static ?string $modelLabel = 'Pesanan';
 
-    protected static ?string $pluralModelLabel = 'History Transaksi';
+    protected static ?string $pluralModelLabel = 'Pesanan';
 
-    protected static ?string $navigationLabel = 'History Transaksi';
+    protected static ?string $navigationLabel = 'Pesanan';
 
     protected static string|UnitEnum|null $navigationGroup = 'Transaksi';
 

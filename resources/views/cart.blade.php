@@ -1,5 +1,5 @@
 <!doctype html>
-<html class="no-js" lang="zxx">
+<html class="no-js" lang="id">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -211,7 +211,7 @@
                         <div class="col-lg-3 col-md-4">
                             <div class="header-top-left">
                                 <ul class="phone-wrap">
-                                    <li><span>Telephone Enquiry:</span><a href="tel:{{ preg_replace('/[^0-9+]/', '', $companyProfile->phone) }}">{{ $companyProfile->phone }}</a></li>
+                                    <li><span>Hubungi Kami:</span><a href="tel:{{ preg_replace('/[^0-9+]/', '', $companyProfile->phone) }}">{{ $companyProfile->phone }}</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -243,7 +243,7 @@
                             </div>
                         </div>
                         <div class="col-lg-9 pl-0 ml-sm-15 ml-xs-15">
-                            <form action="{{ route('home') }}" method="GET" class="hm-searchbox">
+                            <form action="{{ route('home') }}" method="GET" class="hm-searchbox"><input type="hidden" name="browse" value="1">
                                 <select name="catalog" class="nice-select select-search-category">
                                     @foreach ($searchOptions as $option)
                                         <option value="{{ $option['value'] }}" @selected($searchFilter === $option['value'])>
@@ -251,7 +251,7 @@
                                         </option>
                                     @endforeach
                                 </select>
-                                <input type="text" name="q" value="{{ $searchQuery }}" placeholder="Enter your search key ...">
+                                <input type="text" name="q" value="{{ $searchQuery }}" placeholder="Cari produk, merek, atau kategori ...">
                                 <button class="li-btn" type="submit"><i class="fa fa-search"></i></button>
                             </form>
                             <div class="header-middle-right">
@@ -294,6 +294,7 @@
                     </div>
                 </div>
             </div>
+        @include('partials.mobile-navigation')
         </header>
 
         <div class="wishlist-area pt-60 pb-60">

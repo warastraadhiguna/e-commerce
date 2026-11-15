@@ -16,6 +16,17 @@ use Illuminate\Support\Facades\Storage;
 ])]
 class HomeMedia extends Model
 {
+    public function getLinkHrefAttribute(): string
+    {
+        $link = trim((string) $this->link_url);
+
+        if ($link === '' || $link === '#' || preg_match('/^[^:?]*\.html(?:[?#].*)?$/i', $link)) {
+            return route('home', ['catalog' => 'all', 'browse' => 1]).'#search-results';
+        }
+
+        return $link;
+    }
+
     /**
      * @return array<string, array{name: string, size: string, aspect_ratio: string, width: int, height: int}>
      */

@@ -4,8 +4,9 @@ namespace App\Filament\Resources\Orders\Tables;
 
 use App\Enums\OrderStatus;
 use App\Enums\UserRole;
-use Filament\Forms\Components\DatePicker;
+use App\Models\Product;
 use Filament\Actions\EditAction;
+use Filament\Forms\Components\DatePicker;
 use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\Filter;
@@ -56,19 +57,23 @@ class OrdersTable
                     ->sortable(),
                 TextColumn::make('total_amount')
                     ->label('Total')
-                    ->formatStateUsing(fn (?string $state): string => \App\Models\Product::formatCurrency((float) $state))
+                    ->formatStateUsing(fn (?string $state): string => Product::formatCurrency((float) $state))
                     ->sortable(),
                 TextColumn::make('status')
                     ->badge()
                     ->formatStateUsing(fn (OrderStatus|string $state): string => $state instanceof OrderStatus ? $state->label() : OrderStatus::from($state)->label())
                     ->color(fn (OrderStatus|string $state): string => $state instanceof OrderStatus ? $state->color() : OrderStatus::from($state)->color())
                     ->sortable(),
+                TextColumn::make('payment_status')->label('Pembayaran')->badge()
+                    ->formatStateUsing(fn (string $state): string => $state === 'paid' ? 'Lunas' : 'Belum dibayar')
+                    ->color(fn (string $state): string => $state === 'paid' ? 'success' : 'warning'),
                 TextColumn::make('checked_out_at')
                     ->label('Checkout')
                     ->dateTime()
                     ->sortable(),
             ])
             ->filters([
+                SelectFilter::make('payment_status')->label('Pembayaran')->options(['unpaid' => 'Belum dibayar', 'paid' => 'Lunas']),
                 SelectFilter::make('status')
                     ->options(OrderStatus::options()),
                 SelectFilter::make('customer_role')

@@ -120,6 +120,20 @@ class OrderForm
                             ->rows(4)
                             ->columnSpanFull(),
                     ]),
+                Section::make('Pembayaran')
+                    ->description('Tandai lunas setelah pembayaran benar-benar diterima. Pesanan lunas otomatis masuk laporan keuangan.')
+                    ->columns(2)
+                    ->schema([
+                        Select::make('payment_status')->label('Status pembayaran')
+                            ->options(['unpaid' => 'Belum dibayar', 'paid' => 'Lunas'])->required()->live()->native(false),
+                        Select::make('payment_method')->label('Metode pembayaran')
+                            ->options(['transfer' => 'Transfer bank', 'cash' => 'Tunai', 'qris' => 'QRIS'])
+                            ->required(fn ($get): bool => $get('payment_status') === 'paid')->native(false),
+                        TextInput::make('payment_reference')->label('Referensi pembayaran')->maxLength(255),
+                        TextInput::make('paid_at_display')->label('Diterima pada')
+                            ->formatStateUsing(fn (?Order $record): string => $record?->paid_at?->format('d M Y H:i') ?? 'Dicatat otomatis saat ditandai lunas')
+                            ->disabled()->dehydrated(false),
+                    ]),
             ]);
     }
 }

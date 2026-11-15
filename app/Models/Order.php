@@ -34,9 +34,29 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
     'user_notes',
     'internal_notes',
     'checked_out_at',
+    'payment_status',
+    'payment_method',
+    'payment_reference',
+    'paid_at',
 ])]
 class Order extends Model
 {
+    protected static function booted(): void
+    {
+        static::saving(function (Order $order): void {
+            if ($order->payment_status === 'paid') {
+                $order->paid_at ??= now();
+            } else {
+                $order->paid_at = null;
+            }
+        });
+    }
+
+    public function getPaymentStatusLabelAttribute(): string
+    {
+        return $this->payment_status === 'paid' ? 'Lunas' : 'Belum dibayar';
+    }
+
     public function getRouteKeyName(): string
     {
         return 'order_number';
@@ -52,6 +72,7 @@ class Order extends Model
             'subtotal_amount' => 'decimal:2',
             'total_amount' => 'decimal:2',
             'checked_out_at' => 'datetime',
+            'paid_at' => 'datetime',
         ];
     }
 

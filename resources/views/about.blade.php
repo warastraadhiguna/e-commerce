@@ -214,7 +214,7 @@
                         <div class="col-lg-3 col-md-4">
                             <div class="header-top-left">
                                 <ul class="phone-wrap">
-                                    <li><span>Telephone Enquiry:</span><a href="tel:{{ preg_replace('/[^0-9+]/', '', $companyProfile->phone) }}">{{ $companyProfile->phone }}</a></li>
+                                    <li><span>Hubungi Kami:</span><a href="tel:{{ preg_replace('/[^0-9+]/', '', $companyProfile->phone) }}">{{ $companyProfile->phone }}</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -285,6 +285,7 @@
                     </div>
                 </div>
             </div>
+        @include('partials.mobile-navigation')
         </header>
 
         <div class="about-us-wrapper pt-60 pb-40">

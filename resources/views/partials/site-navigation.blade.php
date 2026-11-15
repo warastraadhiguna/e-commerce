@@ -3,7 +3,7 @@
         <a href="{{ route('home') }}">Home</a>
     </li>
     <li class="megamenu-holder catalog-nav-link {{ request()->routeIs('products.show') ? 'active' : '' }}">
-        <a href="{{ route('home') }}#search-results">Product</a>
+        <a href="{{ route('home', ['browse' => 1]) }}#search-results">Product</a>
         @if ($productNavigation->isNotEmpty())
             <ul class="megamenu hb-megamenu hb-megamenu--catalog">
                 @foreach ($productNavigation as $type)
@@ -30,10 +30,10 @@
                     </li>
                 @endforeach
                 <li>
-                    <a href="{{ route('home') }}#search-results">Catalog</a>
+                    <a href="{{ route('home', ['browse' => 1]) }}#search-results">Catalog</a>
                     <ul>
                         <li class="catalog-nav__type-all">
-                            <a href="{{ route('home') }}#search-results">All Products</a>
+                            <a href="{{ route('home', ['browse' => 1]) }}#search-results">All Products</a>
                         </li>
                     </ul>
                 </li>

@@ -1,5 +1,5 @@
 <!doctype html>
-<html class="no-js" lang="zxx">
+<html class="no-js" lang="id">
     
 <!-- index28:48-->
 <head>
@@ -518,7 +518,7 @@
                             <div class="col-lg-3 col-md-4">
                                 <div class="header-top-left">
                                     <ul class="phone-wrap">
-                                        <li><span>Telephone Enquiry:</span><a href="tel:{{ preg_replace('/[^0-9+]/', '', $companyProfile->phone) }}">{{ $companyProfile->phone }}</a></li>
+                                        <li><span>Hubungi Kami:</span><a href="tel:{{ preg_replace('/[^0-9+]/', '', $companyProfile->phone) }}">{{ $companyProfile->phone }}</a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -560,7 +560,7 @@
                             <!-- Begin Header Middle Right Area -->
                             <div class="col-lg-9 pl-0 ml-sm-15 ml-xs-15">
                                 <!-- Begin Header Middle Searchbox Area -->
-                                <form action="{{ route('home') }}" method="GET" class="hm-searchbox">
+                                <form action="{{ route('home') }}" method="GET" class="hm-searchbox"><input type="hidden" name="browse" value="1">
                                     <select name="catalog" class="nice-select select-search-category">
                                         @foreach ($searchOptions as $option)
                                             <option value="{{ $option['value'] }}" @selected($searchFilter === $option['value'])>
@@ -568,7 +568,7 @@
                                             </option>
                                         @endforeach
                                     </select>
-                                    <input type="text" name="q" value="{{ $searchQuery }}" placeholder="Enter your search key ...">
+                                    <input type="text" name="q" value="{{ $searchQuery }}" placeholder="Cari produk, merek, atau kategori ...">
                                     <button class="li-btn" type="submit"><i class="fa fa-search"></i></button>
                                 </form>
                                 <!-- Header Middle Searchbox Area End Here -->
@@ -673,6 +673,7 @@
             </header>
             <!-- Header Area End Here -->
             <!-- Begin Slider With Banner Area -->
+            @unless ($searchIsActive)
             <div class="slider-with-banner">
                 <div class="container">
                     <div class="row">
@@ -686,9 +687,9 @@
                                         <div class="slider-content">
                                             <h5>Sale Offer <span>-20% Off</span> This Week</h5>
                                             <h2>Chamcham Galaxy S9 | S9+</h2>
-                                            <h3>Starting at <span>$1209.00</span></h3>
+                                            <h3>Pilihan elektronik <span>untuk setiap hari</span></h3>
                                             <div class="default-btn slide-btn">
-                                                <a class="links" href="shop-left-sidebar.html">Shopping Now</a>
+                                                <a class="links" href="{{ route('home', ['browse' => 1]) }}#search-results">Lihat Produk</a>
                                             </div>
                                         </div>
                                     </div>
@@ -699,9 +700,9 @@
                                         <div class="slider-content">
                                             <h5>Sale Offer <span>Black Friday</span> This Week</h5>
                                             <h2>Work Desk Surface Studio 2018</h2>
-                                            <h3>Starting at <span>$824.00</span></h3>
+                                            <h3>Lengkapi <span>ruang kerja Anda</span></h3>
                                             <div class="default-btn slide-btn">
-                                                <a class="links" href="shop-left-sidebar.html">Shopping Now</a>
+                                                <a class="links" href="{{ route('home', ['browse' => 1]) }}#search-results">Lihat Produk</a>
                                             </div>
                                         </div>
                                     </div>
@@ -712,9 +713,9 @@
                                         <div class="slider-content">
                                             <h5>Sale Offer <span>-10% Off</span> This Week</h5>
                                             <h2>Phantom 4 Pro+ Obsidian</h2>
-                                            <h3>Starting at <span>$1849.00</span></h3>
+                                            <h3>Temukan <span>produk pilihan Anda</span></h3>
                                             <div class="default-btn slide-btn">
-                                                <a class="links" href="shop-left-sidebar.html">Shopping Now</a>
+                                                <a class="links" href="{{ route('home', ['browse' => 1]) }}#search-results">Lihat Produk</a>
                                             </div>
                                         </div>
                                     </div>
@@ -726,12 +727,12 @@
                         <!-- Begin Li Banner Area -->
                         <div class="col-lg-4 col-md-4 text-center pt-xs-30">
                             <div class="li-banner home-side-banner">
-                                <a href="{{ $sideBanners->get(0)?->link_url ?: '#' }}">
+                                <a href="{{ $sideBanners->get(0)?->link_href ?: route('home', ['browse' => 1]).'#search-results' }}">
                                     <img src="{{ $sideBanners->get(0)?->image_url ?: asset('desain/images/banner/1_1.jpg') }}" alt="{{ $sideBanners->get(0)?->label ?: 'Side Banner 1' }}">
                                 </a>
                             </div>
                             <div class="li-banner home-side-banner mt-15 mt-sm-30 mt-xs-30">
-                                <a href="{{ $sideBanners->get(1)?->link_url ?: '#' }}">
+                                <a href="{{ $sideBanners->get(1)?->link_href ?: route('home', ['browse' => 1]).'#search-results' }}">
                                     <img src="{{ $sideBanners->get(1)?->image_url ?: asset('desain/images/banner/1_2.jpg') }}" alt="{{ $sideBanners->get(1)?->label ?: 'Side Banner 2' }}">
                                 </a>
                             </div>
@@ -741,6 +742,7 @@
                 </div>
             </div>
             <!-- Slider With Banner Area End Here -->
+            @endunless
             @if ($searchIsActive)
                 <section id="search-results" class="product-area pt-60 pb-40">
                     <div class="container">
@@ -748,7 +750,7 @@
                             <div class="col-lg-12">
                                 <div class="li-section-title">
                                     <h2>
-                                        <span>Hasil Pencarian</span>
+                                        <span>{{ filled($searchQuery) ? 'Hasil Pencarian' : 'Katalog Produk' }}</span>
                                     </h2>
                                     <ul class="li-sub-category-list">
                                         <li class="active"><a href="#">Filter: {{ $searchFilterLabel }}</a></li>
@@ -762,6 +764,10 @@
                                     'products' => $searchResults,
                                     'useCarousel' => false,
                                 ])
+                                @if ($searchResults instanceof \Illuminate\Contracts\Pagination\LengthAwarePaginator)
+                                    <p class="text-muted mt-20">{{ $searchResults->total() }} produk ditemukan</p>
+                                    {{ $searchResults->links('pagination::bootstrap-4') }}
+                                @endif
                             </div>
                         </div>
                     </div>
@@ -827,7 +833,7 @@
                                                 <div class="product_desc_info">
                                                     <div class="product-review">
                                                         <h5 class="manufacturer">
-                                                            <a href="shop-left-sidebar.html">Graphic Corner</a>
+                                                            <a href="{{ route('home', ['browse' => 1]) }}#search-results">Graphic Corner</a>
                                                         </h5>
                                                         <div class="rating-box">
                                                             <ul class="rating">
@@ -868,7 +874,7 @@
                                                 <div class="product_desc_info">
                                                     <div class="product-review">
                                                         <h5 class="manufacturer">
-                                                            <a href="shop-left-sidebar.html">Studio Design</a>
+                                                            <a href="{{ route('home', ['browse' => 1]) }}#search-results">Studio Design</a>
                                                         </h5>
                                                         <div class="rating-box">
                                                             <ul class="rating">
@@ -911,7 +917,7 @@
                                                 <div class="product_desc_info">
                                                     <div class="product-review">
                                                         <h5 class="manufacturer">
-                                                            <a href="shop-left-sidebar.html">Graphic Corner</a>
+                                                            <a href="{{ route('home', ['browse' => 1]) }}#search-results">Graphic Corner</a>
                                                         </h5>
                                                         <div class="rating-box">
                                                             <ul class="rating">
@@ -952,7 +958,7 @@
                                                 <div class="product_desc_info">
                                                     <div class="product-review">
                                                         <h5 class="manufacturer">
-                                                            <a href="shop-left-sidebar.html">Studio Design</a>
+                                                            <a href="{{ route('home', ['browse' => 1]) }}#search-results">Studio Design</a>
                                                         </h5>
                                                         <div class="rating-box">
                                                             <ul class="rating">
@@ -995,7 +1001,7 @@
                                                 <div class="product_desc_info">
                                                     <div class="product-review">
                                                         <h5 class="manufacturer">
-                                                            <a href="shop-left-sidebar.html">Graphic Corner</a>
+                                                            <a href="{{ route('home', ['browse' => 1]) }}#search-results">Graphic Corner</a>
                                                         </h5>
                                                         <div class="rating-box">
                                                             <ul class="rating">
@@ -1036,7 +1042,7 @@
                                                 <div class="product_desc_info">
                                                     <div class="product-review">
                                                         <h5 class="manufacturer">
-                                                            <a href="shop-left-sidebar.html">Studio Design</a>
+                                                            <a href="{{ route('home', ['browse' => 1]) }}#search-results">Studio Design</a>
                                                         </h5>
                                                         <div class="rating-box">
                                                             <ul class="rating">
@@ -1085,7 +1091,7 @@
                                                 <div class="product_desc_info">
                                                     <div class="product-review">
                                                         <h5 class="manufacturer">
-                                                            <a href="shop-left-sidebar.html">Graphic Corner</a>
+                                                            <a href="{{ route('home', ['browse' => 1]) }}#search-results">Graphic Corner</a>
                                                         </h5>
                                                         <div class="rating-box">
                                                             <ul class="rating">
@@ -1126,7 +1132,7 @@
                                                 <div class="product_desc_info">
                                                     <div class="product-review">
                                                         <h5 class="manufacturer">
-                                                            <a href="shop-left-sidebar.html">Studio Design</a>
+                                                            <a href="{{ route('home', ['browse' => 1]) }}#search-results">Studio Design</a>
                                                         </h5>
                                                         <div class="rating-box">
                                                             <ul class="rating">
@@ -1169,7 +1175,7 @@
                                                 <div class="product_desc_info">
                                                     <div class="product-review">
                                                         <h5 class="manufacturer">
-                                                            <a href="shop-left-sidebar.html">Graphic Corner</a>
+                                                            <a href="{{ route('home', ['browse' => 1]) }}#search-results">Graphic Corner</a>
                                                         </h5>
                                                         <div class="rating-box">
                                                             <ul class="rating">
@@ -1210,7 +1216,7 @@
                                                 <div class="product_desc_info">
                                                     <div class="product-review">
                                                         <h5 class="manufacturer">
-                                                            <a href="shop-left-sidebar.html">Studio Design</a>
+                                                            <a href="{{ route('home', ['browse' => 1]) }}#search-results">Studio Design</a>
                                                         </h5>
                                                         <div class="rating-box">
                                                             <ul class="rating">
@@ -1253,7 +1259,7 @@
                                                 <div class="product_desc_info">
                                                     <div class="product-review">
                                                         <h5 class="manufacturer">
-                                                            <a href="shop-left-sidebar.html">Graphic Corner</a>
+                                                            <a href="{{ route('home', ['browse' => 1]) }}#search-results">Graphic Corner</a>
                                                         </h5>
                                                         <div class="rating-box">
                                                             <ul class="rating">
@@ -1294,7 +1300,7 @@
                                                 <div class="product_desc_info">
                                                     <div class="product-review">
                                                         <h5 class="manufacturer">
-                                                            <a href="shop-left-sidebar.html">Studio Design</a>
+                                                            <a href="{{ route('home', ['browse' => 1]) }}#search-results">Studio Design</a>
                                                         </h5>
                                                         <div class="rating-box">
                                                             <ul class="rating">
@@ -1343,7 +1349,7 @@
                                                 <div class="product_desc_info">
                                                     <div class="product-review">
                                                         <h5 class="manufacturer">
-                                                            <a href="shop-left-sidebar.html">Graphic Corner</a>
+                                                            <a href="{{ route('home', ['browse' => 1]) }}#search-results">Graphic Corner</a>
                                                         </h5>
                                                         <div class="rating-box">
                                                             <ul class="rating">
@@ -1384,7 +1390,7 @@
                                                 <div class="product_desc_info">
                                                     <div class="product-review">
                                                         <h5 class="manufacturer">
-                                                            <a href="shop-left-sidebar.html">Studio Design</a>
+                                                            <a href="{{ route('home', ['browse' => 1]) }}#search-results">Studio Design</a>
                                                         </h5>
                                                         <div class="rating-box">
                                                             <ul class="rating">
@@ -1427,7 +1433,7 @@
                                                 <div class="product_desc_info">
                                                     <div class="product-review">
                                                         <h5 class="manufacturer">
-                                                            <a href="shop-left-sidebar.html">Graphic Corner</a>
+                                                            <a href="{{ route('home', ['browse' => 1]) }}#search-results">Graphic Corner</a>
                                                         </h5>
                                                         <div class="rating-box">
                                                             <ul class="rating">
@@ -1468,7 +1474,7 @@
                                                 <div class="product_desc_info">
                                                     <div class="product-review">
                                                         <h5 class="manufacturer">
-                                                            <a href="shop-left-sidebar.html">Studio Design</a>
+                                                            <a href="{{ route('home', ['browse' => 1]) }}#search-results">Studio Design</a>
                                                         </h5>
                                                         <div class="rating-box">
                                                             <ul class="rating">
@@ -1511,7 +1517,7 @@
                                                 <div class="product_desc_info">
                                                     <div class="product-review">
                                                         <h5 class="manufacturer">
-                                                            <a href="shop-left-sidebar.html">Graphic Corner</a>
+                                                            <a href="{{ route('home', ['browse' => 1]) }}#search-results">Graphic Corner</a>
                                                         </h5>
                                                         <div class="rating-box">
                                                             <ul class="rating">
@@ -1552,7 +1558,7 @@
                                                 <div class="product_desc_info">
                                                     <div class="product-review">
                                                         <h5 class="manufacturer">
-                                                            <a href="shop-left-sidebar.html">Studio Design</a>
+                                                            <a href="{{ route('home', ['browse' => 1]) }}#search-results">Studio Design</a>
                                                         </h5>
                                                         <div class="rating-box">
                                                             <ul class="rating">
@@ -1597,7 +1603,7 @@
                         <!-- Begin Single Banner Area -->
                         <div class="col-lg-4 col-md-4 text-center">
                             <div class="single-banner home-promo-banner">
-                                <a href="{{ $promoBanners->get(0)?->link_url ?: '#' }}">
+                                <a href="{{ $promoBanners->get(0)?->link_href ?: route('home', ['browse' => 1]).'#search-results' }}">
                                     <img src="{{ $promoBanners->get(0)?->image_url ?: asset('desain/images/banner/1_3.jpg') }}" alt="{{ $promoBanners->get(0)?->label ?: 'Promo Banner 1' }}">
                                 </a>
                             </div>
@@ -1606,7 +1612,7 @@
                         <!-- Begin Single Banner Area -->
                         <div class="col-lg-4 col-md-4 text-center pt-xs-30">
                             <div class="single-banner home-promo-banner">
-                                <a href="{{ $promoBanners->get(1)?->link_url ?: '#' }}">
+                                <a href="{{ $promoBanners->get(1)?->link_href ?: route('home', ['browse' => 1]).'#search-results' }}">
                                     <img src="{{ $promoBanners->get(1)?->image_url ?: asset('desain/images/banner/1_4.jpg') }}" alt="{{ $promoBanners->get(1)?->label ?: 'Promo Banner 2' }}">
                                 </a>
                             </div>
@@ -1615,7 +1621,7 @@
                         <!-- Begin Single Banner Area -->
                         <div class="col-lg-4 col-md-4 text-center pt-xs-30">
                             <div class="single-banner home-promo-banner">
-                                <a href="{{ $promoBanners->get(2)?->link_url ?: '#' }}">
+                                <a href="{{ $promoBanners->get(2)?->link_href ?: route('home', ['browse' => 1]).'#search-results' }}">
                                     <img src="{{ $promoBanners->get(2)?->image_url ?: asset('desain/images/banner/1_5.jpg') }}" alt="{{ $promoBanners->get(2)?->label ?: 'Promo Banner 3' }}">
                                 </a>
                             </div>
@@ -1643,9 +1649,9 @@
                                     <span>Laptop</span>
                                 </h2>
                                 <ul class="li-sub-category-list">
-                                    <li class="active"><a href="shop-left-sidebar.html">Prime Video</a></li>
-                                    <li><a href="shop-left-sidebar.html">Computers</a></li>
-                                    <li><a href="shop-left-sidebar.html">Electronics</a></li>
+                                    <li class="active"><a href="{{ route('home', ['browse' => 1]) }}#search-results">Prime Video</a></li>
+                                    <li><a href="{{ route('home', ['browse' => 1]) }}#search-results">Computers</a></li>
+                                    <li><a href="{{ route('home', ['browse' => 1]) }}#search-results">Electronics</a></li>
                                 </ul>
                             </div>
                             <div class="row">
@@ -1663,7 +1669,7 @@
                                                 <div class="product_desc_info">
                                                     <div class="product-review">
                                                         <h5 class="manufacturer">
-                                                            <a href="shop-left-sidebar.html">Graphic Corner</a>
+                                                            <a href="{{ route('home', ['browse' => 1]) }}#search-results">Graphic Corner</a>
                                                         </h5>
                                                         <div class="rating-box">
                                                             <ul class="rating">
@@ -1704,7 +1710,7 @@
                                                 <div class="product_desc_info">
                                                     <div class="product-review">
                                                         <h5 class="manufacturer">
-                                                            <a href="shop-left-sidebar.html">Studio Design</a>
+                                                            <a href="{{ route('home', ['browse' => 1]) }}#search-results">Studio Design</a>
                                                         </h5>
                                                         <div class="rating-box">
                                                             <ul class="rating">
@@ -1747,7 +1753,7 @@
                                                 <div class="product_desc_info">
                                                     <div class="product-review">
                                                         <h5 class="manufacturer">
-                                                            <a href="shop-left-sidebar.html">Graphic Corner</a>
+                                                            <a href="{{ route('home', ['browse' => 1]) }}#search-results">Graphic Corner</a>
                                                         </h5>
                                                         <div class="rating-box">
                                                             <ul class="rating">
@@ -1788,7 +1794,7 @@
                                                 <div class="product_desc_info">
                                                     <div class="product-review">
                                                         <h5 class="manufacturer">
-                                                            <a href="shop-left-sidebar.html">Studio Design</a>
+                                                            <a href="{{ route('home', ['browse' => 1]) }}#search-results">Studio Design</a>
                                                         </h5>
                                                         <div class="rating-box">
                                                             <ul class="rating">
@@ -1831,7 +1837,7 @@
                                                 <div class="product_desc_info">
                                                     <div class="product-review">
                                                         <h5 class="manufacturer">
-                                                            <a href="shop-left-sidebar.html">Graphic Corner</a>
+                                                            <a href="{{ route('home', ['browse' => 1]) }}#search-results">Graphic Corner</a>
                                                         </h5>
                                                         <div class="rating-box">
                                                             <ul class="rating">
@@ -1872,7 +1878,7 @@
                                                 <div class="product_desc_info">
                                                     <div class="product-review">
                                                         <h5 class="manufacturer">
-                                                            <a href="shop-left-sidebar.html">Studio Design</a>
+                                                            <a href="{{ route('home', ['browse' => 1]) }}#search-results">Studio Design</a>
                                                         </h5>
                                                         <div class="rating-box">
                                                             <ul class="rating">
@@ -1929,9 +1935,9 @@
                                     <span>TV & Audio</span>
                                 </h2>
                                 <ul class="li-sub-category-list">
-                                    <li class="active"><a href="shop-left-sidebar.html">Chamcham</a></li>
-                                    <li><a href="shop-left-sidebar.html">Sanai</a></li>
-                                    <li><a href="shop-left-sidebar.html">Meito</a></li>
+                                    <li class="active"><a href="{{ route('home', ['browse' => 1]) }}#search-results">Chamcham</a></li>
+                                    <li><a href="{{ route('home', ['browse' => 1]) }}#search-results">Sanai</a></li>
+                                    <li><a href="{{ route('home', ['browse' => 1]) }}#search-results">Meito</a></li>
                                 </ul>
                             </div>
                             <div class="row">
@@ -1949,7 +1955,7 @@
                                                 <div class="product_desc_info">
                                                     <div class="product-review">
                                                         <h5 class="manufacturer">
-                                                            <a href="shop-left-sidebar.html">Graphic Corner</a>
+                                                            <a href="{{ route('home', ['browse' => 1]) }}#search-results">Graphic Corner</a>
                                                         </h5>
                                                         <div class="rating-box">
                                                             <ul class="rating">
@@ -1990,7 +1996,7 @@
                                                 <div class="product_desc_info">
                                                     <div class="product-review">
                                                         <h5 class="manufacturer">
-                                                            <a href="shop-left-sidebar.html">Studio Design</a>
+                                                            <a href="{{ route('home', ['browse' => 1]) }}#search-results">Studio Design</a>
                                                         </h5>
                                                         <div class="rating-box">
                                                             <ul class="rating">
@@ -2033,7 +2039,7 @@
                                                 <div class="product_desc_info">
                                                     <div class="product-review">
                                                         <h5 class="manufacturer">
-                                                            <a href="shop-left-sidebar.html">Graphic Corner</a>
+                                                            <a href="{{ route('home', ['browse' => 1]) }}#search-results">Graphic Corner</a>
                                                         </h5>
                                                         <div class="rating-box">
                                                             <ul class="rating">
@@ -2074,7 +2080,7 @@
                                                 <div class="product_desc_info">
                                                     <div class="product-review">
                                                         <h5 class="manufacturer">
-                                                            <a href="shop-left-sidebar.html">Studio Design</a>
+                                                            <a href="{{ route('home', ['browse' => 1]) }}#search-results">Studio Design</a>
                                                         </h5>
                                                         <div class="rating-box">
                                                             <ul class="rating">
@@ -2117,7 +2123,7 @@
                                                 <div class="product_desc_info">
                                                     <div class="product-review">
                                                         <h5 class="manufacturer">
-                                                            <a href="shop-left-sidebar.html">Graphic Corner</a>
+                                                            <a href="{{ route('home', ['browse' => 1]) }}#search-results">Graphic Corner</a>
                                                         </h5>
                                                         <div class="rating-box">
                                                             <ul class="rating">
@@ -2158,7 +2164,7 @@
                                                 <div class="product_desc_info">
                                                     <div class="product-review">
                                                         <h5 class="manufacturer">
-                                                            <a href="shop-left-sidebar.html">Studio Design</a>
+                                                            <a href="{{ route('home', ['browse' => 1]) }}#search-results">Studio Design</a>
                                                         </h5>
                                                         <div class="rating-box">
                                                             <ul class="rating">
@@ -2207,15 +2213,14 @@
                             <!-- Li's Static Home Image Area End Here -->
                             <!-- Begin Li's Static Home Content Area -->
                             <div class="li-static-home-content">
-                                <p>Sale Offer<span>-20% Off</span>This Week</p>
-                                <h2>Featured Product</h2>
-                                <h2>Meito Accessories 2018</h2>
+                                <p>Lengkapi kebutuhan Anda</p>
+                                <h2>Elektronik &amp; Gadget</h2>
+                                <h2>Pilihan untuk setiap hari</h2>
                                 <p class="schedule">
-                                    Starting at
-                                    <span> $1209.00</span>
+                                    Jelajahi koleksi produk pilihan kami
                                 </p>
                                 <div class="default-btn">
-                                    <a href="shop-left-sidebar.html" class="links">Shopping Now</a>
+                                    <a href="{{ route('home', ['browse' => 1]) }}#search-results" class="links">Lihat Produk</a>
                                 </div>
                             </div>
                             <!-- Li's Static Home Content Area End Here -->
@@ -2263,7 +2268,7 @@
                                                         <div class="product_desc_info">
                                                             <div class="product-review">
                                                                 <h5 class="manufacturer">
-                                                                    <a href="shop-left-sidebar.html">Graphic Corner</a>
+                                                                    <a href="{{ route('home', ['browse' => 1]) }}#search-results">Graphic Corner</a>
                                                                 </h5>
                                                                 <div class="rating-box">
                                                                     <ul class="rating">
@@ -2304,7 +2309,7 @@
                                                         <div class="product_desc_info">
                                                             <div class="product-review">
                                                                 <h5 class="manufacturer">
-                                                                    <a href="shop-left-sidebar.html">Studio Design</a>
+                                                                    <a href="{{ route('home', ['browse' => 1]) }}#search-results">Studio Design</a>
                                                                 </h5>
                                                                 <div class="rating-box">
                                                                     <ul class="rating">
@@ -2347,7 +2352,7 @@
                                                         <div class="product_desc_info">
                                                             <div class="product-review">
                                                                 <h5 class="manufacturer">
-                                                                    <a href="shop-left-sidebar.html">Graphic Corner</a>
+                                                                    <a href="{{ route('home', ['browse' => 1]) }}#search-results">Graphic Corner</a>
                                                                 </h5>
                                                                 <div class="rating-box">
                                                                     <ul class="rating">
@@ -2388,7 +2393,7 @@
                                                         <div class="product_desc_info">
                                                             <div class="product-review">
                                                                 <h5 class="manufacturer">
-                                                                    <a href="shop-left-sidebar.html">Studio Design</a>
+                                                                    <a href="{{ route('home', ['browse' => 1]) }}#search-results">Studio Design</a>
                                                                 </h5>
                                                                 <div class="rating-box">
                                                                     <ul class="rating">
@@ -2431,7 +2436,7 @@
                                                         <div class="product_desc_info">
                                                             <div class="product-review">
                                                                 <h5 class="manufacturer">
-                                                                    <a href="shop-left-sidebar.html">Graphic Corner</a>
+                                                                    <a href="{{ route('home', ['browse' => 1]) }}#search-results">Graphic Corner</a>
                                                                 </h5>
                                                                 <div class="rating-box">
                                                                     <ul class="rating">
@@ -2472,7 +2477,7 @@
                                                         <div class="product_desc_info">
                                                             <div class="product-review">
                                                                 <h5 class="manufacturer">
-                                                                    <a href="shop-left-sidebar.html">Studio Design</a>
+                                                                    <a href="{{ route('home', ['browse' => 1]) }}#search-results">Studio Design</a>
                                                                 </h5>
                                                                 <div class="rating-box">
                                                                     <ul class="rating">
@@ -2521,7 +2526,7 @@
                                                         <div class="product_desc_info">
                                                             <div class="product-review">
                                                                 <h5 class="manufacturer">
-                                                                    <a href="shop-left-sidebar.html">Graphic Corner</a>
+                                                                    <a href="{{ route('home', ['browse' => 1]) }}#search-results">Graphic Corner</a>
                                                                 </h5>
                                                                 <div class="rating-box">
                                                                     <ul class="rating">
@@ -2562,7 +2567,7 @@
                                                         <div class="product_desc_info">
                                                             <div class="product-review">
                                                                 <h5 class="manufacturer">
-                                                                    <a href="shop-left-sidebar.html">Studio Design</a>
+                                                                    <a href="{{ route('home', ['browse' => 1]) }}#search-results">Studio Design</a>
                                                                 </h5>
                                                                 <div class="rating-box">
                                                                     <ul class="rating">
@@ -2605,7 +2610,7 @@
                                                         <div class="product_desc_info">
                                                             <div class="product-review">
                                                                 <h5 class="manufacturer">
-                                                                    <a href="shop-left-sidebar.html">Graphic Corner</a>
+                                                                    <a href="{{ route('home', ['browse' => 1]) }}#search-results">Graphic Corner</a>
                                                                 </h5>
                                                                 <div class="rating-box">
                                                                     <ul class="rating">
@@ -2646,7 +2651,7 @@
                                                         <div class="product_desc_info">
                                                             <div class="product-review">
                                                                 <h5 class="manufacturer">
-                                                                    <a href="shop-left-sidebar.html">Studio Design</a>
+                                                                    <a href="{{ route('home', ['browse' => 1]) }}#search-results">Studio Design</a>
                                                                 </h5>
                                                                 <div class="rating-box">
                                                                     <ul class="rating">
@@ -2689,7 +2694,7 @@
                                                         <div class="product_desc_info">
                                                             <div class="product-review">
                                                                 <h5 class="manufacturer">
-                                                                    <a href="shop-left-sidebar.html">Graphic Corner</a>
+                                                                    <a href="{{ route('home', ['browse' => 1]) }}#search-results">Graphic Corner</a>
                                                                 </h5>
                                                                 <div class="rating-box">
                                                                     <ul class="rating">
@@ -2730,7 +2735,7 @@
                                                         <div class="product_desc_info">
                                                             <div class="product-review">
                                                                 <h5 class="manufacturer">
-                                                                    <a href="shop-left-sidebar.html">Studio Design</a>
+                                                                    <a href="{{ route('home', ['browse' => 1]) }}#search-results">Studio Design</a>
                                                                 </h5>
                                                                 <div class="rating-box">
                                                                     <ul class="rating">
@@ -2779,7 +2784,7 @@
                                                         <div class="product_desc_info">
                                                             <div class="product-review">
                                                                 <h5 class="manufacturer">
-                                                                    <a href="shop-left-sidebar.html">Graphic Corner</a>
+                                                                    <a href="{{ route('home', ['browse' => 1]) }}#search-results">Graphic Corner</a>
                                                                 </h5>
                                                                 <div class="rating-box">
                                                                     <ul class="rating">
@@ -2820,7 +2825,7 @@
                                                         <div class="product_desc_info">
                                                             <div class="product-review">
                                                                 <h5 class="manufacturer">
-                                                                    <a href="shop-left-sidebar.html">Studio Design</a>
+                                                                    <a href="{{ route('home', ['browse' => 1]) }}#search-results">Studio Design</a>
                                                                 </h5>
                                                                 <div class="rating-box">
                                                                     <ul class="rating">
@@ -2863,7 +2868,7 @@
                                                         <div class="product_desc_info">
                                                             <div class="product-review">
                                                                 <h5 class="manufacturer">
-                                                                    <a href="shop-left-sidebar.html">Graphic Corner</a>
+                                                                    <a href="{{ route('home', ['browse' => 1]) }}#search-results">Graphic Corner</a>
                                                                 </h5>
                                                                 <div class="rating-box">
                                                                     <ul class="rating">
@@ -2904,7 +2909,7 @@
                                                         <div class="product_desc_info">
                                                             <div class="product-review">
                                                                 <h5 class="manufacturer">
-                                                                    <a href="shop-left-sidebar.html">Studio Design</a>
+                                                                    <a href="{{ route('home', ['browse' => 1]) }}#search-results">Studio Design</a>
                                                                 </h5>
                                                                 <div class="rating-box">
                                                                     <ul class="rating">
@@ -2947,7 +2952,7 @@
                                                         <div class="product_desc_info">
                                                             <div class="product-review">
                                                                 <h5 class="manufacturer">
-                                                                    <a href="shop-left-sidebar.html">Graphic Corner</a>
+                                                                    <a href="{{ route('home', ['browse' => 1]) }}#search-results">Graphic Corner</a>
                                                                 </h5>
                                                                 <div class="rating-box">
                                                                     <ul class="rating">
@@ -2988,7 +2993,7 @@
                                                         <div class="product_desc_info">
                                                             <div class="product-review">
                                                                 <h5 class="manufacturer">
-                                                                    <a href="shop-left-sidebar.html">Studio Design</a>
+                                                                    <a href="{{ route('home', ['browse' => 1]) }}#search-results">Studio Design</a>
                                                                 </h5>
                                                                 <div class="rating-box">
                                                                     <ul class="rating">
@@ -3064,7 +3069,7 @@
                                                 <div class="product_desc_info">
                                                     <div class="product-review">
                                                         <h5 class="manufacturer">
-                                                            <a href="shop-left-sidebar.html">Graphic Corner</a>
+                                                            <a href="{{ route('home', ['browse' => 1]) }}#search-results">Graphic Corner</a>
                                                         </h5>
                                                         <div class="rating-box">
                                                             <ul class="rating">
@@ -3105,7 +3110,7 @@
                                                 <div class="product_desc_info">
                                                     <div class="product-review">
                                                         <h5 class="manufacturer">
-                                                            <a href="shop-left-sidebar.html">Studio Design</a>
+                                                            <a href="{{ route('home', ['browse' => 1]) }}#search-results">Studio Design</a>
                                                         </h5>
                                                         <div class="rating-box">
                                                             <ul class="rating">
@@ -3148,7 +3153,7 @@
                                                 <div class="product_desc_info">
                                                     <div class="product-review">
                                                         <h5 class="manufacturer">
-                                                            <a href="shop-left-sidebar.html">Graphic Corner</a>
+                                                            <a href="{{ route('home', ['browse' => 1]) }}#search-results">Graphic Corner</a>
                                                         </h5>
                                                         <div class="rating-box">
                                                             <ul class="rating">
@@ -3189,7 +3194,7 @@
                                                 <div class="product_desc_info">
                                                     <div class="product-review">
                                                         <h5 class="manufacturer">
-                                                            <a href="shop-left-sidebar.html">Studio Design</a>
+                                                            <a href="{{ route('home', ['browse' => 1]) }}#search-results">Studio Design</a>
                                                         </h5>
                                                         <div class="rating-box">
                                                             <ul class="rating">
@@ -3232,7 +3237,7 @@
                                                 <div class="product_desc_info">
                                                     <div class="product-review">
                                                         <h5 class="manufacturer">
-                                                            <a href="shop-left-sidebar.html">Graphic Corner</a>
+                                                            <a href="{{ route('home', ['browse' => 1]) }}#search-results">Graphic Corner</a>
                                                         </h5>
                                                         <div class="rating-box">
                                                             <ul class="rating">
@@ -3273,7 +3278,7 @@
                                                 <div class="product_desc_info">
                                                     <div class="product-review">
                                                         <h5 class="manufacturer">
-                                                            <a href="shop-left-sidebar.html">Studio Design</a>
+                                                            <a href="{{ route('home', ['browse' => 1]) }}#search-results">Studio Design</a>
                                                         </h5>
                                                         <div class="rating-box">
                                                             <ul class="rating">
@@ -3391,9 +3396,9 @@
                                     <div class="footer-block">
                                         <h3 class="footer-block-title">Product</h3>
                                         <ul>
-                                            <li><a href="#">Prices drop</a></li>
-                                            <li><a href="#">New products</a></li>
-                                            <li><a href="#">Best sales</a></li>
+                                            <li><a href="{{ route('home', ['browse' => 1]) }}#search-results">Katalog Produk</a></li>
+                                            <li><a href="{{ route('home') }}#li-new-product">Produk Terbaru</a></li>
+                                            <li><a href="{{ route('home') }}#li-bestseller-product">Produk Terlaris</a></li>
                                             <li><a href="{{ route('contact') }}">Contact us</a></li>
                                         </ul>
                                     </div>
@@ -3404,8 +3409,8 @@
                                     <div class="footer-block">
                                         <h3 class="footer-block-title">Our company</h3>
                                         <ul>
-                                            <li><a href="#">Delivery</a></li>
-                                            <li><a href="#">Legal Notice</a></li>
+                                            <li><a href="{{ route('contact') }}">Bantuan Pengiriman</a></li>
+                                            <li><a href="{{ route('contact') }}#partner-registration">Daftar Mitra</a></li>
                                             <li><a href="#">About us</a></li>
                                             <li><a href="{{ route('contact') }}">Contact us</a></li>
                                         </ul>

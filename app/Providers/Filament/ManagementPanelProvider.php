@@ -2,6 +2,7 @@
 
 namespace App\Providers\Filament;
 
+use App\Models\CompanyProfile;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\AuthenticateSession;
 use Filament\Http\Middleware\DisableBladeIconComponents;
@@ -30,7 +31,7 @@ class ManagementPanelProvider extends PanelProvider
             ->spa()
             ->topNavigation()
             ->globalSearch(false)
-            ->brandName(config('app.name', 'E-Commerce'))
+            ->brandName(fn (): string => CompanyProfile::query()->value('company_name') ?: config('app.name', 'E-Commerce'))
             ->colors([
                 'primary' => Color::Amber,
             ])

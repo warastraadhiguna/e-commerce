@@ -1,12 +1,13 @@
 <?php
 
 use App\Http\Controllers\AccountController;
+use App\Http\Controllers\Auth\PublicAuthenticatedSessionController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CheckoutController;
-use App\Http\Controllers\Auth\PublicAuthenticatedSessionController;
+use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\OrderController;
-use App\Http\Controllers\ProductPageController;
 use App\Http\Controllers\PartnerRegistrationController;
+use App\Http\Controllers\ProductPageController;
 use App\Http\Controllers\ShippingAddressController;
 use App\Http\Controllers\WishlistController;
 use Illuminate\Support\Facades\Route;
@@ -22,6 +23,7 @@ Route::post('/wishlist/{product}', [WishlistController::class, 'store'])->name('
 Route::delete('/wishlist/{product}', [WishlistController::class, 'destroy'])->name('wishlist.destroy');
 Route::get('/products/{slug}', ProductPageController::class)->name('products.show');
 Route::middleware('auth')->group(function () {
+    Route::get('/orders/{order}/invoice', InvoiceController::class)->name('orders.invoice');
     Route::post('/cart/{product}', [CartController::class, 'store'])->name('cart.store');
     Route::get('/checkout', [CheckoutController::class, 'show'])->name('checkout.show');
     Route::post('/checkout', [CheckoutController::class, 'store'])->name('checkout.store');

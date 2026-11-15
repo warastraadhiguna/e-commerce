@@ -40,7 +40,7 @@
         <div class="product_desc_info">
             <div class="product-review">
                 <h5 class="manufacturer">
-                    <a href="#">{{ $product->brand?->name ?: '-' }}</a>
+                    <a href="{{ route('home', ['catalog' => 'brand:'.$product->brand_id]) }}#search-results">{{ $product->brand?->name ?: '-' }}</a>
                 </h5>
                 {{--
                 <div class="rating-box">

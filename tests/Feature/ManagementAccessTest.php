@@ -88,7 +88,7 @@ class ManagementAccessTest extends TestCase
         $this->actingAs($admin)
             ->get('/management/orders')
             ->assertOk()
-            ->assertSeeText('History Transaksi')
+            ->assertSeeText('Pesanan')
             ->assertSeeText('ORD-MGMT-001');
     }
 }
