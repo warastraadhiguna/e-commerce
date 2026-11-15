@@ -1,3 +1,8 @@
+.single-product-wrap {
+    /* Keep product badges and hover controls below the catalog dropdown. */
+    isolation: isolate;
+}
+
 .hb-menu nav > ul > li.catalog-nav-link > a {
     display: inline-flex;
     align-items: center;
