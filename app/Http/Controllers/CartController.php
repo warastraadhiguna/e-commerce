@@ -27,6 +27,7 @@ class CartController extends Controller
     public function store(Request $request, Product $product): RedirectResponse
     {
         abort_unless($product->is_active, 404);
+        abort_if($product->is_catalog_only, 422, 'Produk ini masih berupa katalog informasi. Harga dan stok belum dikonfirmasi.');
 
         $user = $request->user();
 
@@ -55,6 +56,7 @@ class CartController extends Controller
     public function update(Request $request, Product $product): RedirectResponse
     {
         abort_unless($product->is_active, 404);
+        abort_if($product->is_catalog_only, 422, 'Produk katalog informasi tidak dapat dibeli.');
 
         $user = $request->user();
 

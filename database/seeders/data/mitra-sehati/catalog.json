@@ -1,0 +1,172 @@
+{
+  "version": 1,
+  "source": "https://www.instagram.com/mitrasehati.pia/",
+  "collected_at": "2026-11-23T02:49:45.118Z",
+  "profile": {
+    "name": "Mitra Sehati",
+    "logo": "images/profile.jpg",
+    "primary_color": "#175298",
+    "secondary_color": "#4a80ba",
+    "background_color": "#f7faff",
+    "short_description": "Ruang untuk mengenal karya UMKM, wastra, kuliner, dan cerita Mitra Sehati Indonesia.",
+    "long_description": "Katalog ini memperkenalkan produk lokal dan kegiatan yang dipublikasikan melalui akun Instagram Mitra Sehati serta posting kolaborasinya. Materi mencakup karya wastra, fesyen, kuliner, dan kegiatan pendampingan UMKM. Informasi harga dan ketersediaan produk memerlukan konfirmasi lebih lanjut."
+  },
+  "products": [
+    {
+      "sku": "MS-IG-001",
+      "name": "Teh Telang Malika",
+      "brand": "Malika",
+      "type": "Kuliner",
+      "category": "Minuman",
+      "image": "images/post-8-slide-2.jpg",
+      "source_url": "https://www.instagram.com/piafpd_dpr/p/DV-vw35Ed1G/",
+      "description": "Minuman herbal merek Malika yang ditampilkan dalam rekomendasi kuliner UMKM Mitra Sehati. Detail ukuran, komposisi, varian, harga, dan stok belum dikonfirmasi."
+    },
+    {
+      "sku": "MS-IG-002",
+      "name": "Tas Bordir Aceh Putroena Souvenir",
+      "brand": "Putroena Souvenir",
+      "type": "Wastra & Fesyen",
+      "category": "Tas dan Aksesori",
+      "image": "images/post-7-slide-1.jpg",
+      "source_url": "https://www.instagram.com/piafpd_dpr/p/DW3PptbD6Tl/",
+      "description": "Karya tas bordir bermotif Aceh dari Putroena Souvenir yang diperkenalkan dalam Jejak Karya Lokal. Foto merupakan materi pengenalan usaha, bukan foto SKU tertentu. Pilihan model, ukuran, harga, dan stok perlu dikonfirmasi."
+    },
+    {
+      "sku": "MS-IG-003",
+      "name": "Tas Gayo Aceh",
+      "brand": "Pilihan Mitra Sehati",
+      "type": "Wastra & Fesyen",
+      "category": "Tas dan Aksesori",
+      "image": "images/post-10-slide-2.jpg",
+      "source_url": "https://www.instagram.com/piafpd_dpr/p/DUnDR_9kQeQ/",
+      "description": "Tas Gayo Aceh yang disebut pada materi inspirasi fesyen produk lokal. Gambar menampilkan satu rangkaian penampilan; produsen dan spesifikasi tas belum terverifikasi."
+    },
+    {
+      "sku": "MS-IG-004",
+      "name": "Kerudung Wearing Klamby",
+      "brand": "Wearing Klamby",
+      "type": "Wastra & Fesyen",
+      "category": "Busana",
+      "image": "images/post-10-slide-2.jpg",
+      "source_url": "https://www.instagram.com/piafpd_dpr/p/DUnDR_9kQeQ/",
+      "description": "Kerudung Wearing Klamby yang disebut dalam rekomendasi fesyen pada posting sumber. Model, warna, bahan, harga, dan ketersediaan belum dikonfirmasi."
+    },
+    {
+      "sku": "MS-IG-005",
+      "name": "Baju Batik Motif Gringsing",
+      "brand": "Pilihan Mitra Sehati",
+      "type": "Wastra & Fesyen",
+      "category": "Busana",
+      "image": "images/post-10-slide-2.jpg",
+      "source_url": "https://www.instagram.com/piafpd_dpr/p/DUnDR_9kQeQ/",
+      "description": "Baju batik dengan motif Gringsing yang ditunjukkan pada materi inspirasi fesyen. Produsen, ukuran, bahan, harga, dan stok belum dikonfirmasi."
+    },
+    {
+      "sku": "MS-IG-006",
+      "name": "Celana Wearing Klamby",
+      "brand": "Wearing Klamby",
+      "type": "Wastra & Fesyen",
+      "category": "Busana",
+      "image": "images/post-10-slide-2.jpg",
+      "source_url": "https://www.instagram.com/piafpd_dpr/p/DUnDR_9kQeQ/",
+      "description": "Celana Wearing Klamby yang disebut pada materi inspirasi fesyen sumber. Model, ukuran, warna, harga, dan ketersediaan belum dikonfirmasi."
+    },
+    {
+      "sku": "MS-IG-007",
+      "name": "Sepatu Buttonscarves",
+      "brand": "Buttonscarves",
+      "type": "Wastra & Fesyen",
+      "category": "Alas Kaki",
+      "image": "images/post-10-slide-2.jpg",
+      "source_url": "https://www.instagram.com/piafpd_dpr/p/DUnDR_9kQeQ/",
+      "description": "Alas kaki Buttonscarves yang disebut pada materi rekomendasi fesyen sumber. Tipe, ukuran, harga, dan stok belum dikonfirmasi."
+    }
+  ],
+  "posts": [
+    {
+      "key": "mitra-sehati-ig-01",
+      "title": "Grand Final Duta Batik YBJB 2026",
+      "source_url": "https://www.instagram.com/piafpd_dpr/reel/DfUKheav7nK/",
+      "image": "images/post-01.jpg",
+      "kind": "reel_preview"
+    },
+    {
+      "key": "mitra-sehati-ig-02",
+      "title": "Dukungan pelestarian batik daerah",
+      "source_url": "https://www.instagram.com/piafpd_dpr/p/De9aMsXj1oM/",
+      "image": "images/post-02.jpg",
+      "kind": "photo_preview"
+    },
+    {
+      "key": "mitra-sehati-ig-03",
+      "title": "Wirausaha kuat, UMKM hebat",
+      "source_url": "https://www.instagram.com/piafpd_dpr/reel/Db-bStixA_O/",
+      "image": "images/post-03.jpg",
+      "kind": "reel_preview"
+    },
+    {
+      "key": "mitra-sehati-ig-04",
+      "title": "Bazar Kreasi Bhayangkari Nusantara 2026",
+      "source_url": "https://www.instagram.com/mitrasehati.pia/p/Dbp7Lp1mvAh/",
+      "image": "images/post-04.jpg",
+      "kind": "photo_preview"
+    },
+    {
+      "key": "mitra-sehati-ig-05",
+      "title": "Cerita dan inspirasi produk lokal",
+      "source_url": "https://www.instagram.com/piafpd_dpr/p/DbX30OJkZY1/",
+      "image": "images/post-05.jpg",
+      "kind": "photo_preview"
+    },
+    {
+      "key": "mitra-sehati-ig-06",
+      "title": "Peran UMKM Indonesia",
+      "source_url": "https://www.instagram.com/piafpd_dpr/reel/DZ9v7bWxfuo/",
+      "image": "images/post-06.jpg",
+      "kind": "reel_preview"
+    },
+    {
+      "key": "mitra-sehati-ig-07",
+      "title": "Jejak Karya Lokal: Putroena Souvenir",
+      "source_url": "https://www.instagram.com/piafpd_dpr/p/DW3PptbD6Tl/",
+      "image": "images/post-07.jpg",
+      "kind": "photo_preview"
+    },
+    {
+      "key": "mitra-sehati-ig-08",
+      "title": "Rekomendasi kuliner UMKM Mitra Sehati",
+      "source_url": "https://www.instagram.com/piafpd_dpr/p/DV-vw35Ed1G/",
+      "image": "images/post-08.jpg",
+      "kind": "photo_preview"
+    },
+    {
+      "key": "mitra-sehati-ig-09",
+      "title": "Kegiatan Mitra Sehati dan PIA FPD",
+      "source_url": "https://www.instagram.com/ibasyudhoyono/reel/DVxhaijjCz_/",
+      "image": "images/post-09.jpg",
+      "kind": "reel_preview"
+    },
+    {
+      "key": "mitra-sehati-ig-10",
+      "title": "Inspirasi fesyen produk lokal",
+      "source_url": "https://www.instagram.com/piafpd_dpr/p/DUnDR_9kQeQ/",
+      "image": "images/post-10.jpg",
+      "kind": "photo_preview"
+    },
+    {
+      "key": "mitra-sehati-ig-11",
+      "title": "Kegiatan PIA FPD dan Mitra Sehati",
+      "source_url": "https://www.instagram.com/piafpd_dpr/reel/DUVJe_-kVSX/",
+      "image": "images/post-11.jpg",
+      "kind": "reel_preview"
+    },
+    {
+      "key": "mitra-sehati-ig-12",
+      "title": "Jejak Karya Lokal: Gita Batu Alam",
+      "source_url": "https://www.instagram.com/piafpd_dpr/p/DUH1KljkTow/",
+      "image": "images/post-12.jpg",
+      "kind": "photo_preview"
+    }
+  ]
+}

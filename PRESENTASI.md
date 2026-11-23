@@ -1,5 +1,25 @@
 # Panduan presentasi
 
+## Preset Mitra Sehati dari Instagram publik
+
+Sesudah mengambil kode terbaru, jalankan:
+
+```bash
+php artisan migrate --force
+php artisan db:seed --class=MitraSehatiSeeder --force
+php artisan optimize:clear
+```
+
+Seeder memasang 7 entri katalog informasi, 12 publikasi galeri, foto profil sebagai logo/favicon, serta tema biru. Gambar sumber sudah disertakan di `database/seeders/data/mitra-sehati/images`; saat seeding akan disalin ke storage publik. Tidak membutuhkan koneksi atau login Instagram pada server. Seeder membuat tautan public/storage bila belum tersedia.
+
+Data berasal dari bagian publik akun `https://www.instagram.com/mitrasehati.pia/` dan posting kolaborasinya, dikumpulkan 23 November 2026. Produk yang namanya terbaca pada gambar mencakup Teh Telang Malika, tas bordir Aceh Putroena Souvenir, Tas Gayo Aceh, kerudung dan celana Wearing Klamby, baju batik motif Gringsing, serta alas kaki Buttonscarves. Sebagian gambar adalah poster atau kolase sumber, bukan foto SKU tunggal. Ini bukan katalog lengkap seluruh riwayat Instagram.
+
+Harga dan stok belum diketahui. Mode **Katalog informasi** menampilkan “Harga belum tersedia” dan memblokir pembelian hingga informasi penjualan dikonfirmasi. Nilai nol pada kolom numerik internal bukan harga jual. Tautan posting asli tersedia pada halaman detail. Produk yang sudah memiliki harga dan stok dapat diaktifkan untuk penjualan melalui admin setelah mematikan mode Katalog informasi.
+
+Pemanggilan pertama mengganti identitas toko dengan preset Mitra Sehati dan menonaktifkan produk demo `DUMMY-PRD-*`. Produk pelanggan, akun, pesanan, dan keuangan tidak dihapus. Profil sebelumnya disimpan di disk lokal privat `branding-backups/`. Kontak toko lama dikosongkan bila tidak berasal dari profil Mitra Sehati; tidak ada nomor kontak yang direka.
+
+Pemanggilan ulang tidak menggandakan produk/galeri atau menimpa harga, stok, tema, dan gambar yang sudah diedit. Gambar bawaan yang hilang dari storage akan dipulihkan. Seeder ini dipanggil secara eksplisit dan tidak dijalankan oleh DatabaseSeeder produksi.
+
 - Aplikasi: http://localhost:8000
 - Admin: http://localhost:8000/management
 - Keuangan: http://localhost:8000/management/finance

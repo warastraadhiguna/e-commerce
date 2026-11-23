@@ -327,7 +327,7 @@
             $searchFilter = $homeCatalog['search_filter'] ?? 'all';
             $searchOptions = $homeCatalog['search_options'] ?? collect();
             $currentShopper = auth()->user();
-            $canPurchase = $currentShopper?->isShopper() ?? false;
+            $canPurchase = ! $product->is_catalog_only && ($currentShopper?->isShopper() ?? false);
             $displayPrice = $product->displayPriceFor($currentShopper);
             $oldPrice = $product->oldPriceFor($currentShopper);
             $displayPriceLabel = $product->displayPriceLabelFor($currentShopper);
@@ -343,7 +343,7 @@
                         <div class="col-lg-3 col-md-4">
                             <div class="header-top-left">
                                 <ul class="phone-wrap">
-                                    <li><span>Hubungi Kami:</span><a href="tel:{{ preg_replace('/[^0-9+]/', '', $companyProfile->phone) }}">{{ $companyProfile->phone }}</a></li>
+                                    @if (filled($companyProfile->phone))<li><span>Hubungi Kami:</span><a href="tel:{{ preg_replace('/[^0-9+]/', '', $companyProfile->phone) }}">{{ $companyProfile->phone }}</a></li>@endif
                                 </ul>
                             </div>
                         </div>
@@ -472,7 +472,7 @@
                                 <li><strong>Tipe</strong>{{ $product->productType?->name ?: '-' }}</li>
                                 <li><strong>Kategori</strong>{{ $product->category?->full_name ?: '-' }}</li>
                                 <li><strong>Satuan</strong>{{ $product->unit_summary }}</li>
-                                <li><strong>Stok</strong>{{ rtrim(rtrim(number_format((float) $product->stock_quantity, 3, '.', ''), '0'), '.') }} {{ $product->measurementUnit?->symbol }}</li>
+                                <li><strong>Stok</strong>{{ $product->is_catalog_only ? 'Belum dikonfirmasi' : rtrim(rtrim(number_format((float) $product->stock_quantity, 3, '.', ''), '0'), '.').' '.$product->measurementUnit?->symbol }}</li>
                                 <li><strong>Status</strong>{{ $product->is_active ? 'Aktif' : 'Nonaktif' }}</li>
                                 @if ($product->weight)
                                     <li><strong>Berat</strong>{{ number_format((float) $product->weight, 3) }} kg</li>
@@ -485,6 +485,12 @@
                                 @endif
                             </ul>
                             <div class="single-add-to-cart pt-25">
+                                @if ($product->is_catalog_only)
+                                    <p>Katalog informasi dari materi publik. Harga, varian, dan ketersediaan perlu dikonfirmasi sebelum pembelian.</p>
+                                    @if ($product->public_source_url)
+                                        <a class="li-button" href="{{ $product->public_source_url }}" target="_blank" rel="noopener noreferrer">Lihat sumber Instagram</a>
+                                    @endif
+                                @else
                                 <form id="purchase-section" action="{{ $canPurchase ? route('cart.store', $product) : route('login', ['redirect' => request()->getRequestUri()]) }}" method="{{ $canPurchase ? 'POST' : 'GET' }}" class="cart-quantity" data-preserve-scroll="true">
                                     @if ($canPurchase)
                                         @csrf
@@ -500,6 +506,7 @@
                                     </div>
                                     <button class="add-to-cart" type="submit">{{ $purchaseLabel }}</button>
                                 </form>
+                                @endif
                                 <form class="wishlist-inline-form" action="{{ route('wishlist.store', $product) }}" method="POST" data-preserve-scroll="true">
                                     @csrf
                                     <input type="hidden" name="redirect_to" value="{{ request()->getRequestUri() }}">

@@ -109,6 +109,8 @@ class HomeMedia extends Model
             'side_banner' => 'Banner Utama Samping',
             'promo_banner' => 'Banner Promo Tengah',
             'featured_banner' => 'Banner Lebar Bawah',
+            'brand_hero' => 'Pengantar Merek',
+            'instagram_showcase' => 'Galeri Instagram',
         ];
     }
 

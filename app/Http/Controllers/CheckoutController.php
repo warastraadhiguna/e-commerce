@@ -113,6 +113,10 @@ class CheckoutController extends Controller
 
                 $minimumQuantity = max((float) $product->min_order_quantity, 1);
 
+                if ($product->is_catalog_only) {
+                    throw ValidationException::withMessages(['checkout' => "Harga dan stok {$product->name} belum dikonfirmasi. Produk ini belum dapat dibeli."]);
+                }
+
                 if ($quantity < $minimumQuantity) {
                     throw ValidationException::withMessages([
                         'checkout' => "Jumlah untuk {$product->name} di bawah minimum order.",

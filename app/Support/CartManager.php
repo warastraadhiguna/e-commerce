@@ -11,7 +11,9 @@ use Illuminate\Support\Facades\Cookie;
 class CartManager
 {
     public const SESSION_KEY = 'cart_items';
+
     public const COOKIE_KEY = 'cart_items';
+
     protected const COOKIE_LIFETIME_MINUTES = 43200;
 
     public function __construct(
@@ -123,6 +125,7 @@ class CartManager
                 'measurementUnit:id,name,symbol',
             ])
             ->activePublished()
+            ->where('is_catalog_only', false)
             ->whereIn('id', array_keys($lines))
             ->get()
             ->keyBy('id');

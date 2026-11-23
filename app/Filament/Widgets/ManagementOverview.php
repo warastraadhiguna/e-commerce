@@ -46,7 +46,7 @@ class ManagementOverview extends StatsOverviewWidget
                 ->description('Pembayaran pesanan yang sudah diterima')->color('success')->icon(Heroicon::OutlinedBanknotes)->url(Finance::getUrl()),
             Stat::make('Pesanan perlu diproses', Order::query()->whereIn('status', ['pending', 'processing'])->count())
                 ->description('Pesanan baru dan sedang diproses')->color('warning')->icon(Heroicon::OutlinedShoppingBag)->url(OrderResource::getUrl('index')),
-            Stat::make('Stok menipis', Product::query()->where('is_active', true)->where('stock_quantity', '<=', 5)->count())
+            Stat::make('Stok menipis', Product::query()->where('is_active', true)->where('is_catalog_only', false)->where('stock_quantity', '<=', 5)->count())
                 ->description('Produk aktif dengan stok 5 atau kurang')->color('danger')->icon(Heroicon::OutlinedCube)
                 ->url(ProductResource::getUrl('index')),
             Stat::make('Mitra Baru', number_format($pendingPartnerRegistrations))

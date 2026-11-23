@@ -490,6 +490,7 @@
                 $sideBanners = $homeMedia->where('section', 'side_banner')->sortBy('sort_order')->values();
                 $promoBanners = $homeMedia->where('section', 'promo_banner')->sortBy('sort_order')->values();
                 $featuredBanner = $homeMedia->firstWhere('section', 'featured_banner');
+                $brandHero = $homeMedia->firstWhere('section', 'brand_hero');
                 $newArrivalProducts = $homeCatalog['new_arrivals'] ?? collect();
                 $bestsellerProducts = $homeCatalog['bestsellers'] ?? collect();
                 $featuredProducts = $homeCatalog['featured_products'] ?? collect();
@@ -519,7 +520,7 @@
                             <div class="col-lg-3 col-md-4">
                                 <div class="header-top-left">
                                     <ul class="phone-wrap">
-                                        <li><span>Hubungi Kami:</span><a href="tel:{{ preg_replace('/[^0-9+]/', '', $companyProfile->phone) }}">{{ $companyProfile->phone }}</a></li>
+                                        @if (filled($companyProfile->phone))<li><span>Hubungi Kami:</span><a href="tel:{{ preg_replace('/[^0-9+]/', '', $companyProfile->phone) }}">{{ $companyProfile->phone }}</a></li>@endif
                                     </ul>
                                 </div>
                             </div>
@@ -675,6 +676,9 @@
             <!-- Header Area End Here -->
             <!-- Begin Slider With Banner Area -->
             @unless ($searchIsActive)
+            @if ($brandHero)
+                @include('partials.home.brand-hero')
+            @else
             <div class="slider-with-banner">
                 <div class="container">
                     <div class="row">
@@ -743,6 +747,7 @@
                 </div>
             </div>
             <!-- Slider With Banner Area End Here -->
+            @endif
             @endunless
             @if ($searchIsActive)
                 <section id="search-results" class="product-area pt-60 pb-40">
@@ -1597,6 +1602,7 @@
             </div>
             <!-- Product Area End Here -->
             @endif
+            @unless ($brandHero)
             <!-- Begin Li's Static Banner Area -->
             <div class="li-static-banner">
                 <div class="container">
@@ -1632,6 +1638,7 @@
                 </div>
             </div>
             <!-- Li's Static Banner Area End Here -->
+            @endunless
             @include('partials.home.product-type-section', [
                 'title' => $primaryProductType?->name ?? 'Produk Pilihan',
                 'filters' => $primaryProductTypeFilters,
@@ -2204,6 +2211,7 @@
             </section>
             <!-- Li's TV & Audio Product Area End Here -->
             @endif
+            @unless ($brandHero)
             <!-- Begin Li's Static Home Area -->
             <div class="li-static-home">
                 <div class="container">
@@ -2230,6 +2238,7 @@
                 </div>
             </div>
             <!-- Li's Static Home Area End Here -->
+            @endunless
             @include('partials.home.trending-section', [
                 'brands' => $trendingBrands,
                 'productMap' => $trendingBrandProducts,
@@ -3318,13 +3327,16 @@
             </section>
             <!-- Li's Trendding Products Area End Here -->
             @endif
+            @unless ($searchIsActive)
+                @include('partials.home.instagram-showcase')
+            @endunless
             <!-- Begin Footer Area -->
             <div class="footer">
                 <!-- Begin Footer Static Top Area -->
                 <div class="footer-static-top">
                     <div class="container">
                         <!-- Begin Footer Shipping Area -->
-                        @if ($homeHighlights->isNotEmpty())
+                        @if ($homeHighlights->isNotEmpty() && ! $brandHero)
                             @php
                                 $homeHighlightColumnClass = match ($homeHighlights->count()) {
                                     1 => 'col-lg-12 col-md-12 col-sm-12',
@@ -3377,18 +3389,24 @@
                                         </p>
                                     </div>
                                     <ul class="des">
-                                        <li>
+                                        @if (filled($companyProfile->address))
+<li>
                                             <span>Address: </span>
                                             {!! nl2br(e($companyProfile->address)) !!}
                                         </li>
-                                        <li>
+@endif
+                                        @if (filled($companyProfile->phone))
+<li>
                                             <span>Phone: </span>
                                             <a href="tel:{{ preg_replace('/[^0-9+]/', '', $companyProfile->phone) }}">{{ $companyProfile->phone }}</a>
                                         </li>
-                                        <li>
+@endif
+                                        @if (filled($companyProfile->email))
+<li>
                                             <span>Email: </span>
                                             <a href="mailto:{{ $companyProfile->email }}">{{ $companyProfile->email }}</a>
                                         </li>
+@endif
                                     </ul>
                                 </div>
                                 <!-- Footer Logo Area End Here -->

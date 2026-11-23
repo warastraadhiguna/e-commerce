@@ -79,14 +79,14 @@ class CompanyProfileForm
                             ->columns(2)
                             ->schema([
                                 TextInput::make('phone')
-                                    ->required()
+                                    ->dehydrateStateUsing(fn (?string $state): string => $state ?? '')
                                     ->maxLength(50),
                                 TextInput::make('email')
                                     ->email()
-                                    ->required()
+                                    ->dehydrateStateUsing(fn (?string $state): string => $state ?? '')
                                     ->maxLength(255),
                                 Textarea::make('address')
-                                    ->required()
+                                    ->dehydrateStateUsing(fn (?string $state): string => $state ?? '')
                                     ->rows(1)
                                     ->columnSpanFull(),
                                 Textarea::make('map_embed_url')

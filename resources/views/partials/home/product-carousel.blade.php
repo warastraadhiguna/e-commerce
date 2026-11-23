@@ -1,5 +1,5 @@
 @php
-    $useCarousel = $useCarousel ?? true;
+    $useCarousel = ($useCarousel ?? true) && $products->count() > 5;
 @endphp
 
 @if ($products->isNotEmpty())

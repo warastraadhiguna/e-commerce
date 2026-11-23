@@ -2,8 +2,8 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -39,6 +39,8 @@ use Illuminate\Support\Facades\Storage;
     'is_bestseller',
     'published_at',
     'sort_order',
+    'is_catalog_only',
+    'source_url',
 ])]
 class Product extends Model
 {
@@ -73,6 +75,7 @@ class Product extends Model
             'width' => 'decimal:2',
             'height' => 'decimal:2',
             'is_active' => 'boolean',
+            'is_catalog_only' => 'boolean',
             'is_featured' => 'boolean',
             'is_new_arrival' => 'boolean',
             'is_bestseller' => 'boolean',
@@ -154,6 +157,10 @@ class Product extends Model
 
     public function oldPriceFor(?User $user): ?float
     {
+        if ($this->is_catalog_only) {
+            return null;
+        }
+
         if ($this->usesPartnerPriceFor($user)) {
             return (float) $this->price;
         }
@@ -179,6 +186,10 @@ class Product extends Model
 
     public function displayPriceLabelFor(?User $user): string
     {
+        if ($this->is_catalog_only) {
+            return 'Harga belum tersedia';
+        }
+
         return self::formatCurrency($this->displayPriceFor($user));
     }
 
@@ -187,5 +198,12 @@ class Product extends Model
         $oldPrice = $this->oldPriceFor($user);
 
         return $oldPrice !== null ? self::formatCurrency($oldPrice) : null;
+    }
+
+    public function getPublicSourceUrlAttribute(): ?string
+    {
+        return is_string($this->source_url) && filter_var($this->source_url, FILTER_VALIDATE_URL)
+            && in_array(strtolower((string) parse_url($this->source_url, PHP_URL_SCHEME)), ['https', 'http'], true)
+                ? $this->source_url : null;
     }
 }

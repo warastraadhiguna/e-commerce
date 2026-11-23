@@ -1,3 +1,4 @@
+@if ($products->isNotEmpty())
 <section class="product-area {{ $sectionClasses }}">
     <div class="container">
         <div class="row">
@@ -21,3 +22,4 @@
         </div>
     </div>
 </section>
+@endif

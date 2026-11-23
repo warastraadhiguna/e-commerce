@@ -43,15 +43,16 @@ class ProductsTable
                     ->toggleable(),
                 TextColumn::make('price')
                     ->label('Harga')
-                    ->formatStateUsing(fn (string $state): string => number_format((float) $state, 2))
+                    ->formatStateUsing(fn (string $state, Product $record): string => $record->is_catalog_only ? 'Belum tersedia' : number_format((float) $state, 2))
                     ->sortable(),
                 TextColumn::make('stock_quantity')
                     ->label('Stok')
-                    ->formatStateUsing(fn (string $state, Product $record): string => rtrim(rtrim(number_format((float) $state, 3, '.', ''), '0'), '.').' '.$record->measurementUnit->symbol)
+                    ->formatStateUsing(fn (string $state, Product $record): string => $record->is_catalog_only ? 'Belum dikonfirmasi' : rtrim(rtrim(number_format((float) $state, 3, '.', ''), '0'), '.').' '.$record->measurementUnit->symbol)
                     ->sortable(),
                 IconColumn::make('is_active')
                     ->label('Aktif')
                     ->boolean(),
+                IconColumn::make('is_catalog_only')->label('Katalog informasi')->boolean(),
                 IconColumn::make('is_featured')
                     ->label('Featured')
                     ->boolean()
@@ -72,6 +73,7 @@ class ProductsTable
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
+                TernaryFilter::make('is_catalog_only')->label('Katalog informasi'),
                 SelectFilter::make('brand_id')
                     ->label('Brand')
                     ->options(Brand::query()->orderBy('name')->pluck('name', 'id')),

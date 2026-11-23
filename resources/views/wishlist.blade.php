@@ -170,7 +170,7 @@
                         <div class="col-lg-3 col-md-4">
                             <div class="header-top-left">
                                 <ul class="phone-wrap">
-                                    <li><span>Hubungi Kami:</span><a href="tel:{{ preg_replace('/[^0-9+]/', '', $companyProfile->phone) }}">{{ $companyProfile->phone }}</a></li>
+                                    @if (filled($companyProfile->phone))<li><span>Hubungi Kami:</span><a href="tel:{{ preg_replace('/[^0-9+]/', '', $companyProfile->phone) }}">{{ $companyProfile->phone }}</a></li>@endif
                                 </ul>
                             </div>
                         </div>
@@ -284,7 +284,7 @@
                                             @php
                                                 $displayPrice = $wishlistProduct->displayPriceFor($currentShopper);
                                                 $displayPriceLabel = $wishlistProduct->displayPriceLabelFor($currentShopper);
-                                                $canPurchase = $currentShopper?->isShopper() ?? false;
+                                                $canPurchase = ! $wishlistProduct->is_catalog_only && ($currentShopper?->isShopper() ?? false);
                                             @endphp
                                             <tr>
                                                 <td class="li-product-remove">
@@ -314,11 +314,13 @@
                                                 </td>
                                                 <td class="li-product-stock-status">
                                                     <span class="{{ (float) $wishlistProduct->stock_quantity > 0 ? 'in-stock' : 'out-stock' }}">
-                                                        {{ (float) $wishlistProduct->stock_quantity > 0 ? 'in stock' : 'out of stock' }}
+                                                        {{ $wishlistProduct->is_catalog_only ? 'Belum dikonfirmasi' : ((float) $wishlistProduct->stock_quantity > 0 ? 'in stock' : 'out of stock') }}
                                                     </span>
                                                 </td>
                                                 <td class="li-product-add-cart">
-                                                    @if ($canPurchase)
+                                                    @if ($wishlistProduct->is_catalog_only)
+                                                        <a href="{{ route('products.show', $wishlistProduct->slug) }}">Lihat katalog</a>
+                                                    @elseif ($canPurchase)
                                                         <form action="{{ route('cart.store', $wishlistProduct) }}" method="POST" data-preserve-scroll="true">
                                                             @csrf
                                                             <input type="hidden" name="quantity" value="{{ rtrim(rtrim(number_format((float) $wishlistProduct->min_order_quantity, 3, '.', ''), '0'), '.') }}">

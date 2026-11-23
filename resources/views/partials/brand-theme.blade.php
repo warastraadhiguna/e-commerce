@@ -46,4 +46,23 @@
     }
     .site-brand__text, .brand { font-family: var(--brand-font); }
     .invoice-logo { max-width: 220px; max-height: 72px; object-fit: contain; }
+    .brand-intro { padding: 48px 0; background: linear-gradient(120deg, rgba(var(--brand-primary-rgb), .09), var(--brand-background)); }
+    .brand-intro__grid { display: grid; grid-template-columns: 1.15fr 1fr; align-items: center; gap: 60px; }
+    .brand-intro__eyebrow { color: var(--brand-primary); font-size: 12px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; }
+    .brand-intro h1 { font-size: 52px; line-height: 1.12; margin: 20px 0 14px; color: var(--brand-primary); }
+    .brand-intro h2 { font-size: 27px; line-height: 1.35; margin-bottom: 20px; }
+    .brand-intro p { font-size: 16px; line-height: 1.9; color: #56657a; max-width: 520px; }
+    .brand-intro__actions { display: flex; flex-wrap: wrap; align-items: center; gap: 24px; margin-top: 28px; }
+    .brand-intro__primary { padding: 14px 24px; background: var(--brand-primary); color: var(--brand-on-primary); border-radius: 6px; font-weight: 600; }
+    .brand-intro__primary:hover { background: var(--brand-secondary); color: var(--brand-on-secondary); }
+    .brand-intro__image { display: block; background: #fff; border-radius: 12px; overflow: hidden; }
+    .brand-intro__image img { display: block; width: 100%; max-height: 480px; object-fit: contain; }
+    .instagram-showcase__grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 24px; }
+    .instagram-showcase__card { background: #fff; border: 1px solid #e6ebf2; border-radius: 10px; overflow: hidden; }
+    .instagram-showcase__card img { width: 100%; aspect-ratio: 4 / 5; object-fit: contain; background: #f3f6fb; }
+    .instagram-showcase__card a > div { padding: 20px; }
+    .instagram-showcase__card h3 { font-size: 16px; line-height: 1.6; color: #25354d; }
+    .instagram-showcase__card span { color: var(--brand-primary); font-size: 13px; }
+    @media (max-width: 991px) { .brand-intro__grid { gap: 24px; } .brand-intro h1 { font-size: 38px; } .instagram-showcase__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+    @media (max-width: 575px) { .brand-intro { padding: 32px 0; } .brand-intro__grid { grid-template-columns: 1fr; } .brand-intro__image img { max-height: 360px; } .instagram-showcase__grid { gap: 12px; } .instagram-showcase__card a > div { padding: 12px; } .instagram-showcase__card h3 { font-size: 13px; } }
 </style>

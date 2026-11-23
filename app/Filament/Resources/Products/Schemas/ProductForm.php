@@ -4,14 +4,13 @@ namespace App\Filament\Resources\Products\Schemas;
 
 use App\Models\Brand;
 use App\Models\MeasurementUnit;
-use App\Models\Product;
 use App\Models\ProductCategory;
 use App\Models\ProductType;
 use Filament\Forms\Components\DateTimePicker;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Select;
-use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Textarea;
+use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
 use Filament\Schemas\Components\Section;
 use Filament\Schemas\Components\Utilities\Get;
@@ -30,6 +29,9 @@ class ProductForm
                     ->columns(12)
                     ->columnSpanFull()
                     ->schema([
+                        Toggle::make('is_catalog_only')->label('Katalog informasi (belum dijual)')
+                            ->helperText('Aktifkan jika harga atau stok belum dikonfirmasi. Tombol beli dan checkout akan dinonaktifkan.')->columnSpanFull(),
+                        TextInput::make('source_url')->label('Tautan sumber produk')->url()->maxLength(500)->columnSpanFull(),
                         TextInput::make('sku')
                             ->label('SKU')
                             ->required()

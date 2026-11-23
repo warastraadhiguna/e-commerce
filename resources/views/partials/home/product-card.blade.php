@@ -13,9 +13,9 @@
         $product->unit_summary,
     ])->filter()->join(' • ');
     $productUrl = route('products.show', $product->slug);
-    $canPurchase = $currentShopper?->isShopper() ?? false;
-    $loginUrl = route('login', ['redirect' => request()->getRequestUri()]);
-    $purchaseLabel = $canPurchase ? 'Beli' : 'Login untuk beli';
+    $canPurchase = ! $product->is_catalog_only && ($currentShopper?->isShopper() ?? false);
+    $loginUrl = $product->is_catalog_only ? $productUrl : route('login', ['redirect' => request()->getRequestUri()]);
+    $purchaseLabel = $product->is_catalog_only ? 'Lihat katalog' : ($canPurchase ? 'Beli' : 'Login untuk beli');
     $minimumOrderQuantity = rtrim(rtrim(number_format((float) $product->min_order_quantity, 3, '.', ''), '0'), '.');
     $isWishlisted = $wishlistProductIds->contains($product->getKey());
     $wishlistRedirect = request()->getRequestUri();
