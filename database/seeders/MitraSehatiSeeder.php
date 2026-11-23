@@ -76,6 +76,7 @@ class MitraSehatiSeeder extends Seeder
             ]);
 
             foreach ($data['products'] as $index => $item) {
+                $demoDescription = $item['description'].' Harga dan stok yang ditampilkan adalah data dummy untuk simulasi presentasi, bukan penawaran resmi.';
                 $brand = Brand::query()->firstOrCreate(['slug' => 'mitra-sehati-'.Str::slug($item['brand'])], [
                     'name' => $item['brand'], 'is_active' => true, 'sort_order' => $index + 1,
                 ]);
@@ -86,18 +87,30 @@ class MitraSehatiSeeder extends Seeder
                     'name' => $item['category'], 'product_type_id' => $type->id,
                     'is_active' => true, 'sort_order' => $index + 1,
                 ]);
-                Product::query()->firstOrCreate(['sku' => $item['sku']], [
+                $product = Product::query()->firstOrCreate(['sku' => $item['sku']], [
                     'slug' => 'mitra-sehati-'.Str::slug($item['name']), 'name' => $item['name'],
                     'brand_id' => $brand->id, 'product_type_id' => $type->id,
                     'product_category_id' => $category->id, 'measurement_unit_id' => $unit->id,
-                    'excerpt' => $item['description'], 'description' => $item['description'],
+                    'excerpt' => $demoDescription, 'description' => $demoDescription,
                     'thumbnail_path' => 'mitra-sehati/'.$item['image'],
-                    // Legacy numeric columns use zero internally; catalog-only UI never presents it as a price.
-                    'price' => 0, 'stock_quantity' => 0, 'min_order_quantity' => 1, 'unit_value' => 1,
-                    'is_active' => true, 'is_catalog_only' => true, 'source_url' => $item['source_url'],
+                    'price' => $item['demo_price'], 'stock_quantity' => $item['demo_stock'], 'min_order_quantity' => 1, 'unit_value' => 1,
+                    'is_active' => true, 'is_catalog_only' => false, 'source_url' => $item['source_url'],
                     'is_featured' => true, 'is_new_arrival' => true, 'is_bestseller' => false,
                     'published_at' => $data['collected_at'], 'sort_order' => $index + 1,
                 ]);
+
+                // Upgrade untouched placeholders from the previous seeder once; never replenish stock on reruns.
+                if (! $product->wasRecentlyCreated && $product->is_catalog_only
+                    && (float) $product->price === 0.0 && (float) $product->stock_quantity === 0.0
+                    && $product->source_url === $item['source_url']) {
+                    $changes = ['price' => $item['demo_price'], 'stock_quantity' => $item['demo_stock'], 'is_catalog_only' => false];
+                    foreach (['excerpt', 'description'] as $field) {
+                        if (blank($product->{$field}) || $product->{$field} === $item['description']) {
+                            $changes[$field] = $demoDescription;
+                        }
+                    }
+                    $product->update($changes);
+                }
             }
 
             HomeMedia::query()->firstOrCreate(['key' => 'mitra-sehati-brand-hero'], [
@@ -116,6 +129,6 @@ class MitraSehatiSeeder extends Seeder
         if (! file_exists(public_path('storage')) && ! is_link(public_path('storage'))) {
             Artisan::call('storage:link');
         }
-        $this->command?->info('Mitra Sehati siap: 7 produk katalog informasi, 12 galeri, logo dan tema biru. Harga/stok belum dikonfirmasi; tidak dapat checkout.');
+        $this->command?->info('Mitra Sehati siap: 7 produk dengan harga/stok dummy untuk simulasi belanja, 12 galeri, logo dan tema biru. Data harga bukan penawaran resmi.');
     }
 }

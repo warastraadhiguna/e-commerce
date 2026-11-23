@@ -6,6 +6,7 @@ use App\Models\Brand;
 use App\Models\CompanyProfile;
 use App\Models\HomeMedia;
 use App\Models\MeasurementUnit;
+use App\Models\Order;
 use App\Models\Product;
 use App\Models\ProductCategory;
 use App\Models\ProductType;
@@ -40,8 +41,10 @@ class MitraSehatiSeederTest extends TestCase
         $this->assertDatabaseCount('orders', 0);
         $this->assertDatabaseCount('expenses', 0);
         foreach (Product::all() as $product) {
-            $this->assertTrue($product->is_catalog_only);
-            $this->assertSame('Harga belum tersedia', $product->displayPriceLabelFor(null));
+            $this->assertFalse($product->is_catalog_only);
+            $this->assertGreaterThan(0, (float) $product->price);
+            $this->assertSame('25.000', $product->stock_quantity);
+            $this->assertStringContainsString('data dummy', $product->description);
             $this->assertNotNull($product->public_source_url);
             Storage::disk('public')->assertExists($product->thumbnail_path);
         }
@@ -92,6 +95,7 @@ class MitraSehatiSeederTest extends TestCase
     {
         $this->seed(MitraSehatiSeeder::class);
         $product = Product::where('sku', 'MS-IG-001')->firstOrFail();
+        $product->update(['is_catalog_only' => true, 'price' => 0, 'stock_quantity' => 0]);
         $this->get(route('products.show', $product->slug))->assertOk()->assertSeeText('Harga belum tersedia')
             ->assertSeeText('Lihat sumber Instagram')->assertDontSee('id="purchase-section"', false);
         $buyer = User::factory()->buyer()->create();
@@ -102,6 +106,43 @@ class MitraSehatiSeederTest extends TestCase
         $this->withSession([CartManager::SESSION_KEY => [$product->id => 1.0]])
             ->post(route('checkout.store'), ['shipping_address_id' => $address->id])->assertSessionHasErrors('checkout');
         $this->assertDatabaseCount('orders', 0);
+    }
+
+    public function test_previous_zero_price_catalog_is_upgraded_once_to_dummy_prices(): void
+    {
+        $this->seed(MitraSehatiSeeder::class);
+        $data = json_decode(file_get_contents(database_path('seeders/data/mitra-sehati/catalog.json')), true);
+        $product = Product::where('sku', 'MS-IG-001')->firstOrFail();
+        $product->update(['name' => 'Nama dikurasi', 'is_catalog_only' => true, 'price' => 0, 'stock_quantity' => 0,
+            'excerpt' => $data['products'][0]['description'], 'description' => $data['products'][0]['description']]);
+        $this->seed(MitraSehatiSeeder::class);
+        $product->refresh();
+        $this->assertFalse($product->is_catalog_only);
+        $this->assertSame('Nama dikurasi', $product->name);
+        $this->assertSame('25000.00', $product->price);
+        $this->assertSame('25.000', $product->stock_quantity);
+        $this->assertStringContainsString('data dummy', $product->description);
+        $this->assertDatabaseCount('products', 7);
+    }
+
+    public function test_dummy_product_can_checkout_and_rerun_does_not_replenish_stock(): void
+    {
+        $this->seed(MitraSehatiSeeder::class);
+        $product = Product::where('sku', 'MS-IG-001')->firstOrFail();
+        $buyer = User::factory()->buyer()->create();
+        $address = ShippingAddress::create(['user_id' => $buyer->id, 'label' => 'Demo', 'recipient_name' => 'Buyer Demo',
+            'phone' => '08123456789', 'address_line' => 'Alamat simulasi']);
+        $this->actingAs($buyer)->post(route('cart.store', $product), ['quantity' => 2])->assertRedirect();
+        $this->get(route('products.show', $product->slug))->assertOk()->assertSeeText('Rp25.000,00')
+            ->assertSee('id="purchase-section"', false)->assertSeeText('data dummy');
+        $this->post(route('checkout.store'), ['shipping_address_id' => $address->id])
+            ->assertRedirect(route('orders.show', Order::firstOrFail()));
+        $this->assertDatabaseHas('orders', ['user_id' => $buyer->id, 'total_amount' => 50000]);
+        $this->assertDatabaseHas('order_items', ['product_id' => $product->id, 'quantity' => 2, 'unit_price' => 25000]);
+        $this->assertSame('23.000', $product->fresh()->stock_quantity);
+        $this->seed(MitraSehatiSeeder::class);
+        $this->assertSame('23.000', $product->fresh()->stock_quantity);
+        $this->assertDatabaseCount('orders', 1);
     }
 
     public function test_missing_storage_files_are_restored_on_rerun(): void

@@ -1,5 +1,5 @@
 {
-  "version": 1,
+  "version": 2,
   "source": "https://www.instagram.com/mitrasehati.pia/",
   "collected_at": "2026-11-23T02:49:45.118Z",
   "profile": {
@@ -20,7 +20,9 @@
       "category": "Minuman",
       "image": "images/post-8-slide-2.jpg",
       "source_url": "https://www.instagram.com/piafpd_dpr/p/DV-vw35Ed1G/",
-      "description": "Minuman herbal merek Malika yang ditampilkan dalam rekomendasi kuliner UMKM Mitra Sehati. Detail ukuran, komposisi, varian, harga, dan stok belum dikonfirmasi."
+      "description": "Minuman herbal merek Malika yang ditampilkan dalam rekomendasi kuliner UMKM Mitra Sehati. Detail ukuran, komposisi, varian, harga, dan stok belum dikonfirmasi.",
+      "demo_price": 25000,
+      "demo_stock": 25
     },
     {
       "sku": "MS-IG-002",
@@ -30,7 +32,9 @@
       "category": "Tas dan Aksesori",
       "image": "images/post-7-slide-1.jpg",
       "source_url": "https://www.instagram.com/piafpd_dpr/p/DW3PptbD6Tl/",
-      "description": "Karya tas bordir bermotif Aceh dari Putroena Souvenir yang diperkenalkan dalam Jejak Karya Lokal. Foto merupakan materi pengenalan usaha, bukan foto SKU tertentu. Pilihan model, ukuran, harga, dan stok perlu dikonfirmasi."
+      "description": "Karya tas bordir bermotif Aceh dari Putroena Souvenir yang diperkenalkan dalam Jejak Karya Lokal. Foto merupakan materi pengenalan usaha, bukan foto SKU tertentu. Pilihan model, ukuran, harga, dan stok perlu dikonfirmasi.",
+      "demo_price": 250000,
+      "demo_stock": 25
     },
     {
       "sku": "MS-IG-003",
@@ -40,7 +44,9 @@
       "category": "Tas dan Aksesori",
       "image": "images/post-10-slide-2.jpg",
       "source_url": "https://www.instagram.com/piafpd_dpr/p/DUnDR_9kQeQ/",
-      "description": "Tas Gayo Aceh yang disebut pada materi inspirasi fesyen produk lokal. Gambar menampilkan satu rangkaian penampilan; produsen dan spesifikasi tas belum terverifikasi."
+      "description": "Tas Gayo Aceh yang disebut pada materi inspirasi fesyen produk lokal. Gambar menampilkan satu rangkaian penampilan; produsen dan spesifikasi tas belum terverifikasi.",
+      "demo_price": 225000,
+      "demo_stock": 25
     },
     {
       "sku": "MS-IG-004",
@@ -50,7 +56,9 @@
       "category": "Busana",
       "image": "images/post-10-slide-2.jpg",
       "source_url": "https://www.instagram.com/piafpd_dpr/p/DUnDR_9kQeQ/",
-      "description": "Kerudung Wearing Klamby yang disebut dalam rekomendasi fesyen pada posting sumber. Model, warna, bahan, harga, dan ketersediaan belum dikonfirmasi."
+      "description": "Kerudung Wearing Klamby yang disebut dalam rekomendasi fesyen pada posting sumber. Model, warna, bahan, harga, dan ketersediaan belum dikonfirmasi.",
+      "demo_price": 149000,
+      "demo_stock": 25
     },
     {
       "sku": "MS-IG-005",
@@ -60,7 +68,9 @@
       "category": "Busana",
       "image": "images/post-10-slide-2.jpg",
       "source_url": "https://www.instagram.com/piafpd_dpr/p/DUnDR_9kQeQ/",
-      "description": "Baju batik dengan motif Gringsing yang ditunjukkan pada materi inspirasi fesyen. Produsen, ukuran, bahan, harga, dan stok belum dikonfirmasi."
+      "description": "Baju batik dengan motif Gringsing yang ditunjukkan pada materi inspirasi fesyen. Produsen, ukuran, bahan, harga, dan stok belum dikonfirmasi.",
+      "demo_price": 295000,
+      "demo_stock": 25
     },
     {
       "sku": "MS-IG-006",
@@ -70,7 +80,9 @@
       "category": "Busana",
       "image": "images/post-10-slide-2.jpg",
       "source_url": "https://www.instagram.com/piafpd_dpr/p/DUnDR_9kQeQ/",
-      "description": "Celana Wearing Klamby yang disebut pada materi inspirasi fesyen sumber. Model, ukuran, warna, harga, dan ketersediaan belum dikonfirmasi."
+      "description": "Celana Wearing Klamby yang disebut pada materi inspirasi fesyen sumber. Model, ukuran, warna, harga, dan ketersediaan belum dikonfirmasi.",
+      "demo_price": 249000,
+      "demo_stock": 25
     },
     {
       "sku": "MS-IG-007",
@@ -80,7 +92,9 @@
       "category": "Alas Kaki",
       "image": "images/post-10-slide-2.jpg",
       "source_url": "https://www.instagram.com/piafpd_dpr/p/DUnDR_9kQeQ/",
-      "description": "Alas kaki Buttonscarves yang disebut pada materi rekomendasi fesyen sumber. Tipe, ukuran, harga, dan stok belum dikonfirmasi."
+      "description": "Alas kaki Buttonscarves yang disebut pada materi rekomendasi fesyen sumber. Tipe, ukuran, harga, dan stok belum dikonfirmasi.",
+      "demo_price": 399000,
+      "demo_stock": 25
     }
   ],
   "posts": [
@@ -168,5 +182,6 @@
       "image": "images/post-12.jpg",
       "kind": "photo_preview"
     }
-  ]
+  ],
+  "pricing_mode": "dummy_for_presentation"
 }

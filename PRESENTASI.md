@@ -10,7 +10,7 @@ php artisan db:seed --class=MitraSehatiSeeder --force
 php artisan optimize:clear
 ```
 
-Seeder memasang 7 entri katalog informasi, 12 publikasi galeri, foto profil sebagai logo/favicon, serta tema biru. Gambar sumber sudah disertakan di `database/seeders/data/mitra-sehati/images`; saat seeding akan disalin ke storage publik. Tidak membutuhkan koneksi atau login Instagram pada server. Seeder membuat tautan public/storage bila belum tersedia.
+Seeder memasang 7 produk dengan harga dan stok dummy untuk simulasi belanja, 12 publikasi galeri, foto profil sebagai logo/favicon, serta tema biru. Gambar sumber sudah disertakan di `database/seeders/data/mitra-sehati/images`; saat seeding akan disalin ke storage publik. Tidak membutuhkan koneksi atau login Instagram pada server. Seeder membuat tautan public/storage bila belum tersedia.
 
 Data berasal dari bagian publik akun `https://www.instagram.com/mitrasehati.pia/` dan posting kolaborasinya, dikumpulkan 23 November 2026. Produk yang namanya terbaca pada gambar mencakup Teh Telang Malika, tas bordir Aceh Putroena Souvenir, Tas Gayo Aceh, kerudung dan celana Wearing Klamby, baju batik motif Gringsing, serta alas kaki Buttonscarves. Sebagian gambar adalah poster atau kolase sumber, bukan foto SKU tunggal. Ini bukan katalog lengkap seluruh riwayat Instagram.
 
@@ -18,7 +18,7 @@ Harga dan stok belum diketahui. Mode **Katalog informasi** menampilkan “Harga 
 
 Pemanggilan pertama mengganti identitas toko dengan preset Mitra Sehati dan menonaktifkan produk demo `DUMMY-PRD-*`. Produk pelanggan, akun, pesanan, dan keuangan tidak dihapus. Profil sebelumnya disimpan di disk lokal privat `branding-backups/`. Kontak toko lama dikosongkan bila tidak berasal dari profil Mitra Sehati; tidak ada nomor kontak yang direka.
 
-Pemanggilan ulang tidak menggandakan produk/galeri atau menimpa harga, stok, tema, dan gambar yang sudah diedit. Gambar bawaan yang hilang dari storage akan dipulihkan. Seeder ini dipanggil secara eksplisit dan tidak dijalankan oleh DatabaseSeeder produksi.
+Pemanggilan ulang tidak menggandakan produk/galeri atau mereset harga, stok, tema, dan gambar yang sudah diedit. Khusus produk dari versi lama yang masih berstatus katalog informasi dengan harga dan stok nol, seeder sekali saja mengisinya dengan data dummy dan mengaktifkan pembelian. Stok yang berkurang setelah checkout tidak diisi ulang saat seeder dipanggil lagi. Gambar bawaan yang hilang dari storage akan dipulihkan. Seeder ini dipanggil secara eksplisit dan tidak dijalankan oleh DatabaseSeeder produksi.
 
 - Aplikasi: http://localhost:8000
 - Admin: http://localhost:8000/management
