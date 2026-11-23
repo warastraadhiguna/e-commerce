@@ -57,6 +57,19 @@ Gunakan jendela browser biasa untuk admin dan jendela Incognito untuk pembeli ag
 
 ## Menjalankan ulang
 
+### Jika gambar mengarah ke domain lama
+
+Secara bawaan, gambar public memakai URL `/storage/...` pada domain yang sedang dibuka. File gambar tetap berada di `storage/app/public` dengan tautan `public/storage`. Jika menggunakan domain CDN atau direktori khusus, atur `PUBLIC_STORAGE_URL` secara eksplisit.
+
+Contoh konfigurasi server Mitra Sehati:
+
+```dotenv
+APP_URL=https://mitrasehati-pia.warastra-adhiguna.com
+PUBLIC_STORAGE_URL=/storage
+```
+
+Sesudah mengubah `.env` atau menarik perbaikan konfigurasi dari Git, jalankan `php artisan optimize:clear`. Jika file gambar sudah dapat dibuka langsung di `/storage/mitra-sehati/images/profile.jpg`, tidak perlu mengunggah atau menjalankan seeder ulang.
+
 ### Pengaturan dasar khusus Developer
 
 Logo, favicon, identitas toko, warna utama/pendamping, warna latar, font, dan motif hanya dapat diedit melalui **Developer → Identitas & Tema**. Admin dan superadmin tetap menangani operasional, tetapi tidak mendapat akses pengaturan ini, termasuk melalui URL langsung. Mereka juga tidak dapat membuat, mengubah, menghapus, atau mereset akun Developer.
