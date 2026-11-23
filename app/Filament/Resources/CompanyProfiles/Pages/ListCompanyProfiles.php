@@ -12,6 +12,8 @@ class ListCompanyProfiles extends ListRecords
 
     public function mount(): void
     {
+        abort_unless(CompanyProfileResource::canViewAny(), 403);
+
         $record = CompanyProfile::query()->first()
             ?? CompanyProfile::query()->create(CompanyProfile::defaultAttributes());
 

@@ -23,7 +23,7 @@
     <link rel="stylesheet" href="css/magnific-popup.css">
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/helper.css">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="{{ asset('desain/style.css') }}?v={{ filemtime(public_path('desain/style.css')) }}">
     <link rel="stylesheet" href="css/responsive.css">
     <style>
         .site-brand {
@@ -68,7 +68,7 @@
             position: relative;
             overflow: hidden;
             background:
-                radial-gradient(circle at top left, rgba(254, 215, 0, .28), transparent 34%),
+                radial-gradient(circle at top left, rgba(var(--brand-primary-rgb, 254, 215, 0), .28), transparent 34%),
                 linear-gradient(135deg, #fffdf3 0%, #ffffff 54%, #fff7d1 100%);
         }
 
@@ -85,7 +85,7 @@
             height: 360px;
             right: -120px;
             top: -90px;
-            background: rgba(254, 215, 0, .22);
+            background: rgba(var(--brand-primary-rgb, 254, 215, 0), .22);
         }
 
         .auth-page-section::after {
@@ -126,8 +126,8 @@
             position: absolute;
             inset: 0;
             background:
-                radial-gradient(circle at top right, rgba(254, 215, 0, .55), transparent 28%),
-                radial-gradient(circle at bottom left, rgba(254, 215, 0, .22), transparent 34%);
+                radial-gradient(circle at top right, rgba(var(--brand-primary-rgb, 254, 215, 0), .55), transparent 28%),
+                radial-gradient(circle at bottom left, rgba(var(--brand-primary-rgb, 254, 215, 0), .22), transparent 34%);
             pointer-events: none;
         }
 
@@ -144,7 +144,7 @@
             min-height: 30px;
             padding: 0 14px;
             border-radius: 999px;
-            background: rgba(254, 215, 0, .16);
+            background: rgba(var(--brand-primary-rgb, 254, 215, 0), .16);
             color: #8a6a00;
             font-size: 12px;
             font-weight: 700;
@@ -176,7 +176,7 @@
             width: 72px;
             height: 4px;
             border-radius: 999px;
-            background: #fed700;
+            background: var(--brand-primary, #fed700);
             margin: 24px 0 28px;
         }
 
@@ -200,8 +200,8 @@
 
         .auth-login-card input[type="tel"]:focus,
         .auth-login-card input[name="password"]:focus {
-            border-color: #fed700;
-            box-shadow: 0 0 0 4px rgba(254, 215, 0, .18);
+            border-color: var(--brand-primary, #fed700);
+            box-shadow: 0 0 0 4px rgba(var(--brand-primary-rgb, 254, 215, 0), .18);
             background: #fff;
             outline: none;
         }
@@ -231,7 +231,7 @@
 
         .auth-password-toggle:hover {
             color: #242424;
-            background: rgba(254, 215, 0, .15);
+            background: rgba(var(--brand-primary-rgb, 254, 215, 0), .15);
         }
 
         .auth-password-toggle:focus-visible {
@@ -280,7 +280,7 @@
             min-height: 54px;
             border: 0;
             border-radius: 12px;
-            background: linear-gradient(90deg, #fed700 0%, #ffcb05 100%);
+            background: linear-gradient(90deg, var(--brand-primary, #fed700) 0%, var(--brand-primary, #fed700) 100%);
             color: #242424;
             font-size: 15px;
             font-weight: 700;
@@ -291,11 +291,11 @@
 
         .auth-submit:hover {
             transform: translateY(-1px);
-            box-shadow: 0 14px 28px rgba(254, 215, 0, .25);
+            box-shadow: 0 14px 28px rgba(var(--brand-primary-rgb, 254, 215, 0), .25);
         }
 
         .auth-register-card .auth-kicker {
-            background: rgba(254, 215, 0, .16);
+            background: rgba(var(--brand-primary-rgb, 254, 215, 0), .16);
             color: #ffe27a;
         }
 
@@ -330,8 +330,8 @@
             width: 10px;
             height: 10px;
             border-radius: 50%;
-            background: #fed700;
-            box-shadow: 0 0 0 6px rgba(254, 215, 0, .14);
+            background: var(--brand-primary, #fed700);
+            box-shadow: 0 0 0 6px rgba(var(--brand-primary-rgb, 254, 215, 0), .14);
         }
 
         .auth-register-actions {
@@ -356,7 +356,7 @@
         }
 
         .auth-register-primary {
-            background: #fed700;
+            background: var(--brand-primary, #fed700);
             color: #242424;
         }
 
@@ -398,6 +398,7 @@
         }
     </style>
     <script src="js/vendor/modernizr-2.8.3.min.js"></script>
+    @include('partials.brand-theme')
 </head>
 <body>
     <div class="body-wrapper">

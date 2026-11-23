@@ -23,7 +23,7 @@
     <link rel="stylesheet" href="css/magnific-popup.css">
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/helper.css">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="{{ asset('desain/style.css') }}?v={{ filemtime(public_path('desain/style.css')) }}">
     <link rel="stylesheet" href="css/responsive.css">
     <style>
         .site-brand { display: inline-flex; align-items: center; justify-content: flex-start; width: 220px; max-width: 100%; min-height: 64px; }
@@ -35,15 +35,15 @@
         @include('partials.site-navigation-styles')
         .checkout-card { padding: 28px 30px; border: 1px solid #ececec; background: #fff; }
         .checkout-card h3 { margin-bottom: 22px; }
-        .checkout-helper { margin-bottom: 20px; padding: 14px 18px; border-left: 3px solid #fed700; background: #fffdf5; color: #666; line-height: 1.8; }
+        .checkout-helper { margin-bottom: 20px; padding: 14px 18px; border-left: 3px solid var(--brand-primary, #fed700); background: #fffdf5; color: #666; line-height: 1.8; }
         .checkout-address-list { display: grid; gap: 16px; }
         .checkout-address-option { display: block; margin: 0; cursor: pointer; }
         .checkout-address-option input[type="radio"] { position: absolute; opacity: 0; pointer-events: none; }
         .checkout-address-option__card { display: block; padding: 18px 18px 16px; border: 1px solid #e2e2e2; transition: border-color .2s ease, box-shadow .2s ease; }
-        .checkout-address-option input[type="radio"]:checked + .checkout-address-option__card { border-color: #fed700; box-shadow: 0 0 0 1px #fed700 inset; }
+        .checkout-address-option input[type="radio"]:checked + .checkout-address-option__card { border-color: var(--brand-primary, #fed700); box-shadow: 0 0 0 1px var(--brand-primary, #fed700) inset; }
         .checkout-address-option__header { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; margin-bottom: 8px; }
         .checkout-address-option__label { font-weight: 700; color: #242424; }
-        .checkout-address-option__badge { display: inline-flex; align-items: center; min-height: 24px; padding: 0 10px; background: #fed700; color: #242424; font-size: 12px; font-weight: 700; text-transform: uppercase; }
+        .checkout-address-option__badge { display: inline-flex; align-items: center; min-height: 24px; padding: 0 10px; background: var(--brand-primary, #fed700); color: #242424; font-size: 12px; font-weight: 700; text-transform: uppercase; }
         .checkout-address-option__meta { margin-bottom: 6px; color: #333; font-weight: 600; }
         .checkout-address-option__address, .checkout-address-option__notes { color: #666; line-height: 1.8; }
         .checkout-address-empty { padding: 22px; border: 1px dashed #d9d9d9; color: #666; line-height: 1.8; }
@@ -51,7 +51,7 @@
         .checkout-notes textarea { min-height: 140px; resize: vertical; }
         .checkout-summary-table td, .checkout-summary-table th { vertical-align: top; }
         .checkout-summary-product small { display: block; margin-top: 4px; color: #777; }
-        .checkout-submit { display: inline-flex; align-items: center; justify-content: center; min-height: 48px; padding: 0 26px; border: 0; background: #fed700; color: #242424; font-size: 14px; font-weight: 700; text-transform: uppercase; cursor: pointer; }
+        .checkout-submit { display: inline-flex; align-items: center; justify-content: center; min-height: 48px; padding: 0 26px; border: 0; background: var(--brand-primary, #fed700); color: #242424; font-size: 14px; font-weight: 700; text-transform: uppercase; cursor: pointer; }
         .checkout-back-link { display: inline-flex; align-items: center; margin-left: 14px; color: #666; text-decoration: underline; }
         .checkout-error { margin-bottom: 20px; padding: 14px 18px; border-left: 3px solid #dc3545; background: #fff5f5; color: #8a1f11; line-height: 1.8; }
         @media (max-width: 767px) {
@@ -64,6 +64,7 @@
         }
     </style>
     <script src="js/vendor/modernizr-2.8.3.min.js"></script>
+    @include('partials.brand-theme')
 </head>
 <body>
     @php

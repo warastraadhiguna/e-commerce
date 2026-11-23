@@ -8,9 +8,9 @@ use App\Enums\UserRole;
 use Database\Factories\UserFactory;
 use Filament\Models\Contracts\FilamentUser;
 use Filament\Panel;
-use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Attributes\Hidden;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -109,6 +109,16 @@ class User extends Authenticatable implements FilamentUser
         return $this->role === UserRole::SuperAdmin;
     }
 
+    public function isDeveloper(): bool
+    {
+        return $this->role === UserRole::Developer;
+    }
+
+    public function canManageBranding(): bool
+    {
+        return $this->isDeveloper() && $this->is_active;
+    }
+
     public function isAdmin(): bool
     {
         return $this->role === UserRole::Admin;
@@ -116,7 +126,7 @@ class User extends Authenticatable implements FilamentUser
 
     public function isManagementUser(): bool
     {
-        return $this->isSuperAdmin() || $this->isAdmin();
+        return $this->isDeveloper() || $this->isSuperAdmin() || $this->isAdmin();
     }
 
     public function isBuyer(): bool
@@ -149,7 +159,7 @@ class User extends Authenticatable implements FilamentUser
 
     public function canDeleteManagementRecords(): bool
     {
-        return $this->isSuperAdmin();
+        return $this->isDeveloper() || $this->isSuperAdmin();
     }
 
     public function isEligibleForPartnerPricing(): bool

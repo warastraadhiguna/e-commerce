@@ -18,7 +18,7 @@ class CreateUser extends CreateRecord
 
     protected function normalizePartnerFields(array $data): array
     {
-        if (in_array(($data['role'] ?? null), [UserRole::Admin->value, UserRole::SuperAdmin->value], true)) {
+        if (in_array(($data['role'] ?? null), [UserRole::Developer->value, UserRole::Admin->value, UserRole::SuperAdmin->value], true)) {
             $data['business_name'] = null;
             $data['contact_person'] = null;
             $data['address'] = null;

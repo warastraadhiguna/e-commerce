@@ -14,7 +14,7 @@
     <link rel="stylesheet" href="css/font-awesome.min.css">
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/helper.css">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="{{ asset('desain/style.css') }}?v={{ filemtime(public_path('desain/style.css')) }}">
     <style>
         .purchase-card {
             padding: 36px 40px;
@@ -49,6 +49,7 @@
             line-height: 1.8;
         }
     </style>
+    @include('partials.brand-theme')
 </head>
 <body>
     @php

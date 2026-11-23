@@ -37,6 +37,26 @@ Gunakan jendela browser biasa untuk admin dan jendela Incognito untuk pembeli ag
 
 ## Menjalankan ulang
 
+### Pengaturan dasar khusus Developer
+
+Logo, favicon, identitas toko, warna utama/pendamping, warna latar, font, dan motif hanya dapat diedit melalui **Developer → Identitas & Tema**. Admin dan superadmin tetap menangani operasional, tetapi tidak mendapat akses pengaturan ini, termasuk melalui URL langsung. Mereka juga tidak dapat membuat, mengubah, menghapus, atau mereset akun Developer.
+
+Untuk pemasangan/pembaruan di server:
+
+```bash
+git pull origin master
+php artisan migrate --force
+php artisan optimize:clear
+php artisan storage:link
+php artisan store:create-developer email-developer@domainmu.com
+```
+
+Perintah terakhir meminta nama, nomor HP, dan password minimal 12 karakter melalui prompt tersembunyi. Gunakan email baru; perintah ini tidak menimpa akun yang sudah ada. Tidak ada akun Developer dengan password bawaan. Setelah dibuat, login memakai email di `/management/login`.
+
+Setelah menyimpan tema, buka ulang halaman toko dan panel untuk melihat hasilnya. Warna kuning tetap digunakan sampai Developer mengubahnya. Logo mendukung gambar persegi maupun horizontal; motif disimpan di disk public, sehingga ikut dipindahkan saat migrasi server seperti gambar produk.
+
+### Server lokal
+
 Server lokal saat ini sudah berjalan. Bila berhenti, buka terminal di folder `e-commerce-new` dan jalankan:
 
 ```powershell

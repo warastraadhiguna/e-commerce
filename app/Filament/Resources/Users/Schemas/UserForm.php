@@ -4,6 +4,7 @@ namespace App\Filament\Resources\Users\Schemas;
 
 use App\Enums\PartnerDiscountStatus;
 use App\Enums\UserRole;
+use App\Filament\Resources\Users\UserResource;
 use App\Models\User;
 use Filament\Forms\Components\DateTimePicker;
 use Filament\Forms\Components\Select;
@@ -13,6 +14,7 @@ use Filament\Forms\Components\Toggle;
 use Filament\Schemas\Components\Section;
 use Filament\Schemas\Components\Utilities\Get;
 use Filament\Schemas\Schema;
+use Illuminate\Validation\Rule;
 use Illuminate\Validation\Rules\Password;
 
 class UserForm
@@ -46,13 +48,15 @@ class UserForm
                             ->unique(ignoreRecord: true)
                             ->helperText('Gunakan nomor HP aktif. Login publik memakai nomor ini.'),
                         Select::make('role')
-                            ->options(UserRole::options())
+                            ->options(fn (): array => UserResource::assignableRoles())
+                            ->rules([fn () => Rule::in(array_keys(UserResource::assignableRoles()))])
                             ->default(UserRole::Buyer->value)
                             ->required()
                             ->native(false)
                             ->disabled(fn (?User $record): bool => $record?->id === auth()->id()),
                         Toggle::make('is_active')
                             ->label('Akun aktif')
+                            ->disabled(fn (?User $record): bool => $record?->id === auth()->id())
                             ->default(true),
                     ]),
                 Section::make('Profil pengguna')

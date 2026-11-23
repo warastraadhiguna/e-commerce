@@ -23,7 +23,7 @@
     <link rel="stylesheet" href="css/magnific-popup.css">
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/helper.css">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="{{ asset('desain/style.css') }}?v={{ filemtime(public_path('desain/style.css')) }}">
     <link rel="stylesheet" href="css/responsive.css">
     <style>
         .site-brand {
@@ -112,7 +112,7 @@
             color: #222;
             background: #fff;
             border-color: #ededed;
-            border-top: 3px solid #fed700;
+            border-top: 3px solid var(--brand-primary, #fed700);
         }
 
         .account-tab-pane {
@@ -212,7 +212,7 @@
         }
 
         .account-button {
-            background: #fed700;
+            background: var(--brand-primary, #fed700);
             color: #222;
         }
 
@@ -365,6 +365,7 @@
             }
         }
     </style>
+    @include('partials.brand-theme')
 </head>
 <body>
     @php

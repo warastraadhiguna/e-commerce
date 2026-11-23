@@ -232,7 +232,7 @@ class CompanyProfileTest extends TestCase
                 'message' => 'Spam',
                 'website' => 'https://spam.test',
             ])
-            ->assertRedirect(route('contact') . '#partner-registration')
+            ->assertRedirect(route('contact').'#partner-registration')
             ->assertSessionHasErrors('website');
 
         $this->assertDatabaseCount('partner_registrations', 0);
@@ -240,7 +240,7 @@ class CompanyProfileTest extends TestCase
 
     public function test_management_company_profile_route_redirects_to_edit_page(): void
     {
-        $admin = User::factory()->admin()->create();
+        $admin = User::factory()->developer()->create();
         $companyProfile = CompanyProfile::query()->create(CompanyProfile::defaultAttributes());
 
         $this->actingAs($admin)

@@ -31,9 +31,12 @@ class ManagementPanelProvider extends PanelProvider
             ->spa()
             ->topNavigation()
             ->globalSearch(false)
-            ->brandName(fn (): string => CompanyProfile::query()->value('company_name') ?: config('app.name', 'E-Commerce'))
-            ->colors([
-                'primary' => Color::Amber,
+            ->brandName(fn (): string => $this->brandProfile()->company_name ?: config('app.name', 'E-Commerce'))
+            ->brandLogo(fn (): ?string => $this->brandProfile()->logo_url)
+            ->brandLogoHeight('3rem')
+            ->favicon(fn (): string => $this->brandProfile()->favicon_href)
+            ->colors(fn (): array => [
+                'primary' => Color::hex($this->brandProfile()->theme()['primary']),
             ])
             ->discoverResources(in: app_path('Filament/Resources'), for: 'App\Filament\Resources')
             ->discoverPages(in: app_path('Filament/Pages'), for: 'App\Filament\Pages')
@@ -58,5 +61,10 @@ class ManagementPanelProvider extends PanelProvider
             ->authMiddleware([
                 Authenticate::class,
             ]);
+    }
+
+    private function brandProfile(): CompanyProfile
+    {
+        return once(fn () => CompanyProfile::query()->first() ?? CompanyProfile::make(CompanyProfile::defaultAttributes()));
     }
 }

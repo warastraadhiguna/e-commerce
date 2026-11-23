@@ -66,7 +66,7 @@
 .hb-menu .hb-megamenu--catalog .catalog-nav__all > a:hover,
 .hb-menu .hb-megamenu--catalog .catalog-nav__category > a:hover,
 .hb-menu .hb-megamenu--catalog .catalog-nav__type-all > a:hover {
-    color: #fed700;
+    color: var(--brand-primary, #fed700);
 }
 
 .header-middle-right .hm-menu {

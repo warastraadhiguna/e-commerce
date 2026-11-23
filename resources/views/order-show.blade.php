@@ -23,7 +23,7 @@
     <link rel="stylesheet" href="css/magnific-popup.css">
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/helper.css">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="{{ asset('desain/style.css') }}?v={{ filemtime(public_path('desain/style.css')) }}">
     <link rel="stylesheet" href="css/responsive.css">
     <style>
         .site-brand { display: inline-flex; align-items: center; justify-content: flex-start; width: 220px; max-width: 100%; min-height: 64px; }
@@ -42,9 +42,9 @@
         .order-meta-list, .order-address-list { margin: 0; padding: 0; list-style: none; }
         .order-meta-list li, .order-address-list li { padding: 8px 0; border-bottom: 1px solid #f2f2f2; color: #666; }
         .order-meta-list li strong, .order-address-list li strong { display: inline-block; min-width: 150px; color: #222; }
-        .order-notes { margin-top: 16px; padding: 16px 18px; border-left: 3px solid #fed700; background: #fffdf5; color: #666; line-height: 1.8; }
+        .order-notes { margin-top: 16px; padding: 16px 18px; border-left: 3px solid var(--brand-primary, #fed700); background: #fffdf5; color: #666; line-height: 1.8; }
         .order-actions { margin-top: 24px; }
-        .order-actions a { display: inline-flex; align-items: center; justify-content: center; min-height: 46px; padding: 0 24px; background: #fed700; color: #242424; font-weight: 700; text-transform: uppercase; }
+        .order-actions a { display: inline-flex; align-items: center; justify-content: center; min-height: 46px; padding: 0 24px; background: var(--brand-primary, #fed700); color: #242424; font-weight: 700; text-transform: uppercase; }
         .order-grid--compact { display: grid; grid-template-columns: 1fr 1.15fr; gap: 24px; align-items: start; }
         .order-items-table th,
         .order-items-table td { padding: 12px 14px; }
@@ -58,6 +58,7 @@
         }
     </style>
     <script src="js/vendor/modernizr-2.8.3.min.js"></script>
+    @include('partials.brand-theme')
 </head>
 <body>
     @php

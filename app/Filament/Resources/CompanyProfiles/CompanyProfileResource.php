@@ -20,13 +20,13 @@ class CompanyProfileResource extends Resource
 
     protected static ?string $recordTitleAttribute = 'company_name';
 
-    protected static ?string $modelLabel = 'Company Profile';
+    protected static ?string $modelLabel = 'Identitas & Tema';
 
-    protected static ?string $pluralModelLabel = 'Company Profile';
+    protected static ?string $pluralModelLabel = 'Identitas & Tema';
 
-    protected static ?string $navigationLabel = 'Company Profile';
+    protected static ?string $navigationLabel = 'Identitas & Tema';
 
-    protected static string|UnitEnum|null $navigationGroup = 'Company Setting';
+    protected static string|UnitEnum|null $navigationGroup = 'Developer';
 
     protected static ?int $navigationSort = 1;
 

@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Support\BrandTheme;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Storage;
@@ -20,9 +21,28 @@ use Illuminate\Support\Facades\Storage;
     'x_url',
     'youtube_url',
     'instagram_url',
+    'theme_primary_color',
+    'theme_secondary_color',
+    'theme_background_color',
+    'theme_font',
+    'theme_pattern_path',
+    'favicon_path',
 ])]
 class CompanyProfile extends Model
 {
+    public function theme(): array
+    {
+        return BrandTheme::fromProfile($this);
+    }
+
+    public function getPatternUrlAttribute(): ?string
+    {
+        $path = $this->theme_pattern_path;
+
+        return filled($path) && preg_match('~^(?:[a-zA-Z0-9_-]+/)*[a-zA-Z0-9_.-]+$~', $path)
+            ? Storage::disk('public')->url($path) : null;
+    }
+
     public static function defaultAttributes(): array
     {
         return [
@@ -68,13 +88,17 @@ class CompanyProfile extends Model
 
     public function getFaviconUrlAttribute(): string
     {
+        if (filled($this->favicon_path)) {
+            return Storage::disk('public')->url($this->favicon_path);
+        }
+
         return $this->logo_url
             ?? "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'/%3E";
     }
 
     public function getFaviconHrefAttribute(): string
     {
-        if (! $this->has_logo) {
+        if (! $this->has_logo && ! filled($this->favicon_path)) {
             return $this->favicon_url;
         }
 

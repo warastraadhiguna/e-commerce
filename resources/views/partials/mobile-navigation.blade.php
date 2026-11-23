@@ -7,7 +7,7 @@
 <style>
     .public-mobile-navigation { display: none; }
     @media (max-width: 991px) {
-        .public-mobile-navigation { display: flex; justify-content: space-around; gap: 8px; padding: 14px 12px; background: #fed700; }
+        .public-mobile-navigation { display: flex; justify-content: space-around; gap: 8px; padding: 14px 12px; background: var(--brand-primary, #fed700); }
         .public-mobile-navigation a { color: #242424; font-size: 13px; font-weight: 700; }
     }
 </style>

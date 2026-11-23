@@ -23,7 +23,7 @@
     <link rel="stylesheet" href="css/magnific-popup.css">
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/helper.css">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="{{ asset('desain/style.css') }}?v={{ filemtime(public_path('desain/style.css')) }}">
     <link rel="stylesheet" href="css/responsive.css">
     <style>
         .site-brand {
@@ -170,6 +170,7 @@
         }
     </style>
     <script src="js/vendor/modernizr-2.8.3.min.js"></script>
+    @include('partials.brand-theme')
 </head>
 <body>
     <div class="body-wrapper">

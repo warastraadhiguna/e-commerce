@@ -40,7 +40,7 @@
         <!-- Helper CSS -->
         <link rel="stylesheet" href="css/helper.css">
         <!-- Main Style CSS -->
-        <link rel="stylesheet" href="style.css">
+        <link rel="stylesheet" href="{{ asset('desain/style.css') }}?v={{ filemtime(public_path('desain/style.css')) }}">
         <!-- Responsive CSS -->
         <link rel="stylesheet" href="css/responsive.css">
         <style>
@@ -229,8 +229,8 @@
             }
 
             .quick-view-image__thumb.is-active {
-                border-color: #fed700;
-                box-shadow: 0 0 0 2px rgba(254, 215, 0, .15);
+                border-color: var(--brand-primary, #fed700);
+                box-shadow: 0 0 0 2px rgba(var(--brand-primary-rgb, 254, 215, 0), .15);
             }
 
             .quick-view-image__thumb img {
@@ -345,7 +345,7 @@
                 min-height: 52px;
                 padding: 0 26px;
                 border: 0;
-                background: #fed700;
+                background: var(--brand-primary, #fed700);
                 color: #242424;
                 cursor: pointer;
                 font-weight: 700;
@@ -477,7 +477,8 @@
         </style>
         <!-- Modernizr js -->
         <script src="js/vendor/modernizr-2.8.3.min.js"></script>
-    </head>
+        @include('partials.brand-theme')
+</head>
     <body>
     <!--[if lt IE 8]>
 		<p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>

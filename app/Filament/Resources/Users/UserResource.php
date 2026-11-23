@@ -2,7 +2,7 @@
 
 namespace App\Filament\Resources\Users;
 
-use App\Filament\Resources\Concerns\RestrictsDeleteToSuperAdmin;
+use App\Enums\UserRole;
 use App\Filament\Resources\Users\Pages\CreateUser;
 use App\Filament\Resources\Users\Pages\EditUser;
 use App\Filament\Resources\Users\Pages\ListUsers;
@@ -16,11 +16,10 @@ use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
+use Illuminate\Database\Eloquent\Builder;
 
 class UserResource extends Resource
 {
-    use RestrictsDeleteToSuperAdmin;
-
     protected static ?string $model = User::class;
 
     protected static ?string $recordTitleAttribute = 'name';
@@ -34,6 +33,22 @@ class UserResource extends Resource
     protected static ?int $navigationSort = 4;
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedUserGroup;
+
+    public static function getEloquentQuery(): Builder
+    {
+        return parent::getEloquentQuery()
+            ->when(! auth()->user()?->isDeveloper(), fn (Builder $query) => $query->where('role', '!=', UserRole::Developer->value));
+    }
+
+    public static function assignableRoles(): array
+    {
+        $roles = UserRole::options();
+        if (! auth()->user()?->canManageBranding()) {
+            unset($roles[UserRole::Developer->value]);
+        }
+
+        return $roles;
+    }
 
     public static function form(Schema $schema): Schema
     {

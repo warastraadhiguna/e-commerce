@@ -2,7 +2,10 @@
 
 namespace App\Filament\Resources\CompanyProfiles\Schemas;
 
+use App\Support\BrandTheme;
+use Filament\Forms\Components\ColorPicker;
 use Filament\Forms\Components\FileUpload;
+use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Schemas\Components\Grid;
@@ -27,27 +30,31 @@ class CompanyProfileForm
                     ])
                     ->schema([
                         TextInput::make('company_name')
+                            ->label('Nama toko / merek')
+                            ->maxLength(255)
                             ->required()
                             ->columnSpanFull(),
                         FileUpload::make('logo_path')
                             ->label('Company logo')
                             ->image()
+                            ->maxSize(2048)
                             ->imageEditor()
                             ->imageEditorAspectRatios([
+                                null,
+                                '1:1',
                                 '3:1',
                                 '4:1',
                                 '5:2',
                             ])
-                            ->imageCropAspectRatio('3:1')
-                            ->imageResizeMode('contain')
-                            ->imageResizeTargetWidth('440')
-                            ->imageResizeTargetHeight('140')
-                            ->imageResizeUpscale(false)
-                            ->helperText('Recommended: transparent PNG/SVG with horizontal ratio. Best result around 440 x 140 px.')
+                            ->helperText('Gunakan logo asli, PNG transparan disarankan. Logo persegi maupun horizontal didukung. Maksimal 2 MB.')
                             ->disk('public')
                             ->directory('company')
                             ->visibility('public')
                             ->columnSpanFull(),
+                        FileUpload::make('favicon_path')->label('Ikon browser (favicon)')
+                            ->image()->acceptedFileTypes(['image/png', 'image/jpeg', 'image/webp', 'image/x-icon', 'image/vnd.microsoft.icon'])
+                            ->maxSize(1024)->disk('public')->directory('company')->visibility('public')
+                            ->helperText('Gambar persegi. Jika kosong, memakai logo toko.')->columnSpanFull(),
                         Textarea::make('short_description')
                             ->label('Short description')
                             ->rows(2)
@@ -108,6 +115,19 @@ class CompanyProfileForm
                                     ->url()
                                     ->maxLength(255),
                             ]),
+                    ]),
+                Section::make('Tema toko')
+                    ->description('Berlaku untuk toko, login, checkout, invoice, dan warna utama panel admin. Hanya Developer yang dapat mengubah pengaturan ini.')
+                    ->columns(2)->columnSpan(['default' => 1, 'xl' => 12])
+                    ->schema([
+                        ColorPicker::make('theme_primary_color')->label('Warna utama')->default('#fed700')->required()->regex('/^#[0-9a-fA-F]{6}$/'),
+                        ColorPicker::make('theme_secondary_color')->label('Warna pendamping')->default('#0363cd')->required()->regex('/^#[0-9a-fA-F]{6}$/'),
+                        ColorPicker::make('theme_background_color')->label('Warna latar toko')->default('#ffffff')->required()->regex('/^#[0-9a-fA-F]{6}$/'),
+                        Select::make('theme_font')->label('Gaya huruf')->options(BrandTheme::fonts())->default('default')->required()->native(false),
+                        FileUpload::make('theme_pattern_path')->label('Motif latar toko')
+                            ->image()->acceptedFileTypes(['image/png', 'image/jpeg', 'image/webp'])->maxSize(2048)
+                            ->disk('public')->directory('company/patterns')->visibility('public')->columnSpanFull()
+                            ->helperText('PNG/JPG/WebP maksimal 2 MB. Gunakan motif halus yang dapat diulang. Kosongkan untuk latar polos.'),
                     ]),
             ]);
     }
